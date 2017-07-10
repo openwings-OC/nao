@@ -38,15 +38,6 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=20)
-     * @Assert\NotBlank()
-     * @Assert\
-     */
-    private $nickname;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="nickname", type="string", length=50)
      */
     private $firstname;
@@ -89,5 +80,37 @@ class User extends BaseUser
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
     }
 }
