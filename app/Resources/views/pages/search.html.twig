@@ -2,9 +2,9 @@
 
 {% block body %}
 
-    <form action="" method="post">
+    <form action="" method="post" id="form">
         <div class="row">
-            <div class="large-5 columns">
+            <div class="large-5 large-offset-2">
                 <div class="row collapse">
                     <div class="large-7 columns">
                         <input type="text" id="search" name="search" placeholder="Rechercher un oiseau" />
@@ -15,39 +15,54 @@
                 </div>
             </div>
         </div>
-
     </form>
 
     {% if bird is defined %}
-        <table>
-            <thead>
-                <tr>
-                    <th width="200">Nom commun</th>
-                    <th>Nom scientifique</th>
-                    <th>Auteur</th>
-                    <th>Observations</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for bird in bird %}
-                <tr>
-                    <td>
-                        {{ bird.nomVern }}
-                    </td>
-                    <td>
-                        {{ bird.nomValide }}
-                    </td>
-                    <td>
-                        {{ bird.lbAuteur }}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+        {% if bird is empty %}
+            rien a declarer
+        {% endif %}
+        {% if bird is not empty %}
+            <div class="large-8 large-offset-2">
+                <table>
+                    <thead>
+                    <tr>
+                        <th width="200">Nom commun</th>
+                        <th>Nom scientifique</th>
+                        <th>Auteur</th>
+                        <th>Observations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for bird in bird %}
+                        <tr>
+                            <td>
+                                {% if bird.nomVern is empty %}
+                                    Pas de nom Vernaculaire pour cette race
+                                {% endif %}
+                                {{ bird.nomVern }}
+                            </td>
+                            <td>
+                                {{ bird.nomValide }}
+                            </td>
+                            <td>
+                                {{ bird.lbAuteur }}
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ path('app_observation', {'id' : bird.cdNom}) }}"><i class="fa fa-eye fa-2x"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-    {% if list is defined %}
-        <table>
+        {% endif %}
+
+{% endif %}
+
+
+    {#{% if list is defined %}
+        <table class="large-8 large-offset-2">
             <thead>
                 <tr>
                     <th>Nom commun</th>
@@ -60,6 +75,9 @@
                     {% for bird in list %}
                     <tr>
                         <td>
+                            {% if bird.nomVern is empty %}
+                                Pas de nom Vernaculaire pour cette race
+                            {% endif %}
                             {{ bird.nomVern }}
                         </td>
                         <td>
@@ -68,13 +86,13 @@
                         <td>
                             {{ bird.lbAuteur }}
                         </td>
-                        <td>
-
+                        <td class="text-center">
+                            <a href=""><i class="fa fa-eye fa-2x"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
             </tbody>
         </table>
-    {% endif %}
+    {% endif %}#}
 
 {% endblock %}

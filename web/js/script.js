@@ -19,19 +19,24 @@ $('#search').autocomplete({
             type: "POST",
             dataType : 'JSON',
             data: {'bird': $('#search').val(),
-            maxRows: 15
+            maxRows: 20
         },
             success: function (data, statut) {
-                console.log(data);
                 reponse($.map(data, function (objet) {
+                    console.log(objet);
                     return objet;
                 }));
                 $('#ui-id-1 li div').addClass('results');
+                $('#ui-id-1 li div').addClass('large-4');
                 $('.ui-helper-hidden-accessible').hide();
             }
         });
     }
 });
+
+/*$('#ui-id-1').click(function(){
+    $('#form').submit();
+})*/
 
 $('#ui-id-1').addClass('no-bullet');
 

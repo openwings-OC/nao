@@ -5,11 +5,18 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    <img src="{{ asset('img/Bandeau_desktop.jpg') }}" alt="">
+    <ul class="menu">
+        <li class="is-active"><a>Home</a></li>
+        <li><a>About</a></li>
+        <li><a>Nachos</a></li>
+    </ul>
         {% block body %}{% endblock %}
 
         {% block javascripts %}
