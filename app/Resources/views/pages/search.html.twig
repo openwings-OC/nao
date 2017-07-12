@@ -1,0 +1,80 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <form action="" method="post">
+        <div class="row">
+            <div class="large-5 columns">
+                <div class="row collapse">
+                    <div class="large-7 columns">
+                        <input type="text" id="search" name="search" placeholder="Rechercher un oiseau" />
+                    </div>
+                    <div class="large-5 columns">
+                        <button class="button" type="submit" id="recherche">Rechercher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    {% if bird is defined %}
+        <table>
+            <thead>
+                <tr>
+                    <th width="200">Nom commun</th>
+                    <th>Nom scientifique</th>
+                    <th>Auteur</th>
+                    <th>Observations</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for bird in bird %}
+                <tr>
+                    <td>
+                        {{ bird.nomVern }}
+                    </td>
+                    <td>
+                        {{ bird.nomValide }}
+                    </td>
+                    <td>
+                        {{ bird.lbAuteur }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if list is defined %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom commun</th>
+                    <th>Nom scientifique</th>
+                    <th>Auteur</th>
+                    <th>Observation</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for bird in list %}
+                    <tr>
+                        <td>
+                            {{ bird.nomVern }}
+                        </td>
+                        <td>
+                            {{ bird.nomValide }}
+                        </td>
+                        <td>
+                            {{ bird.lbAuteur }}
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

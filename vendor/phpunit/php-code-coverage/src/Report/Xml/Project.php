@@ -40,14 +40,14 @@ class Project extends Node
     {
         $testsNode = $this->getContextNode()->getElementsByTagNameNS(
             'http://schema.phpunit.de/coverage/1.0',
-            'tests'
+            'Tests'
         )->item(0);
 
         if (!$testsNode) {
             $testsNode = $this->getContextNode()->appendChild(
                 $this->getDom()->createElementNS(
                     'http://schema.phpunit.de/coverage/1.0',
-                    'tests'
+                    'Tests'
                 )
             );
         }

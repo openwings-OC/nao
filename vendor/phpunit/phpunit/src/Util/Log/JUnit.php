@@ -280,7 +280,7 @@ class PHPUnit_Util_Log_JUnit extends PHPUnit_Util_Printer implements PHPUnit_Fra
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
         $this->testSuites[$this->testSuiteLevel]->setAttribute(
-            'tests',
+            'Tests',
             $this->testSuiteTests[$this->testSuiteLevel]
         );
 

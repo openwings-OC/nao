@@ -7,8 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Taxref
  *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TaxrefRepository")
  * @ORM\Table(name="taxref")
- * @ORM\Entity
+ *
+ *
  */
 class Taxref
 {

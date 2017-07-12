@@ -49,7 +49,7 @@ class PHPUnit_TextUI_Command
         'debug'                   => null,
         'disallow-test-output'    => null,
         'disallow-resource-usage' => null,
-        'disallow-todo-tests'     => null,
+        'disallow-todo-Tests'     => null,
         'enforce-time-limit'      => null,
         'exclude-group='          => null,
         'filter='                 => null,
@@ -71,7 +71,7 @@ class PHPUnit_TextUI_Command
         'printer='                => null,
         'process-isolation'       => null,
         'repeat='                 => null,
-        'report-useless-tests'    => null,
+        'report-useless-Tests'    => null,
         'reverse-list'            => null,
         'static-backup'           => null,
         'stderr'                  => null,
@@ -372,7 +372,7 @@ class PHPUnit_TextUI_Command
                     print 'Bootstrap script (relative to path shown above; default: vendor/autoload.php): ';
                     $bootstrapScript = trim(fgets(STDIN));
 
-                    print 'Tests directory (relative to path shown above; default: tests): ';
+                    print 'Tests directory (relative to path shown above; default: Tests): ';
                     $testsDirectory = trim(fgets(STDIN));
 
                     print 'Source directory (relative to path shown above; default: src): ';
@@ -383,7 +383,7 @@ class PHPUnit_TextUI_Command
                     }
 
                     if ($testsDirectory == '') {
-                        $testsDirectory = 'tests';
+                        $testsDirectory = 'Tests';
                     }
 
                     if ($src == '') {
@@ -583,7 +583,7 @@ class PHPUnit_TextUI_Command
                     exit(PHPUnit_TextUI_TestRunner::SUCCESS_EXIT);
                     break;
 
-                case '--report-useless-tests':
+                case '--report-useless-Tests':
                     $this->arguments['reportUselessTests'] = true;
                     break;
 
@@ -611,7 +611,7 @@ class PHPUnit_TextUI_Command
                     $this->arguments['enforceTimeLimit'] = true;
                     break;
 
-                case '--disallow-todo-tests':
+                case '--disallow-todo-Tests':
                     $this->arguments['disallowTodoAnnotatedTests'] = true;
                     break;
 
@@ -1056,10 +1056,10 @@ Logging Options:
 
 Test Selection Options:
 
-  --filter <pattern>        Filter which tests to run.
+  --filter <pattern>        Filter which Tests to run.
   --testsuite <name>        Filter which testsuite to run.
-  --group ...               Only runs tests from the specified group(s).
-  --exclude-group ...       Exclude tests from the specified group(s).
+  --group ...               Only runs Tests from the specified group(s).
+  --exclude-group ...       Exclude Tests from the specified group(s).
   --list-groups             List available test groups.
   --list-suites             List available test suites.
   --test-suffix ...         Only search for test in files with specified
@@ -1067,13 +1067,13 @@ Test Selection Options:
 
 Test Execution Options:
 
-  --report-useless-tests    Be strict about tests that do not test anything.
+  --report-useless-Tests    Be strict about Tests that do not test anything.
   --strict-coverage         Be strict about @covers annotation usage.
   --strict-global-state     Be strict about changes to global state
-  --disallow-test-output    Be strict about output during tests.
-  --disallow-resource-usage Be strict about resource usage during small tests.
+  --disallow-test-output    Be strict about output during Tests.
+  --disallow-resource-usage Be strict about resource usage during small Tests.
   --enforce-time-limit      Enforce time limit based on test size.
-  --disallow-todo-tests     Disallow @todo-annotated tests.
+  --disallow-todo-Tests     Disallow @todo-annotated Tests.
 
   --process-isolation       Run each test in a separate PHP process.
   --no-globals-backup       Do not backup and restore \$GLOBALS for each test.
@@ -1089,8 +1089,8 @@ Test Execution Options:
   --stop-on-risky           Stop execution upon first risky test.
   --stop-on-skipped         Stop execution upon first skipped test.
   --stop-on-incomplete      Stop execution upon first incomplete test.
-  --fail-on-warning         Treat tests with warnings as failures.
-  --fail-on-risky           Treat risky tests as failures.
+  --fail-on-warning         Treat Tests with warnings as failures.
+  --fail-on-risky           Treat risky Tests as failures.
   -v|--verbose              Output more verbose information.
   --debug                   Display debugging information during test execution.
 
@@ -1098,13 +1098,13 @@ Test Execution Options:
   --repeat <times>          Runs the test(s) repeatedly.
   --teamcity                Report test execution progress in TeamCity format.
   --testdox                 Report test execution progress in TestDox format.
-  --testdox-group           Only include tests from the specified group(s).
-  --testdox-exclude-group   Exclude tests from the specified group(s).
+  --testdox-group           Only include Tests from the specified group(s).
+  --testdox-exclude-group   Exclude Tests from the specified group(s).
   --printer <printer>       TestListener implementation to use.
 
 Configuration Options:
 
-  --bootstrap <file>        A "bootstrap" PHP file that is run before the tests.
+  --bootstrap <file>        A "bootstrap" PHP file that is run before the Tests.
   -c|--configuration <file> Read configuration from XML file.
   --no-configuration        Ignore default configuration file (phpunit.xml).
   --no-coverage             Ignore code coverage configuration.

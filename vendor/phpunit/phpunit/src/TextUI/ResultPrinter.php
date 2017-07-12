@@ -330,7 +330,7 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
         if (count($result) === 0) {
             $this->writeWithColor(
                 'fg-black, bg-yellow',
-                'No tests executed!'
+                'No Tests executed!'
             );
 
             return;
@@ -360,7 +360,7 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
 
                 $this->writeWithColor(
                     $color,
-                    'OK, but incomplete, skipped, or risky tests!'
+                    'OK, but incomplete, skipped, or risky Tests!'
                 );
             } else {
                 $this->write("\n");

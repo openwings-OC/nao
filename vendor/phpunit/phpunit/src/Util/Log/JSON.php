@@ -162,7 +162,7 @@ class PHPUnit_Util_Log_JSON extends PHPUnit_Util_Printer implements PHPUnit_Fram
             [
             'event' => 'suiteStart',
             'suite' => $this->currentTestSuiteName,
-            'tests' => count($suite)
+            'Tests' => count($suite)
             ]
         );
     }

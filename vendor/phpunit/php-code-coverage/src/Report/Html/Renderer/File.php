@@ -311,35 +311,35 @@ class File extends Renderer
                 } elseif ($numTests == 0) {
                     $trClass = ' class="danger"';
                 } else {
-                    $lineCss        = 'covered-by-large-tests';
+                    $lineCss        = 'covered-by-large-Tests';
                     $popoverContent = '<ul>';
 
                     if ($numTests > 1) {
-                        $popoverTitle = $numTests . ' tests cover line ' . $i;
+                        $popoverTitle = $numTests . ' Tests cover line ' . $i;
                     } else {
                         $popoverTitle = '1 test covers line ' . $i;
                     }
 
                     foreach ($coverageData[$i] as $test) {
-                        if ($lineCss == 'covered-by-large-tests' && $testData[$test]['size'] == 'medium') {
-                            $lineCss = 'covered-by-medium-tests';
+                        if ($lineCss == 'covered-by-large-Tests' && $testData[$test]['size'] == 'medium') {
+                            $lineCss = 'covered-by-medium-Tests';
                         } elseif ($testData[$test]['size'] == 'small') {
-                            $lineCss = 'covered-by-small-tests';
+                            $lineCss = 'covered-by-small-Tests';
                         }
 
                         switch ($testData[$test]['status']) {
                             case 0:
                                 switch ($testData[$test]['size']) {
                                     case 'small':
-                                        $testCSS = ' class="covered-by-small-tests"';
+                                        $testCSS = ' class="covered-by-small-Tests"';
                                         break;
 
                                     case 'medium':
-                                        $testCSS = ' class="covered-by-medium-tests"';
+                                        $testCSS = ' class="covered-by-medium-Tests"';
                                         break;
 
                                     default:
-                                        $testCSS = ' class="covered-by-large-tests"';
+                                        $testCSS = ' class="covered-by-large-Tests"';
                                         break;
                                 }
                                 break;

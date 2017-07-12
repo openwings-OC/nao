@@ -280,7 +280,7 @@ class CodeCoverageTest extends TestCase
 
         $this->assertAttributeEquals(null, 'currentId', $this->coverage);
         $this->assertAttributeEquals([], 'data', $this->coverage);
-        $this->assertAttributeEquals([], 'tests', $this->coverage);
+        $this->assertAttributeEquals([], 'Tests', $this->coverage);
     }
 
     public function testCollect()

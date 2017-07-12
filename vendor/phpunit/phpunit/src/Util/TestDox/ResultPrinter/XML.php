@@ -38,7 +38,7 @@ class PHPUnit_Util_TestDox_ResultPrinter_XML extends PHPUnit_Util_Printer implem
         $this->document               = new DOMDocument('1.0', 'UTF-8');
         $this->document->formatOutput = true;
 
-        $this->root = $this->document->createElement('tests');
+        $this->root = $this->document->createElement('Tests');
         $this->document->appendChild($this->root);
 
         $this->prettifier = new PHPUnit_Util_TestDox_NamePrettifier;

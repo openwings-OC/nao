@@ -14,7 +14,7 @@
 class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Framework_SelfDescribing, IteratorAggregate
 {
     /**
-     * Last count of tests in this suite.
+     * Last count of Tests in this suite.
      *
      * @var int|null
      */
@@ -59,14 +59,14 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     protected $groups = [];
 
     /**
-     * The tests in the test suite.
+     * The Tests in the test suite.
      *
      * @var array
      */
     protected $tests = [];
 
     /**
-     * The number of tests in the test suite.
+     * The number of Tests in the test suite.
      *
      * @var int
      */
@@ -172,7 +172,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             $this->addTest(
                 self::warning(
                     sprintf(
-                        'No tests found in class "%s".',
+                        'No Tests found in class "%s".',
                         $theClass->getName()
                     )
                 )
@@ -230,7 +230,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Adds the tests from the given class to the suite.
+     * Adds the Tests from the given class to the suite.
      *
      * @param mixed $testClass
      *
@@ -282,7 +282,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
      * Wraps both <code>addTest()</code> and <code>addTestSuite</code>
      * as well as the separate import statements for the user's convenience.
      *
-     * If the named file cannot be read or there are no new tests that can be
+     * If the named file cannot be read or there are no new Tests that can be
      * added, a <code>PHPUnit_Framework_WarningTestCase</code> will be created instead,
      * leaving the current test run untouched.
      *
@@ -514,7 +514,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
                     if (empty($data)) {
                         $data = self::warning(
                             sprintf(
-                                'No tests found in suite "%s".',
+                                'No Tests found in suite "%s".',
                                 $test->getName()
                             )
                         );
@@ -624,7 +624,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Set tests groups of the test case
+     * Set Tests groups of the test case
      *
      * @param array $groups
      */
@@ -634,7 +634,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Runs the tests and collects their result in a TestResult.
+     * Runs the Tests and collects their result in a TestResult.
      *
      * @param PHPUnit_Framework_TestResult $result
      *
@@ -789,7 +789,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Returns the tests as an enumeration.
+     * Returns the Tests as an enumeration.
      *
      * @return array
      */
@@ -799,7 +799,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Set tests of the test suite
+     * Set Tests of the test suite
      *
      * @param array $tests
      */
@@ -972,7 +972,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Template Method that is called before the tests
+     * Template Method that is called before the Tests
      * of this test suite are run.
      */
     protected function setUp()
@@ -980,7 +980,7 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     }
 
     /**
-     * Template Method that is called after the tests
+     * Template Method that is called after the Tests
      * of this test suite have finished running.
      */
     protected function tearDown()
