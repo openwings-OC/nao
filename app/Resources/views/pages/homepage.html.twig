@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block title %}Accueil{% endblock %}
+{% block body %}
+    <div class="text-center primary callout">
+            <h1>COMMENT ÇA FONCTIONNE ?</h1>
+    </div>
+    <div class="row text-center">
+        <div class="large-4 columns align-right">
+            <img height="100" width="100" src="{{ asset('images/svg/Picto ecran.svg') }}" alt="NAO" />
+            <p>
+            Je m'inscris
+            </p>
+        </div>
+        <div class="large-4 columns">
+            {% image 'images/svg/Picto internaute.svg' %}
+            <img height="100" width="100" src="{{ asset_url }}" alt="NAO" />
+            {% endimage %}
+            <p>
+            Je signale un oiseau
+            </p>
+        </div>
+        <div class="large-4 columns align-left">
+            {% image 'images/svg/Picto photo.svg' %}
+            <img height="100" width="100" src="{{ asset_url }}" alt="NAO" />
+            {% endimage %}
+            <p>
+            Je consulte les rapports
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns align-right">
+            <a href="" class="button">EN SAVOIR PLUS</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-8 columns">
+            <h2>DERNIÈRES OBSERVATIONS D'OISEAUX</h2>
+        </div>
+        <div class="large-4 columns">
+            {% image 'images/png/Info.png' %}
+            <img height="100" width="100" src="{{ asset_url }}" alt="NAO" />
+            {% endimage %}
+        </div>
+    </div>
+{% endblock %}

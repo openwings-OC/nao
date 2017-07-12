@@ -1,13 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="fr">
     <head>
         <meta charset="UTF-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {% stylesheets 'css/app.css'
+            filter='cssrewrite' output='css/compiled/app.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    <div class="header">
+        <img src="{{ asset('images/jpg/Bandeau_desktop.jpg') }}" alt="NAO" />
+    </div>
+    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+        <div class="title-bar-title">Menu</div>
+    </div>
+    <div data-sticky-container>
+        <div class="sticky" data-sticky data-margin-top="20">
+    <div class="top-bar" id="example-menu">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-image">
+                    {% image 'images/svg/Logo NAO.png' %}
+                        <img height="200" width="200" src="{{ asset_url }}" alt="NAO" />
+                    {% endimage %}
+                <li>
+                    <a href="#">NOS AMIS LES OISEAUX</a>
+                    <ul class="menu vertical">
+                        <li><a href="#">L'association</a></li>
+                        <li><a href="#">Adhérer à NAO</a></li>
+                        <li><a href="#">Mission</a></li>
+                        <li><a href="#">Agenda</a></li>
+                        <li><a href="#">Équipe</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">RECHERCHE D'ESPÈCE</a>
+                    <ul class="menu vertical">
+                        <li><input type="search" placeholder="Search"><button type="button" class="button">Search</button></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">OBSERVATION</a>
+                    <ul class="menu vertical">
+                        <li><a href="#">Dernières observations</a></li>
+                        <li><a href="#">Carte de France</a></li>
+                        <li><a href="#">Guide du débutant</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">DÉMARCHE SCIENTIFIQUE</a>
+                    <ul class="menu vertical">
+                        <li><a href="#">Le projet et ses partenaires</a></li>
+                        <li><a href="#">Publications</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+
+        </div>
+    </div>
+        </div>
+    </div>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/vendor/jquery.js') }}"></script>
+            <script src="{{ asset('js/vendor/motionui.js') }}"></script>
+            <script src="{{ asset('js/vendor/whatinput.js') }}"></script>
+            <script src="{{ asset('js/vendor/modernizr.js') }}"></script>
+            <script src="{{ asset('js/vendor/foundation.js') }}"></script>
+            <script src="{{ asset('js/app.js') }}"></script>
+        {% endblock %}
     </body>
+    <footer>
+    <div class="success callout text-center">
+        SUIVEZ-NOUS
+        <img height="50" width="50" src="{{ asset('images/png/twitter_circle_gray.png') }}" alt="Twitter" />
+        <img height="50" width="50" src="{{ asset('images/png/facebook.png') }}" alt="Facebook" />
+        <img height="50" width="50" src="{{ asset('images/png/Google+.png') }}" alt="Google+" />
+        <img height="50" width="50" src="{{ asset('images/png/Pinterest.png') }}" alt="Pinterest" />
+    </div>
+        <div class="row">
+            <div class="small-8 columns">
+                <p>EN PARTENARIAT AVEC</p>
+                <img height="150" width="150" src="{{ asset('images/png/LogoMNHN.png') }}" alt="Muséum national d'Histoire naturelle" />
+            </div>
+            <div class="small-4 columns text-center">
+                <li><a href="">Contact</a></li>
+                <li><a href="">Conditions générales d'utilisation</a></li>
+                <li><a href="">Crédits</a></li>
+                <li><a href="">Mentions légales</a></li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns text-center">
+                Copyright © Nos Amis les Oiseaux 2017
+            </div>
+        </div>
+    </footer>
 </html>
