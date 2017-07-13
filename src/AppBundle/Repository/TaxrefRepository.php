@@ -63,4 +63,14 @@ class TaxrefRepository extends EntityRepository {
         return $pag;
     }
 
+    public function findSpecyByBirdId($id){
+        $specy = $this->createQueryBuilder('s')
+            ->where('s.cdNom = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+
+            return $specy;
+    }
+
 }

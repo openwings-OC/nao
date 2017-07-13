@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Observation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -81,12 +82,13 @@ class PagesController extends Controller
      * @route("/observation/{id}", name="app_observation")
      */
     public function observationAction(Request $request){
-
-        return $this->render('pages/observation.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $specie = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
+        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId((int)$request->get('id'));
+        var_dump($observations);
+        return $this->render('pages/observation.html.twig', array(
+            'specie' => $specie,
+            'observations' => $observations
+        ));
     }
-    public function specieAction(Request $request){
 
-    }
 }
