@@ -17,20 +17,22 @@
     <div class="header">
         <img src="{{ asset('images/jpg/Bandeau_desktop.jpg') }}" alt="NAO" />
     </div>
-    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
-        <button class="menu-icon" type="button" data-toggle="example-menu"></button>
+    <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="nao-menu"></button>
         <div class="title-bar-title">Menu</div>
     </div>
+
     <div data-sticky-container>
-        <div class="sticky" data-sticky data-margin-top="20">
-    <div class="top-bar" id="example-menu">
+        <div id="menutest">
+            <div class="logo-menu">
+                <a href="{{ path('homepage') }}">
+                    <img height="200" width="200" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
+                </a>
+            </div>
+    <div class="top-bar" id="nao-menu">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-image">
-                    {% image 'images/svg/Logo NAO.png' %}
-                        <img height="200" width="200" src="{{ asset_url }}" alt="NAO" />
-                    {% endimage %}
-                <li>
+                <li class="blueMenuItem">
                     <a href="#">NOS AMIS LES OISEAUX</a>
                     <ul class="menu vertical">
                         <li><a href="#">L'association</a></li>
@@ -68,8 +70,10 @@
 
         </div>
     </div>
-        </div>
     </div>
+
+
+        </div>
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
