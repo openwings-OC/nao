@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Taxref;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 
 class TaxrefRepository extends EntityRepository {
@@ -17,8 +18,6 @@ class TaxrefRepository extends EntityRepository {
             ->orderBy('l.nomVern', 'ASC')
             ->getQuery()
             ->getResult();
-
-
         return $list;
     }
 
@@ -45,11 +44,31 @@ class TaxrefRepository extends EntityRepository {
             ->andWhere('b.cdTaxsup > :taxsup')
             ->setParameter('letter', $letter.'%', false)
             ->setParameter('taxsup', 0)
-            ->andWhere()
+            //->setMaxResults(50);
             ->getQuery()
             ->getResult();
-
+        //var_dump($bird);
+        //$pag = new Paginator($bird);
         return $bird;
+    }
+
+    //Query pour l'autocompletion ou une partie du nom de l'oiseau
+    public function findBirdByLetterLimited($letter, $limit){
+        $bird = $this->createQueryBuilder('b')
+            ->where('b.nomVern LIKE :letter')
+            ->orWhere('b.nomValide LIKE :letter')
+            ->andWhere('b.cdTaxsup > :taxsup')
+            ->setParameter('letter', $letter.'%', false)
+            ->setParameter('taxsup', 0);
+            //->setFirstResult($limit * 50);
+            //->setMaxResults(50);
+
+        /*->getQuery()
+        ->getResult();*/
+
+        $pag = new Paginator($bird);
+        var_dump($pag);
+        return $pag;
     }
 
 }

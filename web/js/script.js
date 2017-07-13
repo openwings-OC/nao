@@ -1,16 +1,4 @@
-console.log('salut');
-
-var liste = [
-    "Draggable",
-    "Droppable",
-    "Resizable",
-    "Selectable",
-    "Sortable"
-];
-
 //var search = $('#search').val();
-
-console.log(search);
 
 $('#search').autocomplete({
     source : function(requete, reponse) {
@@ -22,8 +10,9 @@ $('#search').autocomplete({
             maxRows: 20
         },
             success: function (data, statut) {
+                //console.log(data);
                 reponse($.map(data, function (objet) {
-                    console.log(objet);
+                    //console.log(objet[0].id);
                     return objet;
                 }));
                 $('#ui-id-1 li div').addClass('results');
@@ -31,12 +20,12 @@ $('#search').autocomplete({
                 $('.ui-helper-hidden-accessible').hide();
             }
         });
+    },
+    select : function(event, ui){
+        $('#form').attr('action', 'observation/' + ui.item.id);
+        $('#form').submit();
     }
 });
-
-/*$('#ui-id-1').click(function(){
-    $('#form').submit();
-})*/
 
 $('#ui-id-1').addClass('no-bullet');
 
