@@ -26,7 +26,6 @@ class TaxrefRepository extends EntityRepository {
         $bird = $this->createQueryBuilder('b')
             ->select('b')
             ->where('b.nomVern = :name')
-            //->orWhere('b.nomValide = :name')
             ->andwhere('b.cdTaxsup > :taxsup' )
             ->setParameter('name', $name)
             ->setParameter('taxsup', 0)
@@ -40,15 +39,13 @@ class TaxrefRepository extends EntityRepository {
     public function findBirdByLetter($letter){
         $bird = $this->createQueryBuilder('b')
             ->where('b.nomVern LIKE :letter')
-            ->orWhere('b.nomValide LIKE :letter')
+            ->orWhere('b.lbNom LIKE :letter')
             ->andWhere('b.cdTaxsup > :taxsup')
             ->setParameter('letter', $letter.'%', false)
             ->setParameter('taxsup', 0)
-            //->setMaxResults(50);
             ->getQuery()
             ->getResult();
-        //var_dump($bird);
-        //$pag = new Paginator($bird);
+
         return $bird;
     }
 
@@ -60,11 +57,6 @@ class TaxrefRepository extends EntityRepository {
             ->andWhere('b.cdTaxsup > :taxsup')
             ->setParameter('letter', $letter.'%', false)
             ->setParameter('taxsup', 0);
-            //->setFirstResult($limit * 50);
-            //->setMaxResults(50);
-
-        /*->getQuery()
-        ->getResult();*/
 
         $pag = new Paginator($bird);
         var_dump($pag);

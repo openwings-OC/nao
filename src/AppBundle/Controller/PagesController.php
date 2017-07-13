@@ -67,11 +67,10 @@ class PagesController extends Controller
             $letter = $request->get('bird');
             $requete = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findBirdByLetter($letter);
             $list = [];
-            $info = [];
             foreach($requete as $bird){
                $list[] = ['value' => $bird->getNomVern(), 'id' => $bird->getCdNom()];
                 if($bird->getNomVern() === ''){
-                    array_push($list, $bird->getNomValide());
+                    array_push($list, $bird->getlbNom());
                 }
             }
             return new JsonResponse(array('list' => $list));

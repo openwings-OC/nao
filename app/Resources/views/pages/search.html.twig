@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <form action="" method="post" id="form">
+    <form action="{{ path('app_search') }}" method="post" id="form">
         <div class="row">
             <div class="large-10 large-offset-2">
                 <div class="row collapse">
                     <div class="large-7 columns">
-                        <input type="text" id="search" name="search" placeholder="Rechercher un oiseau" />
+                        <input type="text" id="search" name="search" placeholder="Rechercher un oiseau (nom vernaculaire ou scientifique)" />
                     </div>
                     <div class="large-4 columns">
                         <button class="button postfix" type="submit" id="recherche">Rechercher</button>

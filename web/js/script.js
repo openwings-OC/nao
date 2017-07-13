@@ -1,13 +1,15 @@
 //var search = $('#search').val();
 
 $('#search').autocomplete({
+    maxShowItems : 10,
+    minLength: 3,
     source : function(requete, reponse) {
         $.ajax({
             url: "http://localhost/nao/web/app_dev.php/autocomplete",
             type: "POST",
             dataType : 'JSON',
             data: {'bird': $('#search').val(),
-            maxRows: 20
+
         },
             success: function (data, statut) {
                 //console.log(data);
