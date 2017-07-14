@@ -15,15 +15,15 @@
     </head>
     <body>
     <div class="header">
-        <img src="{{ asset('images/jpg/Bandeau_desktop.jpg') }}" alt="NAO" />
-    </div>
+        <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" />
+
     <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
         <button class="menu-icon" type="button" data-toggle="nao-menu"></button>
         <div class="title-bar-title">Menu</div>
     </div>
 
     <div data-sticky-container>
-        <div id="menutest">
+        <div class="menutest" id="menutest">
             <div class="logo-menu">
                 <a href="{{ path('homepage') }}">
                     <img height="200" width="200" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
@@ -32,7 +32,7 @@
     <div class="top-bar" id="nao-menu">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-                <li class="blueMenuItem">
+                <li class="naoMenuItem blueMenuItem">
                     <a href="#">NOS AMIS LES OISEAUX</a>
                     <ul class="menu vertical">
                         <li><a href="#">L'association</a></li>
@@ -43,21 +43,21 @@
                         <li><a href="#">Nous contacter</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="naoMenuItem greenMenuItem">
                     <a href="#">RECHERCHE D'ESPÈCE</a>
                     <ul class="menu vertical">
-                        <li><input type="search" placeholder="Search"><button type="button" class="button">Search</button></li>
+                        <li class="greenMenuItem"><input type="search" placeholder="Search"><button type="button" class="button">Search</button></li>
                     </ul>
                 </li>
-                <li>
+                <li class="naoMenuItem greenMenuItem">
                     <a href="#">OBSERVATION</a>
                     <ul class="menu vertical">
-                        <li><a href="#">Dernières observations</a></li>
-                        <li><a href="#">Carte de France</a></li>
-                        <li><a href="#">Guide du débutant</a></li>
+                        <li class="greenMenuItem"><a href="#">Dernières observations</a></li>
+                        <li class="greenMenuItem"><a href="#">Carte de France</a></li>
+                        <li class="greenMenuItem"><a href="#">Guide du débutant</a></li>
                     </ul>
                 </li>
-                <li>
+                <li class="naoMenuItem blueMenuItem">
                     <a href="#">DÉMARCHE SCIENTIFIQUE</a>
                     <ul class="menu vertical">
                         <li><a href="#">Le projet et ses partenaires</a></li>
@@ -67,11 +67,11 @@
             </ul>
         </div>
         <div class="top-bar-right">
-
+            <li></li>
         </div>
     </div>
     </div>
-
+    </div>
 
         </div>
         {% block body %}{% endblock %}
@@ -85,19 +85,19 @@
         {% endblock %}
     </body>
     <footer>
-    <div class="success callout text-center">
+    <div class="callout text-center socialLinks">
         SUIVEZ-NOUS
-        <img height="50" width="50" src="{{ asset('images/png/twitter_circle_gray.png') }}" alt="Twitter" />
-        <img height="50" width="50" src="{{ asset('images/png/facebook.png') }}" alt="Facebook" />
-        <img height="50" width="50" src="{{ asset('images/png/Google+.png') }}" alt="Google+" />
-        <img height="50" width="50" src="{{ asset('images/png/Pinterest.png') }}" alt="Pinterest" />
+        <a href="https://twitter.com/naodujardin"><img height="50" width="50" src="{{ asset('images/png/twitter_circle_gray.png') }}" alt="Twitter" /></a>
+        <a href="https://www.facebook.com/Nos-amis-les-oiseaux-1724481754517162/"><img height="50" width="50" src="{{ asset('images/png/facebook.png') }}" alt="Facebook" /></a>
+        <a href="https://plus.google.com/u/0/114909314086156892767"><img height="50" width="50" src="{{ asset('images/png/Google+.png') }}" alt="Google+" /></a>
+        <a href="https://fr.pinterest.com/naodujardin/"><img height="50" width="50" src="{{ asset('images/png/Pinterest.png') }}" alt="Pinterest" /></a>
     </div>
         <div class="row">
             <div class="small-8 columns">
                 <p>EN PARTENARIAT AVEC</p>
-                <img height="150" width="150" src="{{ asset('images/png/LogoMNHN.png') }}" alt="Muséum national d'Histoire naturelle" />
+                <a href="https://www.mnhn.fr"><img height="150" width="150" src="{{ asset('images/png/LogoMNHN.png') }}" alt="Muséum national d'Histoire naturelle" /></a>
             </div>
-            <div class="small-4 columns text-center">
+            <div class="small-4 columns text-center linksFooter">
                 <li><a href="">Contact</a></li>
                 <li><a href="">Conditions générales d'utilisation</a></li>
                 <li><a href="">Crédits</a></li>
