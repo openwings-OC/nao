@@ -21,11 +21,13 @@ class Observation
      */
     private $id;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref", inversedBy="observations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref")
+     * @ORM\JoinColumn(name="specy", referencedColumnName="CD_NOM")
      */
-    private $specie;
+    private $specy;
+
 
     /**
      * @var \DateTime
@@ -51,17 +53,34 @@ class Observation
     /**
      * @var int
      *
-     * @ORM\Column(name="latitude", type="integer")
+     * @ORM\Column(name="latitude", type="decimal", precision=12, scale=9)
      */
     private $latitude;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="longitude", type="integer")
+     * @ORM\Column(name="longitude", type="decimal", precision=12, scale=9)
      */
     private $longitude;
 
+    /**
+     * @var string
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @var string
+     * @ORM\Column(name="author", type="string", length=255)
+     */
+    private $author;
+
+    /**
+     * @var string
+     * @ORM\Column(name="comment", type="text")
+     */
+    private $comment;
 
     /**
      * Get id
@@ -193,52 +212,99 @@ class Observation
         return $this->longitude;
     }
 
-
     /**
-     * Set taxref
+     * Set specy
      *
-     * @param \AppBundle\Entity\Taxref $taxref
+     * @param \AppBundle\Entity\Taxref $specy
      *
      * @return Observation
      */
-    public function setTaxref(\AppBundle\Entity\Taxref $taxref)
+    public function setSpecy(\AppBundle\Entity\Taxref $specy = null)
     {
-        $this->taxref = $taxref;
+        $this->specy = $specy;
 
         return $this;
     }
 
     /**
-     * Get taxref
+     * Get specy
      *
      * @return \AppBundle\Entity\Taxref
      */
-    public function getTaxref()
+    public function getSpecy()
     {
-        return $this->taxref;
+        return $this->specy;
     }
 
     /**
-     * Set specie
+     * Set image
      *
-     * @param \AppBundle\Entity\Taxref $specie
+     * @param string $image
      *
      * @return Observation
      */
-    public function setSpecie(\AppBundle\Entity\Taxref $specie)
+    public function setImage($image)
     {
-        $this->specie = $specie;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get specie
+     * Get image
      *
-     * @return \AppBundle\Entity\Taxref
+     * @return string
      */
-    public function getSpecie()
+    public function getImage()
     {
-        return $this->specie;
+        return $this->image;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     *
+     * @return Observation
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Observation
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

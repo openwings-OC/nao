@@ -1,8 +1,6 @@
 <?php
 
 namespace AppBundle\Repository;
-
-use AppBundle\Entity\Taxref;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 

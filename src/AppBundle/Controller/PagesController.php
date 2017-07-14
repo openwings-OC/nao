@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Observation;
+use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -79,15 +80,41 @@ class PagesController extends Controller
     }
 
     /**
+     * @route("/specy/{id}", name="app_specy")
+     */
+    public function specyAction(Request $request){
+        $specy = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
+        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId((int)$request->get('id'));
+        return $this->render('pages/specy.html.twig', array(
+            'specy' => $specy,
+            'observations' => $observations
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      * @route("/observation/{id}", name="app_observation")
      */
     public function observationAction(Request $request){
-        $specie = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
-        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId((int)$request->get('id'));
-        var_dump($observations);
+        //$specie = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
+        $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
         return $this->render('pages/observation.html.twig', array(
-            'specie' => $specie,
-            'observations' => $observations
+            'observation' => $observation
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @route("/add/", name="app_addObservation")
+     */
+    public function addObservationAction(Request $request){
+        $observation = new Observation();
+        $form = $this->get('form.factory')->create(ObservationType::class, $observation);
+
+        return $this->render(':crud:add.html.twig', array(
+            'form' => $form->createView(),
         ));
     }
 

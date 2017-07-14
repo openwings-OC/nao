@@ -1,4 +1,3 @@
-//var search = $('#search').val();
 
 $('#search').autocomplete({
     maxShowItems : 10,
@@ -24,10 +23,25 @@ $('#search').autocomplete({
         });
     },
     select : function(event, ui){
-        $('#form').attr('action', 'observation/' + ui.item.id);
+        $('#form').attr('action', 'specy/' + ui.item.id);
         $('#form').submit();
     }
 });
 
 $('#ui-id-1').addClass('no-bullet');
+
+//Geolocalisation
+
+
+function maPosition(position) {
+
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    document.getElementById("appbundle_observation_latitude").value = latitude;
+    document.getElementById("appbundle_observation_longitude").value = longitude;
+}
+
+if(navigator.geolocation)
+    navigator.geolocation.getCurrentPosition(maPosition);
+
 

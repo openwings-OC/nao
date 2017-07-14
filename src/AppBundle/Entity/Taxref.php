@@ -16,17 +16,14 @@ class Taxref
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
+     *
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $cdNom;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Observation", mappedBy="specie", cascade={"persist"})
-     */
-    private $observations;
 
     /**
      * @var string
@@ -63,12 +60,7 @@ class Taxref
      */
     private $famille;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
-     */
-    private $cdNom;
+
 
     /**
      * @var integer
@@ -1062,79 +1054,7 @@ class Taxref
     {
         return $this->cli;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->species = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
-    /**
-     * Add species
-     *
-     * @param \AppBundle\Entity\Observation $species
-     *
-     * @return Taxref
-     */
-    public function addSpecy(\AppBundle\Entity\Observation $species)
-    {
-        $this->species[] = $species;
 
-        return $this;
-    }
 
-    /**
-     * Remove species
-     *
-     * @param \AppBundle\Entity\Observation $species
-     */
-    public function removeSpecy(\AppBundle\Entity\Observation $species)
-    {
-        $this->species->removeElement($species);
-    }
-
-    /**
-     * Get species
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSpecies()
-    {
-        return $this->species;
-    }
-
-    /**
-     * Add observation
-     *
-     * @param \AppBundle\Entity\Observation $observation
-     *
-     * @return Taxref
-     */
-    public function addObservation(\AppBundle\Entity\Observation $observation)
-    {
-        $this->observations[] = $observation;
-
-        return $this;
-    }
-
-    /**
-     * Remove observation
-     *
-     * @param \AppBundle\Entity\Observation $observation
-     */
-    public function removeObservation(\AppBundle\Entity\Observation $observation)
-    {
-        $this->observations->removeElement($observation);
-    }
-
-    /**
-     * Get observations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getObservations()
-    {
-        return $this->observations;
-    }
 }

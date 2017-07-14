@@ -27,7 +27,7 @@
                     <th width="200">Nom commun</th>
                     <th>Nom scientifique</th>
                     <th>Auteur</th>
-                    <th>Observations</th>
+                    <th>Voir les observations</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                             {{ bird.lbAuteur }}
                         </td>
                         <td class="text-center">
-                            <a href="{{ path('app_observation', {'id' : bird.cdNom}) }}"><i class="fa fa-eye fa-2x"></i></a>
+                            <a href="{{ path('app_specy', {'id' : bird.cdNom}) }}"><i class="fa fa-eye fa-2x"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

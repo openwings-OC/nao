@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="large-7 row">
+        <h1>Ajouter une observation</h1>
+        <p id="infoposition"></p>
+{{ form_start(form) }}
+
+    {{ form_label(form.specy) }}
+    {{ form_widget(form.specy) }}
+    <div class="large-6 columns">
+    {{ form_label(form.latitude) }}
+    {{ form_widget(form.latitude) }}
+    </div>
+    <div class="large-6 columns">
+    {{ form_label(form.longitude) }}
+    {{ form_widget(form.longitude) }}
+    </div>
+
+    {{ form_label(form.createdAt) }}
+    {{ form_widget(form.createdAt) }}
+
+    {{ form_label(form.comment) }}
+    {{ form_widget(form.comment) }}
+
+    {{ form_widget(form.save) }}
+
+    </div>
+
+    {% include "modules/mapAdd.html.twig" %}
+{% endblock %}

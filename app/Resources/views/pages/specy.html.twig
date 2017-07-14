@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% if observations is  defined %}
+        <h3>Espèce : {{ specy.nomVern }}</h3>
+        <h4>il y a {{ observations|length }} observations de cette espèce</h4>
+        <div class="row">
+            {% for observation in observations %}
+                {% if loop.index == 1 %}
+            <div class="large-4 columns">
+                <h3>A</h3>
+                        <img src="{{ observation.image }}" alt="{{ observation.specy.nomVern }}">
+                        <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
+                        <p>Observée par : {{ observation.author }}</p>
+                        <p>Commentaire : {{ observation.comment }}</p>
+            </div>
+            <div class="large-5 columns">
+                {% include ':modules:map.html.twig' %}
+            </div>
+                {% endif %}
+            {% endfor %}
+            {% if observations is not empty %}
+            <div class="large-3 columns">
+                <h4>Les autres observations de cette espèce</h4>
+                {% for observation in observations %}
+                    {% if loop.index > 1 %}
+                        {{ observation.author }} - {{ observation.createdAt|date('d-m-Y') }} - <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if observations is empty %}
+        <a href="{{ path('app_addObservation') }}" class="button">Ajouter une observation de cette espèce</a>
+    {% endif %}
+
+{% endblock %}

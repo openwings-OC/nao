@@ -1,1 +1,28 @@
-Ici il y aura une observation
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
+    </div>
+    <div class="row">
+        <div class="large-5 columns">
+
+                    <h3>{{ observation.specy.nomVern }}</h3>
+                    <img src="{{ observation.image }}" alt="{{ observation.specy.nomVern }}">
+                    <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
+                    <p>Observée par : {{ observation.author }}</p>
+                    <p>Commentaire : {{ observation.comment }}</p>
+        </div>
+        <div class="large-6 columns">
+        {% include ':modules:map.html.twig' %}
+        </div>
+        {#<div class="large-3 columns">
+            <h4>Les autres observations de cette espèce</h4>
+
+                    {{ observation.author }} - {{ observation.createdAt|date('d-m-Y') }} - <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
+                    <br>
+        </div>#}
+    </div>
+
+
+{% endblock %}

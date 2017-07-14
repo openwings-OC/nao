@@ -11,13 +11,24 @@ namespace AppBundle\Repository;
 class ObservationRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findObservationsBySpecieId($id){
-        $id = 1;
-        $specy = $this->createQueryBuilder('o')
-            ->where('o.specie = :id')
+
+        $observations = $this->createQueryBuilder('o')
+            ->where('o.specy = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
 
-        return $specy;
+        return $observations;
+    }
+
+    public function findObservationById($id){
+        var_dump($id);
+        $observation = $this->createQueryBuilder('o')
+            ->where('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+
+            return $observation;
     }
 }
