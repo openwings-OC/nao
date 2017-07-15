@@ -1,5 +1,6 @@
 
     <div class="large-6 row">
+
         <div id="map" ></div>
     </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&libraries=places" async defer></script>
@@ -16,10 +17,10 @@
 
 <script>
     function displayResults(result, div) {
-//        html = ["Address: " + result.address()]
         $('#appbundle_observation_latitude').val(result.lat())
         $('#appbundle_observation_longitude').val(result.lng())
     }
+
     $( function() {
         var addressPicker = new AddressPicker();
         $('#address').typeahead(null, {
@@ -38,7 +39,6 @@
     $( function() {
         // instantiate the addressPicker suggestion engine (based on bloodhound)
         var uluru = {lat: 48.864872, lng: 2.348236 };
-
 
         var addressPicker = new AddressPicker({
             map: {id: '#map',
@@ -285,7 +285,8 @@
                     }
 
                 ],
-            zoom: 6
+            zoom: 6,
+            scrollwheel: false
             },
             marker: {draggable: true, visible: true},
             zoomForLocation: 5,

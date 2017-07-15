@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Image;
 
 /**
  * Observation
@@ -65,8 +66,7 @@ class Observation
     private $longitude;
 
     /**
-     * @var string
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
 
@@ -123,7 +123,7 @@ class Observation
      *
      * @return Observation
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
 
@@ -236,29 +236,6 @@ class Observation
         return $this->specy;
     }
 
-    /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Observation
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 
     /**
      * Set author
@@ -306,5 +283,19 @@ class Observation
     public function getComment()
     {
         return $this->comment;
+    }
+
+
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }

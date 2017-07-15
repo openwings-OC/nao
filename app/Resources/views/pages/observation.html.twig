@@ -8,8 +8,8 @@
         <div class="large-5 columns">
 
                     <h3>{{ observation.specy.nomVern }}</h3>
-                    <img src="{{ observation.image }}" alt="{{ observation.specy.nomVern }}">
-                    <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
+            {{ dump(observation.createdAt|date("my")) }}
+            <img src="{{ asset('img/' ~ observation.createdAt|date("my") ~ observation.specy.cdNom ~ '.jpg') }}" alt="{{ observation.specy.nomVern }}"/>
                     <p>Observée par : {{ observation.author }}</p>
                     <p>Commentaire : {{ observation.comment }}</p>
         </div>

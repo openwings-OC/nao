@@ -97,7 +97,6 @@ class PagesController extends Controller
      * @route("/observation/{id}", name="app_observation")
      */
     public function observationAction(Request $request){
-        //$specie = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
         return $this->render('pages/observation.html.twig', array(
             'observation' => $observation
@@ -105,14 +104,26 @@ class PagesController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @route("/add/", name="app_addObservation")
      */
     public function addObservationAction(Request $request){
         $observation = new Observation();
-        $form = $this->get('form.factory')->create(ObservationType::class, $observation);
+        $form = $this->createForm(ObservationType::class, $observation);
 
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
+            $em = $this->getDoctrine()->getManager();
+
+            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
+            $date = $observation->getCreatedAt();
+            $observation->setState('pending');
+            $observation->setUpdatedAt($date);
+            $observation->setAuthor('Robin');
+
+            $em->persist($observation);
+            $em->flush();
+
+        }
         return $this->render(':crud:add.html.twig', array(
             'form' => $form->createView(),
         ));
