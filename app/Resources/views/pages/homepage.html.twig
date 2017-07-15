@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Accueil{% endblock %}
 {% block body %}
+
     <div class="text-center callout ccf">
             <h1>COMMENT ÇA FONCTIONNE ?</h1>
     </div>
@@ -27,16 +28,17 @@
             <a href="" class="button">EN SAVOIR PLUS</a>
         </div>
     </div>
+
     <div class="row">
         <div class="large-12 columns">
-            <h2 class="callout greenBackground">DERNIÈRES OBSERVATIONS D'OISEAUX</h2>
-            <div class="large-4 columns">
-            <div class="row small-up-12 medium-up-2">
+            <div class="large-8 columns">
+                <h2 class="callout greenBackground">DERNIÈRES OBSERVATIONS D'OISEAUX</h2>
+
+                <div class="row small-up-12 medium-up-2">
                 <div class="column">
                     <div class="card">
                         <img src="{{ asset('images/jpg/piaf.jpg') }}">
                         <div class="card-section">
-                            <h4>This is a card.</h4>
                             <p>It has an easy to override visual style, and is appropriately subdued.</p>
                         </div>
                     </div>
@@ -45,7 +47,6 @@
                     <div class="card">
                         <img src={{ asset('images/jpg/piaf.jpg') }}>
                         <div class="card-section">
-                            <h4>This is a card.</h4>
                             <p>It has an easy to override visual style, and is appropriately subdued.</p>
                         </div>
                     </div>
@@ -56,7 +57,6 @@
                     <div class="card">
                         <img src={{ asset('images/jpg/piaf.jpg') }}>
                         <div class="card-section">
-                            <h4>This is a card.</h4>
                             <p>It has an easy to override visual style, and is appropriately subdued.</p>
                         </div>
                     </div>
@@ -65,26 +65,33 @@
                     <div class="card">
                         <img src={{ asset('images/jpg/piaf.jpg') }}>
                         <div class="card-section">
-                            <h4>This is a card.</h4>
                             <p>It has an easy to override visual style, and is appropriately subdued.</p>
                         </div>
                     </div>
                 </div>
             </div>
             </div>
-            <div class="large-4 columns text-center">
-                <a href="/informations" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/Doigt.png') }}" alt="NAO" />
-                    <p>
-                        Je m'informe
-                    </p></a>
-            </div>
             <div class="large-4 columns greenBackground text-center">
                 <a href="/informations" class="button secondary expanded"><img height="50" width="50" src="{{ asset('images/png/Info.png') }}" alt="NAO" />
                     <p>
-                        Je m'informe
+                        JE M'INFORME
                     </p></a>
             </div>
-    </div>
-
+            <div class="large-4 columns text-center">
+                <a href="/informations" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/Doigt.png') }}" alt="NAO" />
+                    <p>
+                        JE SIGNALE UN OISEAU
+                    </p></a>
+            </div>
+            <div class="large-4 columns text-center">
+                <a href="/informations" class="button expanded"><img height="50" width="50" src="{{ asset('images/png/Loupe.png') }}" alt="NAO" />
+                    <p>
+                        JE RECHERCHE UN OISEAU
+                    </p></a>
+            </div>
+        </div>
+        <div class="large-12 columns">
+            <a href="/" class="button third expanded">JE FAIS UN DON À L'ASSOCIATION</a>
+        </div>
     </div>
 {% endblock %}
