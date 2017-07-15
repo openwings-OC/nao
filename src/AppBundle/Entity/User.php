@@ -38,14 +38,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=50)
+     * @ORM\Column(name="firstname", type="string", length=50)
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=50)
+     * @ORM\Column(name="lastname", type="string", length=50)
      */
     private $lastname;
 
@@ -55,7 +55,7 @@ class User extends BaseUser
 
     public function __construct(){
         parent::__construct();
-        // your own logic
+        $this->createdAt = new \DateTime();
     }
 
     /**
