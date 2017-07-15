@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('app_search') }}" method="post" id="form">
+        <div class="row">
+            <div class="large-10 large-offset-2">
+                <div class="row collapse">
+                    <div class="large-7 columns">
+                        <input type="text" id="search" name="search" placeholder="Rechercher un oiseau (nom vernaculaire ou scientifique)" />
+                    </div>
+                    <div class="large-4 columns">
+                        <button class="button postfix" type="submit" id="recherche">Rechercher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {% if pagination is defined %}
+        <div class="text-center">
+            {{ knp_pagination_render(pagination, ':modules:pagination.html.twig') }}
+        </div>
+        <div class="large-8 large-offset-2">
+            <table>
+                <thead>
+                <tr>
+                    <th width="200">Nom commun</th>
+                    <th>Nom scientifique</th>
+                    <th>Auteur</th>
+                    <th>Observations</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bird in pagination %}
+                    <tr>
+                        <td>
+                            {% if bird.nomVern is empty %}
+                                Pas de nom Vernaculaire pour cette race
+                            {% endif %}
+                            {{ bird.nomVern }}
+                        </td>
+                        <td>
+                            {{ bird.nomValide }}
+                        </td>
+                        <td>
+                            {{ bird.lbAuteur }}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path('app_observation', {'id' : bird.cdNom}) }}"><i class="fa fa-eye fa-2x"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
