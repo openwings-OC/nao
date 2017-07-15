@@ -85,11 +85,9 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
-<<<<<<< HEAD
     registration:
         form:
             type: AppBundle\Form\RegistrationType
-=======
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
@@ -101,4 +99,3 @@ knp_paginator:
     template:
         pagination: 'modules:pagination.html.twig'     # sliding pagination controls template
         sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
->>>>>>> fb7bc011e20777f138b1a355a0d268bffa26abb4

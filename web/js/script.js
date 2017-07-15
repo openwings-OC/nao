@@ -5,7 +5,7 @@ $('#search').autocomplete({
     minLength: 3,
     source : function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: "http://localhost:3000/autocomplete",
             type: "POST",
             dataType : 'JSON',
             data: {'bird': $('#search').val(),

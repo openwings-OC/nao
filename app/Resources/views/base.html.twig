@@ -5,7 +5,6 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-<<<<<<< HEAD
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
         {% block stylesheets %}
             {% stylesheets 'css/app.css'
@@ -89,33 +88,13 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script src="{{ asset('js/vendor/motionui.js') }}"></script>
             <script src="{{ asset('js/vendor/whatinput.js') }}"></script>
             <script src="{{ asset('js/vendor/modernizr.js') }}"></script>
             <script src="{{ asset('js/vendor/foundation.js') }}"></script>
             <script src="{{ asset('js/app.js') }}"></script>
-=======
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        {% endblock %}
-
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <img src="{{ asset('img/Bandeau_desktop.jpg') }}" alt="">
-    <ul class="menu">
-        <li class="is-active"><a>Home</a></li>
-        <li><a>About</a></li>
-        <li><a>Nachos</a></li>
-    </ul>
-        {% block body %}{% endblock %}
-
-        {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script src="{{ asset('js/script.js') }}"></script>
->>>>>>> fb7bc011e20777f138b1a355a0d268bffa26abb4
         {% endblock %}
     </body>
     <footer>
