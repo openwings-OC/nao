@@ -1,13 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="fr">
     <head>
         <meta charset="UTF-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+        {% block stylesheets %}
+            {% stylesheets 'css/app.css'
+            filter='cssrewrite' output='css/compiled/app.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    <div class="header">
+        <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" />
+
+    <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="nao-menu"></button>
+        <div class="title-bar-title">Menu</div>
+    </div>
+
+    <div data-sticky-container>
+        <div class="menutest" id="menutest">
+            <div class="logo-menu">
+                <a href="{{ path('homepage') }}">
+                    <img height="180" width="180" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
+                </a>
+            </div>
+    <div class="top-bar" id="nao-menu">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="naoMenuItem blueMenuItem">
+                    <a href="#">NOS AMIS LES OISEAUX</a>
+                    <ul class="menu vertical">
+                        <li><a href="#">L'association</a></li>
+                        <li><a href="#">Adhérer à NAO</a></li>
+                        <li><a href="#">Mission</a></li>
+                        <li><a href="#">Agenda</a></li>
+                        <li><a href="#">Équipe</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                    </ul>
+                </li>
+                <li class="naoMenuItem greenMenuItem">
+                    <a href="#">RECHERCHE D'ESPÈCE</a>
+                    <ul class="menu vertical">
+                        <li class="greenMenuItem"><input type="search" placeholder="Search"><button type="button" class="button">Search</button></li>
+                    </ul>
+                </li>
+                <li class="naoMenuItem greenMenuItem">
+                    <a href="#">OBSERVATION</a>
+                    <ul class="menu vertical">
+                        <li class="greenMenuItem"><a href="#">Dernières observations</a></li>
+                        <li class="greenMenuItem"><a href="#">Carte de France</a></li>
+                        <li class="greenMenuItem"><a href="#">Guide du débutant</a></li>
+                    </ul>
+                </li>
+                <li class="naoMenuItem blueMenuItem">
+                    <a href="#">DÉMARCHE SCIENTIFIQUE</a>
+                    <ul class="menu vertical">
+                        <li><a href="#">Le projet et ses partenaires</a></li>
+                        <li><a href="#">Publications</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="dropdown menu" data-dropdown-menu>
+
+            <li class="naoMenuItem orangeMenuItem">
+                <a href="#"><img height="50" width="50" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
+                <ul class="menu vertical">
+                    <li class="orangeMenuItem"><a href="/register" class="button expanded">S'INSCRIRE</a></li>
+                    <li class="orangeMenuItem"><a href="/login" class="button expanded">SE CONNECTER</a></li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+        </div>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/vendor/jquery.js') }}"></script>
+            <script src="{{ asset('js/vendor/motionui.js') }}"></script>
+            <script src="{{ asset('js/vendor/whatinput.js') }}"></script>
+            <script src="{{ asset('js/vendor/modernizr.js') }}"></script>
+            <script src="{{ asset('js/vendor/foundation.js') }}"></script>
+            <script src="{{ asset('js/app.js') }}"></script>
+        {% endblock %}
     </body>
+    <footer>
+    <div class="callout text-center socialLinks">
+        <a href="https://twitter.com/naodujardin"><i class="fa fa-twitter fa-3x"></i></a>
+        <a href="https://www.facebook.com/Nos-amis-les-oiseaux-1724481754517162/"><i class="fa fa-facebook fa-3x"></i></a>
+        <a href="https://plus.google.com/u/0/114909314086156892767"><i class="fa fa-google-plus fa-3x"></i></a>
+        <a href="https://fr.pinterest.com/naodujardin/"><i class="fa fa-pinterest fa-3x"></i></a>
+    </div>
+        <div class="row">
+            <div class="small-6 columns">
+                <p>EN PARTENARIAT AVEC</p>
+                <a href="https://www.mnhn.fr"><img height="150" width="150" src="{{ asset('images/png/LogoMNHN.png') }}" alt="Muséum national d'Histoire naturelle" /></a>
+            </div>
+            <div class="small-6 columns text-center linksFooter">
+                <li><a href="">Contact</a></li>
+                <li><a href="">Conditions générales d'utilisation</a></li>
+                <li><a href="">Crédits</a></li>
+                <li><a href="">Mentions légales</a></li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns text-center">
+                Copyright © Nos Amis les Oiseaux 2017
+            </div>
+        </div>
+    </footer>
 </html>
