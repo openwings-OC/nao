@@ -113,7 +113,7 @@ class PagesController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @route("/observation/{id}", name="app_observation")
+     * @route("/observations/{id}", name="app_observation")
      */
     public function observationAction(Request $request){
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
@@ -128,7 +128,7 @@ class PagesController extends Controller
 
     /**
      *
-     * @route("/add/", name="app_addObservation")
+     * @route("/observations/add/", name="app_addObservation")
      */
     public function addObservationAction(Request $request){
         $observation = new Observation();

@@ -4,10 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
-    "hash": "6874a98483206336c04c7e697e495999",
-    "content-hash": "dc02436468a14f141b53f0058d90c6b5",
-
+    "hash": "05c2ff421068f716fe09ea5d605c3abd",
+    "content-hash": "928edec36110f366cb4a79f5009605dc",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -403,7 +401,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2016-09-20T10:07:57+00:00"
+            "time": "2016-09-20 10:07:57"
         },
         {
             "name": "doctrine/dbal",
@@ -700,7 +698,7 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2015-11-04T21:23:23+00:00"
+            "time": "2015-11-04 21:23:23"
         },
         {
             "name": "doctrine/inflector",
