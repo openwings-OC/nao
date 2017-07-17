@@ -17,6 +17,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
+        {% block body %}{% endblock %}
     <div class="header">
         <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" />
 
@@ -87,15 +89,23 @@
         </div>
         {% block body %}{% endblock %}
         {% block javascripts %}
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap&libraries=places" async defer></script>
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script src="{{ asset('js/vendor/motionui.js') }}"></script>
             <script src="{{ asset('js/vendor/whatinput.js') }}"></script>
             <script src="{{ asset('js/vendor/modernizr.js') }}"></script>
             <script src="{{ asset('js/vendor/foundation.js') }}"></script>
+            <script src="{{ asset('js/bloodhound.js') }}"></script>
+            <script src="{{ asset('js/typeahead.jquery.js') }}"></script>
+            <script src="{{ asset('js/typeahead-addresspicker.js') }}"></script>
+            <script src="{{ asset('js/jquery.ui.addresspicker.js') }}"></script>
             <script src="{{ asset('js/app.js') }}"></script>
             <script src="{{ asset('js/script.js') }}"></script>
         {% endblock %}
+
+
     </body>
     <footer>
     <div class="callout text-center socialLinks">
