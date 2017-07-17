@@ -7,12 +7,20 @@ use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class PagesController extends Controller
 {
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function indexAction(Request $request)
+    {
 
+        return $this->render('pages/homepage.html.twig');
+
+    }
     /**
      * @route("/search", name="app_search")
      */
@@ -77,7 +85,15 @@ class PagesController extends Controller
                     array_push($list, $bird->getlbNom());
                 }
             }
-            return new JsonResponse(array('list' => $list));
+
+            $response = new Response();
+            $response->setContent(json_encode(
+                array('list' => $list)
+            ),
+                array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json')
+            );
+
+            return $response;
         }
     }
 
@@ -136,4 +152,8 @@ class PagesController extends Controller
         ));
     }
 
+
+
+
 }
+
