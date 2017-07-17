@@ -11,10 +11,10 @@ namespace AppBundle\Repository;
 class ObservationRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findObservationsBySpecieId($id){
-
         $observations = $this->createQueryBuilder('o')
             ->where('o.specy = :id')
             ->setParameter('id', $id)
+            ->orderBy('o.id', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -22,7 +22,6 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function findObservationById($id){
-        var_dump($id);
         $observation = $this->createQueryBuilder('o')
             ->where('o.id = :id')
             ->setParameter('id', $id)
@@ -30,5 +29,15 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleResult();
 
             return $observation;
+    }
+
+    public function getNumberOfObservationsByBird($birdCdNom){
+        $number = $this->createQueryBuilder('n')
+            ->select('COUNT(n.specy)')
+            ->where('n.specy = :specy')
+            ->setParameter('specy', $birdCdNom)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $number;
     }
 }

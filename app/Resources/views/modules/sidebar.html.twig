@@ -1,1 +1,7 @@
 <h4>Les autres observation de cette espèce</h4>
+{% for observation in observations %}
+    {% if loop.index > 1 %}
+        {{ observation.author }} - {{ observation.createdAt|date('d-m-Y') }} - <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
+        <br>
+    {% endif %}
+{% endfor %}

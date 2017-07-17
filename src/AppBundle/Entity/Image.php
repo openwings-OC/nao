@@ -121,9 +121,9 @@ class Image
         if(null === $this->file){
             return;
         }
-
+        $uniqid = uniqid();
         $date = $date->format('ym');
-        $name = $date . $cdNom . ".jpg";
+        $name = $date . $cdNom . $uniqid .".jpg";
         $this->file->move($this->getUploadRootDir(), $name);
 
         $this->url = $name;

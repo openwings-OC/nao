@@ -22,6 +22,7 @@ class ObservationType extends AbstractType
         $builder
             ->add('createdAt', DateType::class, array(
                 'label' => 'Date de l\'observation',
+                'data' => new \DateTime()
             ))
             ->add('latitude', TextType::class)
             ->add('longitude', TextType::class)
@@ -38,9 +39,7 @@ class ObservationType extends AbstractType
                         ->setParameter('taxsup', 0);
                 },
             ))
-            ->add('image', ImageType::class, array(
-                'label' => 'Choisissez une image'
-            ))
+            ->add('image', ImageType::class)
             ->add('save', SubmitType::class, array(
                 'label' => 'Envoyer'
             ));

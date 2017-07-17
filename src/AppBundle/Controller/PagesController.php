@@ -68,9 +68,11 @@ class PagesController extends Controller
         if($request->isXmlHttpRequest()){
             $letter = $request->get('bird');
             $requete = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findBirdByLetter($letter);
+            $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation');
             $list = [];
             foreach($requete as $bird){
-               $list[] = ['value' => $bird->getNomVern(), 'id' => $bird->getCdNom()];
+               $number = $numberRequest->getNumberOfObservationsByBird($bird);
+               $list[] = ['value' => $bird->getNomVern(), 'number' => $number, 'id' => $bird->getCdNom()];
                 if($bird->getNomVern() === ''){
                     array_push($list, $bird->getlbNom());
                 }
@@ -84,10 +86,11 @@ class PagesController extends Controller
      */
     public function specyAction(Request $request){
         $specy = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
+        $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation')->getNumberOfObservationsByBird($specy->getCdNom());
         $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId((int)$request->get('id'));
         return $this->render('pages/specy.html.twig', array(
             'specy' => $specy,
-            'observations' => $observations
+            'observations' => $observations,
         ));
     }
 
@@ -98,8 +101,12 @@ class PagesController extends Controller
      */
     public function observationAction(Request $request){
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
+        $specy = $observation->getSpecy()->getCdNom();
+        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specy);
         return $this->render('pages/observation.html.twig', array(
-            'observation' => $observation
+            'specy' => $specy,
+            'observation' => $observation,
+            'observations' => $observations
         ));
     }
 
