@@ -20,16 +20,16 @@ $('#search').autocomplete({
     minLength: 3,
     source : function(requete, reponse) {
         $.ajax({
-            url: "http://localhost:3000/autocomplete",
+            url: "http://localhost/nao/web/app_dev.php/autocomplete",
             type: "POST",
             dataType : 'JSON',
             data: {'bird': $('#search').val(),
 
         },
             success: function (data, statut) {
+                console.log(data)
                 reponse($.map(data, function (objet) {
                     return objet
-                    //return objet;
                 }));
                 $('#ui-id-1 li div').addClass('results');
                 $('#ui-id-1 li div').addClass('large-12');
@@ -43,6 +43,29 @@ $('#search').autocomplete({
     }
 });
 
+
+//Requete AJAX carte des observations
+$selectBird = $('#appbundle_observation_specy');
+$($selectBird).change(function(){
+    console.log($selectBird.val())
+    $.ajax({
+        url: "http://localhost/nao/web/app_dev.php/observation_map",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            'bird': $selectBird.val(),
+        },
+        success: function (data, status){
+            console.log(data)
+            for(var i = 0 ; i < data.list.length ; i++){
+                console.log(data.list[i])
+            }
+
+        }
+
+    })
+})
+
 //Ajuste la largeur du moteur de recherche
 $('#ui-id-1').addClass('large-4');
 
@@ -54,12 +77,15 @@ $('#changecible').click(function(position){
     maPosition(position);
 })
 
-function maPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    document.getElementById("appbundle_observation_latitude").value = latitude;
-    document.getElementById("appbundle_observation_longitude").value = longitude;
-}
+// if($('#infoposition') != null){
+    function maPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        document.getElementById("appbundle_observation_latitude").value = latitude;
+        document.getElementById("appbundle_observation_longitude").value = longitude;
+    }
 
-if(navigator.geolocation)
-    navigator.geolocation.getCurrentPosition(maPosition);
+    if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(maPosition);
+
+

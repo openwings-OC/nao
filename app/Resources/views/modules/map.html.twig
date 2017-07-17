@@ -2,7 +2,7 @@
 <div id="map"></div>
 <script>
     function initMap() {
-        var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };
+        {#var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };#}
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             center: uluru,
@@ -254,6 +254,7 @@
             position: uluru,
             map: map
         });
+
 
     }
 </script>

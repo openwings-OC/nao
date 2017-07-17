@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>Carte des observations</h1>
+        <h2>Sélectionnez l'espèce recherchée</h2>
+
+        {{ form_start(form) }}
+        {{ form_widget(form.specy) }}
+    </div>
+
+    {% include ':modules:map.html.twig' %}
+
+
+{% endblock %}

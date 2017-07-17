@@ -18,7 +18,6 @@
     </head>
     <body>
 
-        {% block body %}{% endblock %}
     <div class="header">
         <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" />
 
@@ -58,7 +57,7 @@
                     <a href="#">OBSERVATION</a>
                     <ul class="menu vertical">
                         <li class="greenMenuItem"><a href="#">Dernières observations</a></li>
-                        <li class="greenMenuItem"><a href="#">Carte de France</a></li>
+                        <li class="greenMenuItem"><a href="{{ path('app_observation_map') }}">Carte de France</a></li>
                         <li class="greenMenuItem"><a href="#">Guide du débutant</a></li>
                     </ul>
                 </li>
@@ -90,7 +89,7 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
 
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap&libraries=places" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&callback=initMap&libraries=places" async defer></script>
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script src="{{ asset('js/vendor/motionui.js') }}"></script>

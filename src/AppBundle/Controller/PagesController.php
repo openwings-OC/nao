@@ -7,6 +7,7 @@ use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -117,6 +118,14 @@ class PagesController extends Controller
      */
     public function observationAction(Request $request){
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
+
+        /*$specyId = 4525;
+        var_dump($specyId);
+        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+        $list = $em->findObservationsBySpecieId($specyId);
+        var_dump($list);
+        die();*/
+
         $specy = $observation->getSpecy()->getCdNom();
         $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specy);
         return $this->render('pages/observation.html.twig', array(
@@ -151,6 +160,39 @@ class PagesController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @route("/observation_map", name="app_observation_map")
+     */
+    public function observationMap(Request $request){
+        if($request->isXmlHttpRequest()){
+            $specyId = (int)$request->get('bird');
+            $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+            $req = $em->findObservationsBySpecieId($specyId);
+
+            $list = [];
+            foreach($req as $bird){
+                $list[] = ['latitude' => $bird->getLatitude(), 'longitude' => $bird->getLongitude(), 'observation' => $bird->getId()];
+            }
+            return new JsonResponse(array('list' => $list));
+            /*$response = new Response();
+            $response->setContent(json_encode(
+                array('list' => $list)
+            ),
+                array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json')
+            );
+
+            return $response;*/
+        }
+
+        $form = $this->createForm(ObservationType::class);
+        return $this->render(':pages:observation_map.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+
 
 
 
