@@ -1,8 +1,6 @@
 <?php
 
 namespace AppBundle\Repository;
-
-use AppBundle\Entity\Taxref;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -61,6 +59,16 @@ class TaxrefRepository extends EntityRepository {
         $pag = new Paginator($bird);
         var_dump($pag);
         return $pag;
+    }
+
+    public function findSpecyByBirdId($id){
+        $specy = $this->createQueryBuilder('s')
+            ->where('s.cdNom = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getSingleResult();
+
+            return $specy;
     }
 
 }

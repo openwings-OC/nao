@@ -16,12 +16,14 @@ class Taxref
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
+     *
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $cdNom;
+
 
     /**
      * @var string
@@ -58,12 +60,7 @@ class Taxref
      */
     private $famille;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
-     */
-    private $cdNom;
+
 
     /**
      * @var integer
@@ -256,15 +253,6 @@ class Taxref
 
 
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set regne
@@ -1057,4 +1045,7 @@ class Taxref
     {
         return $this->cli;
     }
+
+
+
 }

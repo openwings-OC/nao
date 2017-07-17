@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Observation;
+use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -66,9 +68,11 @@ class PagesController extends Controller
         if($request->isXmlHttpRequest()){
             $letter = $request->get('bird');
             $requete = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findBirdByLetter($letter);
+            $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation');
             $list = [];
             foreach($requete as $bird){
-               $list[] = ['value' => $bird->getNomVern(), 'id' => $bird->getCdNom()];
+               $number = $numberRequest->getNumberOfObservationsByBird($bird);
+               $list[] = ['value' => $bird->getNomVern(), 'number' => $number, 'id' => $bird->getCdNom()];
                 if($bird->getNomVern() === ''){
                     array_push($list, $bird->getlbNom());
                 }
@@ -78,15 +82,58 @@ class PagesController extends Controller
     }
 
     /**
+     * @route("/specy/{id}", name="app_specy")
+     */
+    public function specyAction(Request $request){
+        $specy = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
+        $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation')->getNumberOfObservationsByBird($specy->getCdNom());
+        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId((int)$request->get('id'));
+        return $this->render('pages/specy.html.twig', array(
+            'specy' => $specy,
+            'observations' => $observations,
+        ));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      * @route("/observation/{id}", name="app_observation")
      */
     public function observationAction(Request $request){
-
-        return $this->render('pages/observation.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
+        $specy = $observation->getSpecy()->getCdNom();
+        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specy);
+        return $this->render('pages/observation.html.twig', array(
+            'specy' => $specy,
+            'observation' => $observation,
+            'observations' => $observations
+        ));
     }
-    public function specieAction(Request $request){
 
+    /**
+     *
+     * @route("/add/", name="app_addObservation")
+     */
+    public function addObservationAction(Request $request){
+        $observation = new Observation();
+        $form = $this->createForm(ObservationType::class, $observation);
+
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
+            $em = $this->getDoctrine()->getManager();
+
+            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
+            $date = $observation->getCreatedAt();
+            $observation->setState('pending');
+            $observation->setUpdatedAt($date);
+            $observation->setAuthor('Robin');
+
+            $em->persist($observation);
+            $em->flush();
+
+        }
+        return $this->render(':crud:add.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
+
 }

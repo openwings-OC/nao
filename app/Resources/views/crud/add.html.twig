@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Ajouter une observation</h1><br>
+    <div class="large-6 row">
+
+        <p class="panel callout radius text-center alert-box alert round">Attention, toute observation doit être validée par un naturaliste pour être pûbliée</p>
+    </div>
+    <div class="large-12 row">
+        <p id="infoposition"></p>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="large-3 columns">
+            {{ form_widget(form.image) }}
+            {{ form_widget(form.image) }}
+        </div>
+        <div class="large-6 columns">
+            <div class="large-12 columns">
+                {{ form_label(form.specy) }}
+                {{ form_widget(form.specy) }}
+            </div>
+
+            <div class="large-5 columns">
+                {{ form_label(form.latitude) }}
+                {{ form_widget(form.latitude) }}
+            </div>
+            <div class="large-5 columns">
+                {{ form_label(form.longitude) }}
+                {{ form_widget(form.longitude) }}
+            </div>
+            <div class="large-2 columns">
+                <a id="changecible"><i id="cible" class="fa fa-dot-circle-o fa-2x"></i></a>
+            </div>
+            <br>
+            <div class="large-12 columns">
+            {{ form_label(form.createdAt) }}
+            {{ form_widget(form.createdAt) }}
+            </div>
+            <div class="large-12 columns">
+            {{ form_label(form.comment) }}
+            {{ form_widget(form.comment) }}
+            </div>
+        </div>
+        <div class="large-2 columns">
+           {{ form_widget(form.save, {'attr' : {'class' : 'hollow button large-12' }}) }}
+            <a href="#" class="hollow button secondary large-12">Annuler</a>
+        </div>
+        {{ form_rest(form) }}
+
+</div>
+<div class="large-6 row">
+    <p class="panel callout radius text-center alert-box warning round">Déplacez le curseur pour récupérer automatiquement les coordonnées</p>
+</div>
+    {% include "modules/mapAdd.html.twig" %}
+{% endblock %}

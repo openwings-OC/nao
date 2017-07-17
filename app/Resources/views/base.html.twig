@@ -13,16 +13,24 @@
     <body>
     <img src="{{ asset('img/Bandeau_desktop.jpg') }}" alt="">
     <ul class="menu">
-        <li class="is-active"><a>Home</a></li>
+        <li class="is-active"><a href="{{ path('app_search') }}">Home</a></li>
         <li><a>About</a></li>
         <li><a>Nachos</a></li>
     </ul>
         {% block body %}{% endblock %}
 
         {% block javascripts %}
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap&libraries=places" async defer></script>
             <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script src="{{ asset('js/bloodhound.js') }}"></script>
+            <script src="{{ asset('js/typeahead.jquery.js') }}"></script>
+            <script src="{{ asset('js/typeahead-addresspicker.js') }}"></script>
+            <script src="{{ asset('js/jquery.ui.addresspicker.js') }}"></script>
             <script src="{{ asset('js/script.js') }}"></script>
+
         {% endblock %}
+
+
     </body>
 </html>

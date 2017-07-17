@@ -1,5 +1,20 @@
-//var search = $('#search').val();
 
+//Nom image uploadée
+var inputs = $('#appbundle_observation_image_file');
+Array.prototype.forEach.call( inputs, function( input )
+{
+    var label	 = $('#appbundle_observation_image div div label'),
+        labelVal = label.innerHTML;
+
+    input.addEventListener( 'change', function(e)
+    {
+        var value = $('#appbundle_observation_image_file').val();
+        var filename = value.slice(12);
+        label.html(filename)
+    });
+});
+
+//Autocompletion moteur de recherche
 $('#search').autocomplete({
     maxShowItems : 10,
     minLength: 3,
@@ -12,22 +27,39 @@ $('#search').autocomplete({
 
         },
             success: function (data, statut) {
-                //console.log(data);
                 reponse($.map(data, function (objet) {
-                    //console.log(objet[0].id);
-                    return objet;
+                    return objet
+                    //return objet;
                 }));
                 $('#ui-id-1 li div').addClass('results');
-                $('#ui-id-1 li div').addClass('large-4');
+                $('#ui-id-1 li div').addClass('large-12');
                 $('.ui-helper-hidden-accessible').hide();
-            }
+            },
         });
     },
     select : function(event, ui){
-        $('#form').attr('action', 'observation/' + ui.item.id);
+        $('#form').attr('action', 'specy/' + ui.item.id);
         $('#form').submit();
     }
 });
 
-$('#ui-id-1').addClass('no-bullet');
+//Ajuste la largeur du moteur de recherche
+$('#ui-id-1').addClass('large-4');
 
+//Geolocalisation
+
+$('#changecible').click(function(position){
+    if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(maPosition);
+    maPosition(position);
+})
+
+function maPosition(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    document.getElementById("appbundle_observation_latitude").value = latitude;
+    document.getElementById("appbundle_observation_longitude").value = longitude;
+}
+
+if(navigator.geolocation)
+    navigator.geolocation.getCurrentPosition(maPosition);
