@@ -18,10 +18,9 @@
     </head>
     <body>
 
-        {% block body %}{% endblock %}
+
     <div class="header">
         <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" />
-
     <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
         <button class="menu-icon" type="button" data-toggle="nao-menu"></button>
         <div class="title-bar-title">Menu</div>
@@ -88,7 +87,7 @@
     </div>
         </div>
         {% block body %}{% endblock %}
-        {% block javascripts %}
+            {% block javascripts %}
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap&libraries=places" async defer></script>
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
@@ -104,7 +103,6 @@
             <script src="{{ asset('js/app.js') }}"></script>
             <script src="{{ asset('js/script.js') }}"></script>
         {% endblock %}
-
 
     </body>
     <footer>

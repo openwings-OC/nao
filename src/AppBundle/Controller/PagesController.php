@@ -17,9 +17,7 @@ class PagesController extends Controller
      */
     public function indexAction(Request $request)
     {
-
         return $this->render('pages/homepage.html.twig');
-
     }
     /**
      * @route("/search", name="app_search")
