@@ -189,18 +189,11 @@ class PagesController extends Controller
 
     }
 
-
     /**
      * @route("/guide-debutant", name="app_guide_debutant")
      */
     public function debutantAction(){
         return $this->render(':pages:guide_debutant.html.twig');
     }
-
-
-
-
-
-
 }
 
