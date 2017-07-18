@@ -18,8 +18,11 @@ class PagesController extends Controller
      */
     public function indexAction(Request $request)
     {
-
-        return $this->render('pages/homepage.html.twig');
+        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+        $lastObservations = $em->find4LastObservations();
+        return $this->render('pages/homepage.html.twig', array(
+            'list' => $lastObservations
+        ));
 
     }
     /**
@@ -57,6 +60,7 @@ class PagesController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
         $list = $em->findBirdByLetterLimited($page , 50);
 
+        //Service pagination
         $pagination = array(
             'page' => $page,
             //'nbPages' => $list(count($list) / 50),
@@ -78,6 +82,7 @@ class PagesController extends Controller
             $letter = $request->get('bird');
             $requete = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findBirdByLetter($letter);
             $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation');
+            //Service qui créé le tableau JSON
             $list = [];
             foreach($requete as $bird){
                $number = $numberRequest->getNumberOfObservationsByBird($bird);
@@ -118,14 +123,6 @@ class PagesController extends Controller
      */
     public function observationAction(Request $request){
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
-
-        /*$specyId = 4525;
-        var_dump($specyId);
-        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
-        $list = $em->findObservationsBySpecieId($specyId);
-        var_dump($list);
-        die();*/
-
         $specy = $observation->getSpecy()->getCdNom();
         $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specy);
         return $this->render('pages/observation.html.twig', array(
@@ -145,7 +142,7 @@ class PagesController extends Controller
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
             $em = $this->getDoctrine()->getManager();
-
+            //Service hydrater objet
             $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
             $date = $observation->getCreatedAt();
             $observation->setState('pending');
@@ -172,7 +169,7 @@ class PagesController extends Controller
 
             $list = [];
             foreach($req as $bird){
-                $list[] = ['latitude' => $bird->getLatitude(), 'longitude' => $bird->getLongitude(), 'observation' => $bird->getId()];
+                $list[] = [$bird->getLatitude(), $bird->getLongitude(), $bird->getId()];
             }
             return new JsonResponse(array('list' => $list));
             /*$response = new Response();
@@ -190,6 +187,14 @@ class PagesController extends Controller
             'form' => $form->createView(),
         ));
 
+    }
+
+
+    /**
+     * @route("/guide-debutant", name="app_guide_debutant")
+     */
+    public function debutantAction(){
+        return $this->render(':pages:guide_debutant.html.twig');
     }
 
 

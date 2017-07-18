@@ -40,4 +40,16 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
             ->getSingleScalarResult();
         return $number;
     }
+
+    public function find4LastObservations(){
+        $limit = 4;
+
+        $list = $this->createQueryBuilder('l')
+            ->orderBy('l.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return $list;
+    }
 }
