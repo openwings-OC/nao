@@ -1,5 +1,5 @@
 fos_user_registration_register:
-    path: /
+    path: /creer-un-compte
     methods: [GET, POST]
     defaults: { _controller: FOSUserBundle:Registration:register}
 fos_user_registration_check_email:
