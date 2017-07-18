@@ -1,10 +1,19 @@
 <h4>Géolocalisation de l'observation</h4>
+<div class="large-6 row">
 <div id="map"></div>
+</div>
+
+
 <script>
     function initMap() {
-        var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };
+        {% if observation is defined %}
+            var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };
+        {% endif %}
+        {% if observation is not defined %}
+            var uluru = {lat: 48.857762 , lng: 2.348699}
+        {% endif %}
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
+            zoom: 6,
             center: uluru,
             styles : [
 
@@ -250,10 +259,12 @@
             ],
             scrollwheel : false
         });
+        var image = {{ asset('img/marker.png') }};
         var marker = new google.maps.Marker({
             position: uluru,
-            map: map
+            map: map,
+            icon: image
         });
-
     }
 </script>
+

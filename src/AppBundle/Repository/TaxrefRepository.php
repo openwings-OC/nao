@@ -9,7 +9,6 @@ class TaxrefRepository extends EntityRepository {
 
     //Selectionne tous les oiseaux de la bdd
     public function findAll(){
-
         $list = $this->createQueryBuilder('l')
             ->where('l.cdTaxsup > :taxsup')
             ->setParameter('taxsup', 0)

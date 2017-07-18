@@ -8,8 +8,7 @@
     <div class="row text-center">
         <div class="medium-4 columns">
             <img height="100" width="100" src="{{ asset('images/svg/Picto internaute.svg') }}" alt="NAO" />
-            <p>
-            Je m'inscris
+            <p>Je m'inscris
             </p>
         </div>
         <div class="medium-4 columns">
@@ -33,43 +32,21 @@
         <div class="large-12 columns">
             <div class="large-8 columns">
                 <h2 class="callout greenBackground">DERNIÈRES OBSERVATIONS D'OISEAUX</h2>
+                <div class="row small-up-12 medium-up-2" data-equalizer data-equalize-on="medium">
+                {% for bird in list %}
+                    <div class="column">
+                        <div class="card ">
+                            <div class="img-card" data-equalizer-watch style="max-height: 200px; overflow: hidden;">
+                                <img src="{{ asset('img/' ~ bird.image.url) }}" style="width: 100%">
+                            </div>
+                            <div class="card-section">
+                                <p>{{ bird.specy.nomVern }}</p>
+                            </div>
+                        </div>
 
-                <div class="row small-up-12 medium-up-2">
-                <div class="column">
-                    <div class="card">
-                        <img src="{{ asset('images/jpg/piaf.jpg') }}">
-                        <div class="card-section">
-                            <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                        </div>
                     </div>
+                {% endfor %}
                 </div>
-                <div class="column">
-                    <div class="card">
-                        <img src={{ asset('images/jpg/piaf.jpg') }}>
-                        <div class="card-section">
-                            <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row small-up-12 medium-up-2">
-                <div class="column">
-                    <div class="card">
-                        <img src={{ asset('images/jpg/piaf.jpg') }}>
-                        <div class="card-section">
-                            <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <img src={{ asset('images/jpg/piaf.jpg') }}>
-                        <div class="card-section">
-                            <p>It has an easy to override visual style, and is appropriately subdued.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
             <div class="large-4 columns greenBackground text-center">
                 <a href="/informations" class="button secondary expanded"><img height="50" width="50" src="{{ asset('images/png/Info.png') }}" alt="NAO" />

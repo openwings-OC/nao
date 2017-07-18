@@ -7,6 +7,7 @@ use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,7 +18,11 @@ class PagesController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('pages/homepage.html.twig');
+        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+        $lastObservations = $em->find4LastObservations();
+        return $this->render('pages/homepage.html.twig', array(
+            'list' => $lastObservations
+        ));
     }
     /**
      * @route("/search", name="app_search")
@@ -54,6 +59,7 @@ class PagesController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
         $list = $em->findBirdByLetterLimited($page , 50);
 
+        //Service pagination
         $pagination = array(
             'page' => $page,
             //'nbPages' => $list(count($list) / 50),
@@ -75,6 +81,7 @@ class PagesController extends Controller
             $letter = $request->get('bird');
             $requete = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findBirdByLetter($letter);
             $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation');
+            //Service qui créé le tableau JSON
             $list = [];
             foreach($requete as $bird){
                $number = $numberRequest->getNumberOfObservationsByBird($bird);
@@ -134,7 +141,7 @@ class PagesController extends Controller
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
             $em = $this->getDoctrine()->getManager();
-
+            //Service hydrater objet
             $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
             $date = $observation->getCreatedAt();
             $observation->setState('pending');
@@ -150,8 +157,42 @@ class PagesController extends Controller
         ));
     }
 
+    /**
+     * @route("/observation_map", name="app_observation_map")
+     */
+    public function observationMap(Request $request){
+        if($request->isXmlHttpRequest()){
+            $specyId = (int)$request->get('bird');
+            $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+            $req = $em->findObservationsBySpecieId($specyId);
 
+            $list = [];
+            foreach($req as $bird){
+                $list[] = [$bird->getLatitude(), $bird->getLongitude(), $bird->getId()];
+            }
+            return new JsonResponse(array('list' => $list));
+            /*$response = new Response();
+            $response->setContent(json_encode(
+                array('list' => $list)
+            ),
+                array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json')
+            );
 
+            return $response;*/
+        }
 
+        $form = $this->createForm(ObservationType::class);
+        return $this->render(':pages:observation_map.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    /**
+     * @route("/guide-debutant", name="app_guide_debutant")
+     */
+    public function debutantAction(){
+        return $this->render(':pages:guide_debutant.html.twig');
+    }
 }
 
