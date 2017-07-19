@@ -67,30 +67,13 @@ class ObservationsController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     /**
      *
      * @route("/observations/editer/{id}", name="app_editObservation")
      */
     public function editObservationAction(Request $request){
-        $observation = new Observation();
-        $form = $this->createForm(ObservationType::class, $observation);
 
-        if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
-            $em = $this->getDoctrine()->getManager();
-
-            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
-            $date = $observation->getCreatedAt();
-            $observation->setState('pending');
-            $observation->setUpdatedAt($date);
-            $observation->setAuthor('Robin');
-
-            $em->persist($observation);
-            $em->flush();
-
-        }
-        return $this->render(':crud:add.html.twig', array(
-            'form' => $form->createView(),
-        ));
     }
 
     /**
@@ -98,25 +81,7 @@ class ObservationsController extends Controller
      * @route("/observations/supprimer/{id}", name="app_deleteObservation")
      */
     public function deleteObservationAction(Request $request){
-        $observation = new Observation();
-        $form = $this->createForm(ObservationType::class, $observation);
 
-        if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
-            $em = $this->getDoctrine()->getManager();
-
-            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
-            $date = $observation->getCreatedAt();
-            $observation->setState('pending');
-            $observation->setUpdatedAt($date);
-            $observation->setAuthor('Robin');
-
-            $em->persist($observation);
-            $em->flush();
-
-        }
-        return $this->render(':crud:add.html.twig', array(
-            'form' => $form->createView(),
-        ));
     }
 
 }
