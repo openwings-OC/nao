@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <meta name="description" content="NAO notre mission aidera les scientifiques à comprendre le comportement des différentes espèces d'oiseaux"/>
+    <div class="text-center callout ccf">
+        <h1>NOTRE MISSION</h1>
+    </div>
+    <div class="row mission">
+        <h3>Préserver la biodiversité</h3>
+        <img src="{{ asset('images/jpg/mission_1.jpg') }}" alt="">
+        <p>La biodiversité est aujourd'hui gravement menacée du fait des activité humaines.<br>Les conséquences de l'érosion de cette biodiversité sont dramatiques : Perte patrimoniale irréversible, perte des services rendus par les écosystèmes concernant l'alimentation, le bois, le climat, les ressources en eau etc ...<br>Après l’alarme des scientifiques nous relatant la diminution sensible de la biodiversité, nous devons tout faire pour qu’elle soit sauvegardée et qu’ainsi<br>elle continue à nous procurer les biens et services sans lesquels nous ne pourrions pas vivre. </p>
+        <h3>Référencer les oiseaux en France</h3>
+        <img src="{{ asset('images/jpg/mission_2.jpg') }}" alt="">
+        <p>Il aidera les scientifiques à comprendre le comportement des différentes espèces d'oiseaux et ses évolutions.<br>Les migrateurs reviennent-ils plus tôt quand le printemps est précoce ?<br>Les oiseaux granivores viennent-ils plus aux mangeoires dans les jardins proches des plaines agricoles où les graines sauvages manqueraient en hiver ?<br>Comment les aménagements urbains agissent sur la capacité des oiseaux à vivre en ville ?<br>Autant de questions qui auront des réponses grâce à vos contributions !</p>
+        <h3>La sensibilisation</h3>
+        <img src="{{ asset('images/jpg/mission_3.jpg') }}" alt="">
+        <p>Nous menons régulièrement des actions de sensibilisation auprès du public et notamment des plus jeunes :</p>
+        <ul>
+            <li>Conférences</li>
+            <li>Exposés</li>
+            <li>Newsletter</li>
+        </ul>
+    </div>
+
+{% endblock %}

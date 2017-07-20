@@ -1,10 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <div class="large-8 columns">
+    <div class="large-12 columns">
         <form action="{{ path('app_search') }}" method="post" id="form">
             <div class="row">
-                <div class="large-10 columns">
+                <div class="large-12 columns">
                     <div class="row collapse">
                         <div class="small-10 columns">
                             <input type="text" id="search" name="search" placeholder="Rechercher un oiseau (nom vernaculaire ou scientifique)" />
@@ -17,11 +17,6 @@
             </div>
         </form>
     </div>
-    <div class="large-4 columns">
-        <a href="{{ path('app_addObservation') }}" class="button">Ajouter une observation</a>
-    </div>
-
-
 
     {% if pagination is defined %}
         <div class="text-center">
@@ -60,5 +55,40 @@
                 </tbody>
             </table>
         </div>
-    {% endif %}
+
+    {% else %}
+        <div class="large-8 large-offset-2">
+            <table>
+                <thead>
+                <tr>
+                    <th width="200">Nom commun</th>
+                    <th>Nom scientifique</th>
+                    <th>Auteur</th>
+                    <th>Voir les observations</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bird in list %}
+                    <tr>
+                        <td>
+                            {% if bird.nomVern is empty %}
+                                Pas de nom Vernaculaire pour cette race
+                            {% endif %}
+                            {{ bird.nomVern }}
+                        </td>
+                        <td>
+                            {{ bird.nomValide }}
+                        </td>
+                        <td>
+                            {{ bird.lbAuteur }}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path('app_specy', {'id' : bird.cdNom}) }}"><i class="fa fa-eye fa-2x"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+     {% endif %}
 {% endblock %}

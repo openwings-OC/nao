@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="no-js" lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    {% block stylesheets %}
+        {% stylesheets 'css/app.css'
+        filter='cssrewrite' output='css/compiled/app.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body class="body-landing-a">
+    <div class="logo-slogan columns">
+        <div class="logo-landing medium-3 columns">
+            <a href="{{ path('homepage') }}">
+                <img height="250" width="250" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
+            </a>
+        </div>
+        <div class="medium-8 columns left slogan">
+            <h1>JE VOIS</h1>
+            <h1>JE SIGNALE</h1>
+            <h1>JE PROTEGE !</h1>
+        </div>
+    </div>
+
+    <div class="columns panel-program">
+        <div class="panel callout radius medium-5 text-center">
+            <p>Un programme de science participative pour la préservation des oiseaux et de la biodiversité</p>
+        </div>
+    </div>
+    <div class="row medium-5 medium-offset-0 grid-margin-x">
+        <form action="" id="form-landing">
+            <div class="columns large-12">
+                <label for="prenom">IDENTITÉ</label>
+            </div>
+            <div class="columns large-6">
+                <input type="text" name="prenom" placeholder="PRÉNOM">
+            </div>
+            <div class="large-6 columns">
+                <input type="text" name="nom" placeholder="NOM">
+            </div>
+
+            <div class="columns large-12">
+                <label for="prenom">EMAIL</label>
+            </div>
+            <div class="columns large-6">
+                <input type="text" name="email1" placeholder="E-MAIL">
+            </div>
+            <div class="large-6 columns">
+                <input type="text" name="email2" placeholder="CONFIRMER L'EMAIL">
+            </div>
+
+                <div class="columns large-12">
+                    <label for="prenom">COMPTE UTILISATEUR</label>
+                </div>
+                <div class="columns large-12">
+                     <input type="text" name="identifiant" placeholder="NOM D'UTILISATEUR">
+                </div>
+
+                <div class="large-6 columns">
+                    <input type="password" name="password1" placeholder="MOT DE PASSE">
+                </div>
+                <div class="large-6 columns">
+                    <input type="password" name="password2" placeholder="CONFIRMER LE MOT DE PASSE">
+                </div>
+            <div class="columns large-6 text-center">
+                <button type="submit" class="button third large-12">JE M'INSCRIS</button>
+                <span>Vous avez déja un compte ?</span>
+                <a  href="">Connectez-vous</a>
+            </div>
+            <div class="columns large-6 inscription-reseaux">
+                <button class="button large-12"><i class="fa fa-google-plus"></i>S'INSCRIRE VIA GOOGLE+</button>
+                <button class="button large-12"><i class="fa fa-facebook"></i>S'INSCRIRE VIA FACEBOOK</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="accedez-rapports">
+        <p>ACCÉDEZ À L'INTEGRALITÉ DE NOS RAPPORTS SCIENTIFIQUES</p>
+    </div>
+    <footer>
+        <img class="medium-2 small-5" src="{{ asset('images/png/logomnhn.png') }}" alt="">
+    </footer>
+
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&callback=initMap&libraries=places" async defer></script>
+    <script src="{{ asset('js/vendor/jquery.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('js/vendor/motionui.js') }}"></script>
+    <script src="{{ asset('js/vendor/whatinput.js') }}"></script>
+    <script src="{{ asset('js/vendor/modernizr.js') }}"></script>
+    <script src="{{ asset('js/vendor/foundation.js') }}"></script>
+    <script src="{{ asset('js/bloodhound.js') }}"></script>
+    <script src="{{ asset('js/typeahead.jquery.js') }}"></script>
+    <script src="{{ asset('js/typeahead-addresspicker.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.addresspicker.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+{% endblock %}
+
+</body>
+
+</html>
