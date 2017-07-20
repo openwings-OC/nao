@@ -45,9 +45,9 @@ $('#search').autocomplete({
 
 
 //Requete AJAX carte des observations
-$selectBird = $('#appbundle_observation_specy');
+//$selectBird = $('#appbundle_observation_specy');
+$selectBird = $('#recherche_carte>#appbundle_observation_specy');
 $($selectBird).change(function(){
-    console.log($selectBird.val())
     $.ajax({
         url: "http://localhost/nao/web/app_dev.php/observation_map",
         type: "POST",

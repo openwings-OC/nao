@@ -24,6 +24,14 @@ class Taxref
      */
     private $cdNom;
 
+    function __toString()
+    {
+        if($this->nomVern === ""){
+            $this->nomVern = $this->lbNom;
+        }
+        return $this->nomVern ." - ". $this->lbNom;
+    }
+
 
     /**
      * @var string

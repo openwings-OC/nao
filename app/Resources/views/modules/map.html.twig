@@ -1,5 +1,5 @@
 <h4>Géolocalisation de l'observation</h4>
-<div class="large-6 row">
+<div class="large-12 row">
 <div id="map"></div>
 </div>
 
@@ -259,11 +259,11 @@
             ],
             scrollwheel : false
         });
-        var image = {{ asset('img/marker.png') }};
+        //var image = {{ asset('img/marker.png') }};
         var marker = new google.maps.Marker({
             position: uluru,
-            map: map,
-            icon: image
+            map: map
+            //icon: image
         });
     }
 </script>

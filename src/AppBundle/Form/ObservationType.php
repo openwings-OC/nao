@@ -29,7 +29,7 @@ class ObservationType extends AbstractType
             ->add('image', TextType::class)
             ->add('comment', TextareaType::class)
             ->add('specy', EntityType::class, array(
-                'choice_label' => 'nomVern',
+                //'choice_label' => 'nomVern',
                 'label' => 'Choisir l\'espèce observée',
                 'class' => 'AppBundle:Taxref',
                 'query_builder' => function( EntityRepository $er){

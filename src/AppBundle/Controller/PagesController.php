@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Observation;
+use AppBundle\Entity\User;
 use AppBundle\Form\ObservationType;
+use AppBundle\Form\RegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,6 +31,7 @@ class PagesController extends Controller
      */
     public function searchAction(Request $request)
     {
+
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
         if ($request->isMethod('POST')) {
             $bird = $em->findBirdByLetter($_POST['search']/*, $_GET['page']*/);
@@ -37,7 +40,7 @@ class PagesController extends Controller
             $bird = $em->findAll();
         }
         else if(empty($_GET['page'])){
-            return $this->render('pages/search.html.twig');
+            $bird = $em->findAll();
         }
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -48,6 +51,7 @@ class PagesController extends Controller
         $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/search.html.twig', array(
             'pagination' => $pagination,
+            'bird' => $bird
         ));
     }
 
@@ -62,7 +66,6 @@ class PagesController extends Controller
         //Service pagination
         $pagination = array(
             'page' => $page,
-            //'nbPages' => $list(count($list) / 50),
             'nomRoute' => 'app_results',
             'paramsRoute' => array()
         );
@@ -189,10 +192,63 @@ class PagesController extends Controller
     }
 
     /**
-     * @route("/guide-debutant", name="app_guide_debutant")
-     */
+ * @route("/guide-debutant", name="app_guide_debutant")
+ */
     public function debutantAction(){
         return $this->render(':pages:guide_debutant.html.twig');
+    }
+
+    /**
+     * @route("/adherer", name="app_adherer")
+     */
+    public function adhererAction(){
+        return $this->render(':pages:adherer.html.twig');
+    }
+
+    /**
+     * @route("/association", name="app_association")
+     */
+    public function associationAction(){
+        return $this->render(':pages:association.html.twig');
+    }
+
+    /**
+     * @route("/equipe", name="app_equipe")
+     */
+    public function equipeAction(){
+        return $this->render(':pages:equipe.html.twig');
+    }
+
+    /**
+     * @route("/mission", name="app_mission")
+     */
+    public function missionAction(){
+        return $this->render(':pages:mission.html.twig');
+    }
+
+    /**
+     * @route("/projet", name="app_projet")
+     */
+    public function projetAction(){
+        return $this->render(':pages:projet.html.twig');
+    }
+
+    /**
+     * @route("/landing-a", name="app_landing-a")
+     */
+    public function landingAAction(){
+        $user = new User();
+        $form = $this->createForm(RegistrationType::class, $user);
+        return $this->render(':pages:landing-a.html.twig');
+    }
+
+    /**
+     * @route("/landing-b", name="app_landing-b")
+     */
+    public function landingBAction(){
+        $user = new User();
+        $form = $this->createForm(RegistrationType::class, $user);
+        return $this->render(':pages:landing-b.html.twig');
     }
 }
 
