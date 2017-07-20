@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+$PAGE_NUMBER = 50;
+
 /**
  * Taxref
  *

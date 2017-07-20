@@ -38,7 +38,7 @@ $('#search').autocomplete({
         });
     },
     select : function(event, ui){
-        $('#form').attr('action', 'specy/' + ui.item.id);
+        $('#form').attr('action', 'espece/' + ui.item.id);
         $('#form').submit();
     }
 });
