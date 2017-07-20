@@ -11,7 +11,8 @@ fos_user_register:
 
 fos_user_resetting:
     resource: "@AppBundle/Resources/config/routing/fos/resetting.yml"
-    prefix: /
+    prefix: /reinitialiser
 
 fos_user_change_password:
     resource: "@AppBundle/Resources/config/routing/fos/change_password.yml"
+    prefix: /changer-de-mot-passe
