@@ -1,5 +1,5 @@
 fos_user_resetting_request:
-    path: /
+    path: /saisir-email
     methods: [GET]
     defaults: { _controller: FOSUserBundle:Resetting:request}
 fos_user_resetting_send_email:
