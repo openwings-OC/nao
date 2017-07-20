@@ -3,6 +3,9 @@
 parameters:
     #parameter_name: value
 
+imports:
+    - { resource: "@AppBundle/Resources/config/services.yml" }
+
 services:
     # default configuration for services in *this* file
     _defaults:

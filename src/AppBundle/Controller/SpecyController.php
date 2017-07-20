@@ -1,18 +1,25 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: JulienHalgand
+ * Date: 18/07/2017
+ * Time: 15:01
+ */
 
 namespace AppBundle\Controller;
-
+use AppBundle\Entity\Taxref;
+use AppBundle\Entity\Observation;
+use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-class PagesController extends Controller
+class SpecyController extends Controller
 {
-
     /**
-     * @route("/search", name="app_search")
+     * @route("/recherche-especes", name="app_search")
      */
     public function searchAction(Request $request)
     {
@@ -30,7 +37,7 @@ class PagesController extends Controller
         $pagination = $paginator->paginate(
             $bird,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 50)
+            $request->query->getInt('limit', Taxref::PAGE_NUMBER)
         );
         $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/search.html.twig', array(
@@ -40,11 +47,11 @@ class PagesController extends Controller
 
     /**
      *
-     * @route("/results/{page}", name="app_results")
+     * @route("/resultats/{page}", name="app_results")
      */
     public function resultAction($page){
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
-        $list = $em->findBirdByLetterLimited($page , 50);
+        $list = $em->findBirdByLetterLimited($page , Taxref::PAGE_NUMBER);
 
         $pagination = array(
             'page' => $page,
@@ -66,27 +73,39 @@ class PagesController extends Controller
         if($request->isXmlHttpRequest()){
             $letter = $request->get('bird');
             $requete = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findBirdByLetter($letter);
+            $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation');
             $list = [];
             foreach($requete as $bird){
-               $list[] = ['value' => $bird->getNomVern(), 'id' => $bird->getCdNom()];
+                $number = $numberRequest->getNumberOfObservationsByBird($bird);
+                $list[] = ['value' => $bird->getNomVern(), 'number' => $number, 'id' => $bird->getCdNom()];
                 if($bird->getNomVern() === ''){
                     array_push($list, $bird->getlbNom());
                 }
             }
-            return new JsonResponse(array('list' => $list));
+
+            $response = new Response();
+            $response->setContent(json_encode(
+                array('list' => $list)
+            ),
+                array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json')
+            );
+
+            return $response;
         }
     }
 
     /**
-     * @route("/observation/{id}", name="app_observation")
+     * @route("/espece/{id}", name="app_specy")
      */
-    public function observationAction(Request $request){
-
-        return $this->render('pages/observation.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+    public function specyAction(Request $request){
+        $specy = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));
+        $numberRequest = $this->getDoctrine()->getRepository('AppBundle:Observation')->getNumberOfObservationsByBird($specy->getCdNom());
+        $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId((int)$request->get('id'));
+        return $this->render('pages/specy.html.twig', array(
+            'specy' => $specy,
+            'observations' => $observations,
+        ));
     }
-    public function specieAction(Request $request){
 
-    }
+
 }
