@@ -27,11 +27,8 @@ class SpecyController extends Controller
         if ($request->isMethod('POST')) {
             $bird = $em->findBirdByLetter($_POST['search']/*, $_GET['page']*/);
         }
-        elseif(!empty($_GET['page'])){
+        else {
             $bird = $em->findAll();
-        }
-        else if(empty($_GET['page'])){
-            return $this->render('pages/search.html.twig');
         }
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

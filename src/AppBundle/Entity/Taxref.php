@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-$PAGE_NUMBER = 50;
+
 
 /**
  * Taxref
@@ -16,6 +16,9 @@ $PAGE_NUMBER = 50;
  */
 class Taxref
 {
+
+    const PAGE_NUMBER = 50;
+
     /**
      * @var integer
      * @ORM\Id
