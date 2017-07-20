@@ -23,7 +23,7 @@ class ObservationsController extends Controller
      * @route("/observations", name="app_indexobservation")
      */
     public function indexAction(Request $request){
-
+        return $this->render('pages/observations/index.html.twig');
     }
 
     /**
@@ -69,11 +69,17 @@ class ObservationsController extends Controller
     }
 
     /**
+     * @route("mesobservations", name="app_myobservations")
+     */
+    public function myObservationsAction(Request $request){
+        return $this->render('pages/observations/myobservations.html.twig');
+    }
+    /**
      *
      * @route("/observations/editer/{id}", name="app_editObservation")
      */
     public function editObservationAction(Request $request){
-
+        return $this->render('pages/observations/edit.html.twig');
     }
 
     /**
@@ -81,7 +87,7 @@ class ObservationsController extends Controller
      * @route("/observations/supprimer/{id}", name="app_deleteObservation")
      */
     public function deleteObservationAction(Request $request){
-
+        return $this->redirectToRoute('app_indexobservation');
     }
 
 }
