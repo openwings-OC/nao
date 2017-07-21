@@ -1,8 +1,40 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input class="button" type="submit" value="{{ 'registration.submit'|trans }}" />
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr':{ 'novalidate': 'novalidate', 'data-abide': null, 'id': 'register'}}) }}
+<div class="columns large-12">
+    <label class="secondary" for="lastname">IDENTITÉ</label>
+</div>
+<div class="columns large-6">
+    {{ form_widget(form.lastname) }}
+    {{ form_errors(form.lastname) }}
+</div>
+<div class="columns large-6">
+    {{ form_widget(form.firstname) }}
+    {{ form_errors(form.firstname) }}
+</div>
+<div class="columns large-12">
+    <label class="secondary" for="prenom">EMAIL</label>
+</div>
+{% for emailField in form.email %}
+    <div class="columns large-6">
+        {{ form_widget(emailField) }}
+        {{ form_errors(emailField) }}
+    </div>
+{% endfor %}
+<div class="columns large-12">
+    <label class="secondary" for="username">COMPTE UTLISATEUR</label>
+</div>
+<div class="columns large-12">
+    {{ form_widget(form.username) }}
+    {{ form_errors(form.username) }}
+</div>
+{% for passwordField in form.plainPassword %}
+    <div class="columns large-6">
+        {{ form_widget(passwordField) }}
+        {{ form_errors(passwordField) }}
+    </div>
+{% endfor %}
+    <div class="columns large-12 clearfix">
+        <button class="button third float-right" type="submit">{{ 'JE M\'INSCRIS' }}</button>
     </div>
 {{ form_end(form) }}

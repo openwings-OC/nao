@@ -37,7 +37,6 @@ class Taxref
         return $this->nomVern ." - ". $this->lbNom;
     }
 
-
     /**
      * @var string
      *
@@ -72,8 +71,6 @@ class Taxref
      * @ORM\Column(name="FAMILLE", type="string", length=17, nullable=true)
      */
     private $famille;
-
-
 
     /**
      * @var integer
