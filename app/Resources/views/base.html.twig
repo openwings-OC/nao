@@ -17,8 +17,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-
-    <div class="header">
+    {#Menu original - ne aps toucher#}
+    {#<div class="header">
         <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" style="
     width: 100%;"/>
 
@@ -28,6 +28,10 @@
     </div>
 
     <div data-sticky-container>
+        <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle="nao-menu"></button>
+            <div class="title-bar-title">Menu</div>
+        </div>
         <div class="menutest" id="menutest">
             <div class="logo-menu">
                 <a href="{{ path('homepage') }}">
@@ -35,7 +39,7 @@
                 </a>
             </div>
             <div class="top-bar" id="nao-menu">
-                <div class="top-bar-left">
+                <div class="top-bar-right">
                     <ul class="dropdown menu" data-dropdown-menu>
                         <li class="naoMenuItem blueMenuItem">
                             <a href="#">NOS AMIS LES OISEAUX</a>
@@ -47,40 +51,121 @@
                                 <li><a href="#">Nous contacter</a></li>
                             </ul>
                         </li>
-                        <li class="naoMenuItem greenMenuItem">
-                            <a href="#">RECHERCHE D'ESPÈCE</a>
-                            <ul class="menu vertical">
-                                <li class="greenMenuItem"><input type="search" placeholder="Search"><button type="button" class="button">Search</button></li>
-                            </ul>
-                        </li>
-                        <li class="naoMenuItem greenMenuItem">
+                        <li class="naoMenuItem greenMenuItem ">
                             <a href="#">OBSERVATION</a>
                             <ul class="menu vertical">
-                                <li class="greenMenuItem"><a href="#">Dernières observations</a></li>
+                                <li class="greenMenuItem"><a href="{{ path('app_last_observations') }}">Dernières observations</a></li>
                                 <li class="greenMenuItem"><a href="{{ path('app_observation_map') }}">Carte de France</a></li>
                                 <li class="greenMenuItem"><a href="{{ path('app_guide_debutant') }}">Guide du débutant</a></li>
                             </ul>
                         </li>
-                        <li class="naoMenuItem blueMenuItem">
-                            <a href="{{ path('app_projet') }}">Le projet et ses partenaires</a>
+                        <li class="naoMenuItem blueMenuItem ">
+                                <a href="{{ path('app_projet') }}">Le projet et ses partenaires</a>
                         </li>
-                    </ul>
-                </div>
-                <div class="top-bar-right">
-                            <ul class="dropdown menu" data-dropdown-menu>
+                        <li class="naoMenuItem">
+                            <form action="{{ path('app_search') }}" method="post" id="form">
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <div class="row collapse">
+                                            <div class="small-10 columns">
+                                                <input type="text" id="search" name="search" placeholder="Recherche d'espèce">
+                                            </div>
+                                            <div class="small-2 columns">
+                                                <button type="submit" href="#" class="button postfix"><i class="fa fa-search"></i></button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </li>
 
-                                <li class="naoMenuItem orangeMenuItem">
-                                    <a href="#"><img height="50" width="50" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
-                                    <ul class="menu vertical">
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                    </ul>
+
+
+
                 </div>
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="naoMenuItem orangeMenuItem">
+                        <a href="#"><img height="50" width="50" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
+                        <ul class="menu vertical">
+                            <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
+                            <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
     </div>
     </div>
+    </div>#}
+
+    <div class="header">
+
+
+        <img src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" style="
+    width: 100%;"/>
+        <div data-sticky-container>
+            <div class="menutest" id="menutest">
+                <div class="logo-menu">
+                    <a href="{{ path('homepage') }}">
+                        <img height="250" width="250" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
+                    </a>
+                </div>
+                <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
+                    <button class="menu-icon" type="button" data-toggle></button>
+                    <div class="title-bar-title">MENU</div>
+                </div>
+                <div class="top-bar" id="nao-menu">
+                    <div class="top-bar-right">
+                        <ul class="menu vertical medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+                            <li class="naoMenuItem blueMenuItem has-submenu">
+                                <a href="#">NOS AMIS LES OISEAUX</a>
+                                <ul class="vertical menu mega submenu" >
+                                    <li><a href="{{ path('app_association') }}">L'association</a></li>
+                                    <li><a href="{{ path('app_adherer') }}">Adhérer à NAO</a></li>
+                                    <li><a href="{{ path('app_mission') }}">Mission</a></li>
+                                    <li><a href="{{ path('app_equipe') }}">Équipe</a></li>
+                                    <li><a href="#">Nous contacter</a></li>
+                                </ul>
+                            </li>
+                            <li class="naoMenuItem greenMenuItem " >
+                                <a href="#">OBSERVATION</a>
+                                <ul class="menu vertical">
+                                    <li class="greenMenuItem"><a href="{{ path('app_last_observations') }}">Dernières observations</a></li>
+                                    <li class="greenMenuItem"><a href="{{ path('app_observation_map') }}">Carte de France</a></li>
+                                    <li class="greenMenuItem"><a href="{{ path('app_guide_debutant') }}">Guide du débutant</a></li>
+                                </ul>
+                            </li>
+                            <li class="naoMenuItem blueMenuItem ">
+                                <a href="{{ path('app_projet') }}">DÉMARCHE SCIENTIFIQUE</a>
+                            </li>
+                            <li class="naoMenuItem greenMenuItem">
+                                <form action="{{ path('app_search') }}" method="post" id="form-home">
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div class="row collapse">
+                                                <div class="small-10 columns">
+                                                    <input type="text"  name="search" placeholder="RECHERCHE D'ESPÈCE" id="search" class="search" >
+                                                </div>
+                                                <div class="small-2 columns">
+                                                    <button type="submit" href="#" class="button postfix secondary"><i class="fa fa-search fa-2x"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="naoMenuItem orangeMenuItem">
+                                <a href="#" id="menu-utilisateur"><img height="20" width="20" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
+                                <ul class="menu vertical">
+                                    <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
+                                    <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
         {% block body %}{% endblock %}
 

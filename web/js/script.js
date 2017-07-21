@@ -15,7 +15,7 @@ Array.prototype.forEach.call( inputs, function( input )
 });
 
 //Autocompletion moteur de recherche
-$('#search').autocomplete({
+$('.search').autocomplete({
     maxShowItems : 10,
     minLength: 3,
     source : function(requete, reponse) {
@@ -23,7 +23,7 @@ $('#search').autocomplete({
             url: "http://localhost/nao/web/app_dev.php/autocomplete",
             type: "POST",
             dataType : 'JSON',
-            data: {'bird': $('#search').val(),
+            data: {'bird': $('.search').val(),
 
         },
             success: function (data, statut) {
@@ -32,7 +32,7 @@ $('#search').autocomplete({
                     return objet
                 }));
                 $('#ui-id-1 li div').addClass('results');
-                $('#ui-id-1 li div').addClass('large-12');
+                $('#ui-id-1 li div').addClass('large-10');
                 $('.ui-helper-hidden-accessible').hide();
             },
         });
@@ -45,8 +45,8 @@ $('#search').autocomplete({
 
 
 //Requete AJAX carte des observations
-//$selectBird = $('#appbundle_observation_specy');
-$selectBird = $('#recherche_carte>#appbundle_observation_specy');
+$selectBird = $('#appbundle_observation_specy');
+// $selectBird = $('#recherche_carte>#appbundle_observation_specy');
 $($selectBird).change(function(){
     $.ajax({
         url: "http://localhost/nao/web/app_dev.php/observation_map",

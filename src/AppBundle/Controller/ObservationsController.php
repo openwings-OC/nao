@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ObservationsController extends Controller
 {
@@ -113,6 +114,21 @@ class ObservationsController extends Controller
 
             return $response;*/
         }
+        $form = $this->createForm(ObservationType::class);
+        return $this->render(':pages:observation_map.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @route("/dernieres-observations", name="app_last_observations")
+     */
+    public function observationsLastAction(Request $request){
+        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+        $list = $em->findLastObservations(12);
+        return $this->render('pages/observations_last.html.twig', array(
+            'list' => $list
+        ));
     }
 
 }
