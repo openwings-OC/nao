@@ -71,10 +71,11 @@ class Observation
     private $image;
 
     /**
-     * @var string
-     * @ORM\Column(name="author", type="string", length=255)
+     * @var int
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="observations", cascade="all")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
-    private $author;
+    private $user;
 
     /**
      * @var string
@@ -297,5 +298,14 @@ class Observation
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function setUser(User $user){
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getUser(){
+        return $this->user;
     }
 }

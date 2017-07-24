@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,12 +51,23 @@ class User extends BaseUser
     private $lastname;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Observation", mappedBy="user", cascade="all")
+     * @Assert\All({
+     *   @Assert\Type(type="AppBundle\Entity\Observation")
+     * })
+     * @Assert\Valid
+     */
+    private $observations;
+
+    /**
      * User constructor.
      */
 
     public function __construct(){
         parent::__construct();
         $this->createdAt = new \DateTime();
+        $this->observations = new ArrayCollection();
     }
 
     /**
