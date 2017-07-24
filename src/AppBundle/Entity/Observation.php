@@ -23,12 +23,6 @@ class Observation
     private $id;
 
 
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref")
-     * @ORM\JoinColumn(name="specy", referencedColumnName="CD_NOM")
-     */
-    private $specy;
-
 
     /**
      * @var \DateTime
@@ -76,6 +70,12 @@ class Observation
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref", inversedBy="observations", cascade="all")
+     * @ORM\JoinColumn(name="specy_id", referencedColumnName="CD_NOM")
+     */
+    private $specy;
 
     /**
      * @var string
@@ -235,31 +235,6 @@ class Observation
     public function getSpecy()
     {
         return $this->specy;
-    }
-
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Observation
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**

@@ -22,7 +22,7 @@ $('#search-home').autocomplete({
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: window.location.host + "/autocomplete",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -51,7 +51,7 @@ $('#search-page-search').autocomplete({
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: window.location.host + "/autocomplete",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -75,10 +75,11 @@ $('#search-page-search').autocomplete({
 });
 
 //Requete AJAX carte des observations
-$selectBird = $('#appbundle_observation_specy');
+$selectBird = $('.observationMap');
 $($selectBird).change(function() {
+    console.log("observation map")
     $.ajax({
-        url: window.location.host + "/observation_map",
+        url: "http://" + window.location.host + "/observation_map",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -294,25 +295,3 @@ $($selectBird).change(function() {
 
 //Ajuste la largeur du moteur de recherche
 $('#ui-id-1').addClass('large-4');
-
-//Geolocalisation
-
-$('#changecible').click(function(position) {
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(maPosition);
-    maPosition(position);
-})
-
-var maPosition = (function(position) {
-
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    self.setMaPositionOnObservationForm = function() {
-        document.getElementById("appbundle_observation_latitude").value = latitude;
-        document.getElementById("appbundle_observation_longitude").value = longitude;
-    }
-    return self;
-});
-
-if (navigator.geolocation)
-    navigator.geolocation.getCurrentPosition(maPosition);

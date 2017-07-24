@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Entity\Observation;
+use AppBundle\Entity\Taxref;
 use AppBundle\Form\ObservationsExistType;
 use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -96,14 +97,12 @@ class ObservationsController extends Controller
      * @route("/observation_map", name="app_observation_map")
      */
     public function observationMap(Request $request){
-        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
-        $list = $em->findLastObservations(50);
+        $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
 
-
+        //$list = $em->findLastObservations(50);
         if($request->isXmlHttpRequest()){
             $specyId = (int)$request->get('bird');
-            $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
-            $req = $em->findObservationsBySpecieId($specyId);
+            $req = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specyId);
 
             $list = [];
             foreach($req as $bird){
@@ -119,10 +118,23 @@ class ObservationsController extends Controller
 
             return $response;
         }
+        $query = $em->createQueryBuilder('s')
+            ->orderBy('s.nomVern', 'ASC')
+            ->where('s.cdTaxsup > :taxsup')
+            ->setParameter('taxsup', 0)
+            ->getQuery();
+        $species = $query->getResult();
+        $speciesWithObservations = [];
+        foreach ($species as $specie){
+            if(count($specie->getObservations()) > 0){
+                $speciesWithObservations[] = $specie;
+            }
+        }
         $form = $this->createForm(ObservationsExistType::class);
         return $this->render(':pages:observation_map.html.twig', array(
             'form' => $form->createView(),
-            'list' => $list
+            //'list' => $list,
+            'speciesWithObservations' => $speciesWithObservations
         ));
     }
 
@@ -136,5 +148,4 @@ class ObservationsController extends Controller
             'list' => $list
         ));
     }
-
 }
