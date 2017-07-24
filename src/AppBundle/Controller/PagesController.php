@@ -70,7 +70,7 @@ class PagesController extends Controller
     }
 
     /**
-     * @route("/landing-a", name="app_landing-a")
+     * @route("/participation-a", name="app_landing-a")
      */
     public function landingAAction(){
         $user = new User();
@@ -79,7 +79,7 @@ class PagesController extends Controller
     }
 
     /**
-     * @route("/landing-b", name="app_landing-b")
+     * @route("/participation-a", name="app_landing-b")
      */
     public function landingBAction(){
         $user = new User();

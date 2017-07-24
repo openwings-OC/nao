@@ -1,18 +1,24 @@
 {% extends "form_div_layout.html.twig" %}
 
-{# Based on Foundation 5 Doc #}
+{# Based on Foundation 6 Abide Doc #}
+{# Improvements:
+   - Use 'menu' instead of 'inline-list'
+   - Add labels
+   - Add 'group_by' to choice_expanded widget
+   - Add placeholder to simple date widget
+#}
 {# Widgets #}
 
 {% block form_widget_simple -%}
     {% if errors|length > 0 -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' is-invalid-input')|trim}) %}
     {% endif %}
     {{- parent() -}}
 {%- endblock form_widget_simple %}
 
 {% block textarea_widget -%}
     {% if errors|length > 0 -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' is-invalid-input')|trim}) %}
     {% endif %}
     {{- parent() -}}
 {%- endblock textarea_widget %}
@@ -23,7 +29,7 @@
 {%- endblock %}
 
 {% block money_widget -%}
-    <div class="row collapse">
+    <div class="row">
         {% set prepend = '{{' == money_pattern[0:2] %}
         {% if not prepend %}
             <div class="small-3 large-2 columns">
@@ -70,6 +76,8 @@
 
 {% block date_widget -%}
     {% if widget == 'single_text' %}
+        {% set attr = attr|merge({placeholder: (attr.placeholder|default('AAAA-MM-JJ'))|trim}) %}
+        {% set attr = attr|merge({maxlength: (attr.maxlength|default(10))|trim}) %}
         {{- block('form_widget_simple') -}}
     {% else %}
         {% set attr = attr|merge({class: (attr.class|default('') ~ ' row')|trim}) %}
@@ -138,7 +146,7 @@
 
 {% block choice_widget_collapsed -%}
     {% if errors|length > 0 -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' is-invalid-input')|trim}) %}
     {% endif %}
 
     {% if multiple -%}
@@ -165,164 +173,192 @@
 {%- endblock choice_widget_collapsed %}
 
 {% block choice_widget_expanded -%}
-    {% if '-inline' in label_attr.class|default('') %}
-        <ul class="inline-list">
-            {% for child in form %}
-                <li>{{ form_widget(child, {
-                        parent_label_class: label_attr.class|default(''),
-                    }) }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <div {{ block('widget_container_attributes') }}>
-            {% for child in form %}
-                {{ form_widget(child, {
-                    parent_label_class: label_attr.class|default(''),
-                }) }}
-            {% endfor %}
-        </div>
-    {% endif %}
+    {% set options = choices -%}
+    {{- block('choice_widget_expanded_options') -}}
 {%- endblock choice_widget_expanded %}
 
-{% block checkbox_widget -%}
-    {% set parent_label_class = parent_label_class|default('') %}
-    {% if errors|length > 0 -%}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+{%- block choice_widget_expanded_options -%}
+    {% set nb_per_line = 4 %}
+    {% if i is not defined %}
+        {% set i = 0 %}
     {% endif %}
-    {% if 'checkbox-inline' in parent_label_class %}
-        {{ form_label(form, null, { widget: parent() }) }}
-    {% else %}
-        <div class="checkbox">
-            {{ form_label(form, null, { widget: parent() }) }}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+    <fieldset id="{{ 'fieldset_' ~ group_label }}"><legend>{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }} — <a href="#" onclick="checkCheckboxFromFieldset('{{ 'fieldset_' ~ group_label }}', true); return false">Tout sélectionner</a> / <a href="#" onclick="checkCheckboxFromFieldset('{{ 'fieldset_' ~ group_label }}', false); return false">Tout désélectionner</a></legend>
+        <div class="row">
+            {% set i = 0 %}
+            {% set options = choice %}
+            {{- block('choice_widget_expanded_options') -}}
+            {% set i = choice.choices|length + 1 %}
+            {% if i % nb_per_line != 1 %}
+                {% set break = false %}
+                {% for j in range(0, nb_per_line) if not break %}
+                    <div class="large-{{ (12 / nb_per_line) }} columns">&nbsp;</div>
+                    {% if i % nb_per_line == 0 %}
+                        {% set break = true %}
+                    {% endif %}
+                    {% set i = i + 1 %}
+                {% endfor %}
+            {% endif %}
         </div>
+    </fieldset>
+{%- else -%}
+            {% if i % nb_per_line == 0 and i != 0 %}
+    </div><div class="row">
     {% endif %}
-{%- endblock checkbox_widget %}
+    <div class="large-{{ (12 / nb_per_line) }} columns" style="white-space: nowrap">
+        {{ form_widget(form[group_label], {
+            parent_label_class: label_attr.class|default(''),
+        }) }}
+    </div>
+    {% set i = i + 1 %}
+    {%- endif -%}
+    {% endfor %}
+    {%- endblock choice_widget_expanded_options -%}
 
-{% block radio_widget -%}
-    {% set parent_label_class = parent_label_class|default('') %}
-    {% if 'radio-inline' in parent_label_class %}
-        {{ form_label(form, null, { widget: parent() }) }}
-    {% else %}
+    {% block checkbox_widget -%}
+        {% set parent_label_class = parent_label_class|default('') %}
         {% if errors|length > 0 -%}
-            {% set attr = attr|merge({class: (attr.class|default('') ~ ' error')|trim}) %}
+            {% set attr = attr|merge({class: (attr.class|default('') ~ ' is-invalid-input')|trim}) %}
         {% endif %}
-        <div class="radio">
+        {% if 'checkbox-inline' in parent_label_class %}
             {{ form_label(form, null, { widget: parent() }) }}
+        {% else %}
+            <div class="checkbox">
+                {{ form_label(form, null, { widget: parent() }) }}
+            </div>
+        {% endif %}
+    {%- endblock checkbox_widget %}
+
+    {% block radio_widget -%}
+        {% set parent_label_class = parent_label_class|default('') %}
+        {% if 'radio-inline' in parent_label_class %}
+            {{ form_label(form, null, { widget: parent() }) }}
+        {% else %}
+            {% if errors|length > 0 -%}
+                {% set attr = attr|merge({class: (attr.class|default('') ~ ' is-invalid-input')|trim}) %}
+            {% endif %}
+            <div class="radio">
+                {{ form_label(form, null, { widget: parent() }) }}
+            </div>
+        {% endif %}
+    {%- endblock radio_widget %}
+
+    {# Labels #}
+
+    {% block form_label -%}
+        {% if errors|length > 0 -%}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' is-invalid-label')|trim}) %}
+        {% endif %}
+        {{- parent() -}}
+    {%- endblock form_label %}
+
+    {% block choice_label -%}
+        {% if errors|length > 0 -%}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' is-invalid-label')|trim}) %}
+        {% endif %}
+        {# remove the checkbox-inline and radio-inline class, it's only useful for embed labels #}
+        {% set label_attr = label_attr|merge({class: label_attr.class|default('')|replace({'checkbox-inline': '', 'radio-inline': ''})|trim}) %}
+        {{- block('form_label') -}}
+    {%- endblock %}
+
+    {% block checkbox_label -%}
+        {{- block('checkbox_radio_label') -}}
+    {%- endblock checkbox_label %}
+
+    {% block radio_label -%}
+        {{- block('checkbox_radio_label') -}}
+    {%- endblock radio_label %}
+
+    {% block checkbox_radio_label -%}
+        {% if required %}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if errors|length > 0 -%}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' is-invalid-input')|trim}) %}
+        {% endif %}
+        {% if parent_label_class is defined %}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ parent_label_class)|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {{ widget|raw }}
+        {% autoescape false %}
+            {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+        {% endautoescape %}
+        </label>
+    {%- endblock checkbox_radio_label %}
+
+    {# Rows #}
+
+    {% block form_row -%}
+        <div class="row">
+            <div class="large-12 columns{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+                {{ form_label(form) }}
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+            </div>
         </div>
-    {% endif %}
-{%- endblock radio_widget %}
+    {%- endblock form_row %}
 
-{# Labels #}
+    {% block choice_row -%}
+        {% set force_error = true %}
+        {{ block('form_row') }}
+    {%- endblock choice_row %}
 
-{% block form_label -%}
-    {% if errors|length > 0 -%}
-        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' error')|trim}) %}
-    {% endif %}
-    {{- parent() -}}
-{%- endblock form_label %}
+    {% block date_row -%}
+        {% set force_error = true %}
+        {{ block('form_row') }}
+    {%- endblock date_row %}
 
-{% block choice_label -%}
-    {% if errors|length > 0 -%}
-        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' error')|trim}) %}
-    {% endif %}
-    {# remove the checkbox-inline and radio-inline class, it's only useful for embed labels #}
-    {% set label_attr = label_attr|merge({class: label_attr.class|default('')|replace({'checkbox-inline': '', 'radio-inline': ''})|trim}) %}
-    {{- block('form_label') -}}
-{%- endblock %}
+    {% block time_row -%}
+        {% set force_error = true %}
+        {{ block('form_row') }}
+    {%- endblock time_row %}
 
-{% block checkbox_label -%}
-    {{- block('checkbox_radio_label') -}}
-{%- endblock checkbox_label %}
+    {% block datetime_row -%}
+        {% set force_error = true %}
+        {{ block('form_row') }}
+    {%- endblock datetime_row %}
 
-{% block radio_label -%}
-    {{- block('checkbox_radio_label') -}}
-{%- endblock radio_label %}
-
-{% block checkbox_radio_label -%}
-    {% if required %}
-        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
-    {% endif %}
-    {% if errors|length > 0 -%}
-        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' error')|trim}) %}
-    {% endif %}
-    {% if parent_label_class is defined %}
-        {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ parent_label_class)|trim}) %}
-    {% endif %}
-    {% if label is empty %}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-            '%name%': name,
-            '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {% endif %}
-    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-    {{ widget|raw }}
-    {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
-    </label>
-{%- endblock checkbox_radio_label %}
-
-{# Rows #}
-
-{% block form_row -%}
-    <div class="row">
-        <div class="large-12 columns{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
-            {{ form_label(form) }}
-            {{ form_widget(form) }}
-            {{ form_errors(form) }}
+    {% block checkbox_row -%}
+        <div class="row">
+            <div class="large-12 columns{% if not valid %} error{% endif %}">
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+            </div>
         </div>
-    </div>
-{%- endblock form_row %}
+    {%- endblock checkbox_row %}
 
-{% block choice_row -%}
-    {% set force_error = true %}
-    {{ block('form_row') }}
-{%- endblock choice_row %}
-
-{% block date_row -%}
-    {% set force_error = true %}
-    {{ block('form_row') }}
-{%- endblock date_row %}
-
-{% block time_row -%}
-    {% set force_error = true %}
-    {{ block('form_row') }}
-{%- endblock time_row %}
-
-{% block datetime_row -%}
-    {% set force_error = true %}
-    {{ block('form_row') }}
-{%- endblock datetime_row %}
-
-{% block checkbox_row -%}
-    <div class="row">
-        <div class="large-12 columns{% if not valid %} error{% endif %}">
-            {{ form_widget(form) }}
-            {{ form_errors(form) }}
+    {% block radio_row -%}
+        <div class="row">
+            <div class="large-12 columns{% if not valid %} error{% endif %}">
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+            </div>
         </div>
-    </div>
-{%- endblock checkbox_row %}
+    {%- endblock radio_row %}
 
-{% block radio_row -%}
-    <div class="row">
-        <div class="large-12 columns{% if not valid %} error{% endif %}">
-            {{ form_widget(form) }}
-            {{ form_errors(form) }}
-        </div>
-    </div>
-{%- endblock radio_row %}
+    {# Errors #}
 
-{# Errors #}
-
-{% block form_errors -%}
-    {% if errors|length > 0 -%}
-        {% if form.parent %}<span class="form-error is-visible">{% else %}<div data-alert class="alert callout">{% endif %}
-        {%- for error in errors -%}
-            {{ error.message }}
-            {% if not loop.last %}, {% endif %}
-        {%- endfor -%}
-        {% if form.parent %}</span>{% else %}</div>{% endif %}
-    {%- endif %}
-{%- endblock form_errors %}
+    {% block form_errors -%}
+        {% if errors|length > 0 -%}
+            {% if form.parent %}<span class="form-error is-visible">{% endif %}
+                {%- for error in errors -%}
+                    {{ error.message }}
+                    {% if not loop.last %}, {% endif %}
+                {%- endfor -%}
+             {% if form.parent %}</span>{% endif %}
+        {% else %}
+            <span class="form-error">Ce champs est invalide</span>
+        {%- endif %}
+    {%- endblock form_errors %}

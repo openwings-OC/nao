@@ -59,11 +59,11 @@ class ObservationsController extends Controller
             $date = $observation->getCreatedAt();
             $observation->setState('pending');
             $observation->setUpdatedAt($date);
-            $observation->setAuthor('Robin');
+            $observation->setUser($this->getUser());
 
             $em->persist($observation);
             $em->flush();
-
+            return $this->redirectToRoute('app_observation', array('id' => $observation->getId()));
         }
         return $this->render(':crud:add.html.twig', array(
             'form' => $form->createView(),

@@ -12,7 +12,6 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
-
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
@@ -76,8 +75,16 @@
                             <li class="naoMenuItem orangeMenuItem" id="profile">
                                 <a href="#" id="menu-utilisateur"><img height="20" width="20" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
                                 <ul class="menu vertical">
-                                    <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
-                                    <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_profile_show') }}" class="button expanded">MON PROFIL</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">MES OBSERVATIONS</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('app_addObservation') }}" class="button expanded">AJOUTER UNE OBSERVATION</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_logout') }}" class="button expanded">SE DÉCONNECTER</a></li>
+                                    {% else %}
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                                    {% endif %}
                                 </ul>
                             </li>
                         </ul>
@@ -85,6 +92,7 @@
                 </div>
             </div>
         </div>
+
         <div class="text-center callout ccf title-mobile hide-for-medium">
             <h1>NOS AMIS LES OISEAUX</h1>
         </div>

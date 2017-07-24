@@ -41,8 +41,8 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
         return $number;
     }
 
-    public function findLastObservations($limit){
 
+    public function findLastObservations($limit){
         $list = $this->createQueryBuilder('l')
             ->orderBy('l.id', 'DESC')
             ->setMaxResults($limit)
