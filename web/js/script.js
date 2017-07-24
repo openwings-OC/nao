@@ -2,7 +2,6 @@ $(document).ready(function() {
     $(".js-example-basic-single").select2();
 });
 
-
 //Nom image uploadée
 var inputs = $('#appbundle_observation_image_file');
 Array.prototype.forEach.call( inputs, function( input )
@@ -75,7 +74,8 @@ $('#search-page-search').autocomplete({
 });
 
 //Requete AJAX carte des observations
-$selectBird = $('#appbundle_observation_specy');
+//$selectBird = $('#appbundle_observation_specy');
+$selectBird = $('.js-example-basic-single');
 $($selectBird).change(function(){
     $.ajax({
         url: "http://localhost/nao/web/app_dev.php/observation_map",
@@ -363,6 +363,7 @@ $('#changecible').click(function(position){
     function maPosition(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
+        console.log(latitude)
         document.getElementById("appbundle_observation_latitude").value = latitude;
         document.getElementById("appbundle_observation_longitude").value = longitude;
     }
@@ -370,8 +371,3 @@ $('#changecible').click(function(position){
     if(navigator.geolocation)
         navigator.geolocation.getCurrentPosition(maPosition);
 
-//Carte des observations chargement
-
-if($('#select2-appbundle_observation_specy-container')){
-    console.log('salut');
-}
