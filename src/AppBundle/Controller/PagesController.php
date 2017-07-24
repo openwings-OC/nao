@@ -21,7 +21,7 @@ class PagesController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
-        $lastObservations = $em->find4LastObservations();
+        $lastObservations = $em->findLastObservations(3);
         return $this->render('pages/homepage.html.twig', array(
             'list' => $lastObservations
         ));
@@ -86,4 +86,5 @@ class PagesController extends Controller
         $form = $this->createForm(RegistrationType::class, $user);
         return $this->render(':pages:landing-b.html.twig');
     }
+
 }

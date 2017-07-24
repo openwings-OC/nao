@@ -41,8 +41,7 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
         return $number;
     }
 
-    public function find4LastObservations(){
-        $limit = 4;
+    public function findLastObservations($limit){
 
         $list = $this->createQueryBuilder('l')
             ->orderBy('l.id', 'DESC')
