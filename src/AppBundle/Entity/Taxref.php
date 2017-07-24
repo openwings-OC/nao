@@ -19,6 +19,8 @@ class Taxref
 
     const PAGE_NUMBER = 50;
 
+
+
     /**
      * @var integer
      * @ORM\Id
@@ -1058,7 +1060,5 @@ class Taxref
     {
         return $this->cli;
     }
-
-
 
 }

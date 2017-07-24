@@ -2,12 +2,12 @@
 
 {% block body %}
     <div class="large-12 columns">
-        <form action="{{ path('app_search') }}" method="post" id="form">
+        <form action="{{ path('app_search') }}" method="post" id="form-search">
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row collapse">
                         <div class="small-10 columns">
-                            <input type="text" class="search" name="search" placeholder="Rechercher un oiseau (nom vernaculaire ou scientifique)" />
+                            <input type="text" class="search" id="search-page-search" name="search" placeholder="Rechercher un oiseau (nom vernaculaire ou scientifique)" />
                         </div>
                         <div class="small-2 columns">
                             <button class="button postfix" type="submit" id="recherche">Rechercher</button>
@@ -42,7 +42,7 @@
                             {{ bird.nomVern }}
                         </td>
                         <td>
-                            {{ bird.nomValide }}
+                            {{ bird.lbNom }}
                         </td>
                         <td>
                             {{ bird.lbAuteur }}

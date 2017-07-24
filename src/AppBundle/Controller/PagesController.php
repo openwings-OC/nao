@@ -86,4 +86,5 @@ class PagesController extends Controller
         $form = $this->createForm(RegistrationType::class, $user);
         return $this->render(':pages:landing-b.html.twig');
     }
+
 }

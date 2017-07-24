@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 use AppBundle\Entity\Observation;
+use AppBundle\Form\ObservationsExistType;
 use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -95,6 +96,10 @@ class ObservationsController extends Controller
      * @route("/observation_map", name="app_observation_map")
      */
     public function observationMap(Request $request){
+        $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
+        $list = $em->findLastObservations(50);
+
+
         if($request->isXmlHttpRequest()){
             $specyId = (int)$request->get('bird');
             $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
@@ -104,19 +109,20 @@ class ObservationsController extends Controller
             foreach($req as $bird){
                 $list[] = [$bird->getLatitude(), $bird->getLongitude(), $bird->getId()];
             }
-            return new JsonResponse(array('list' => $list));
-            /*$response = new Response();
+//            return new JsonResponse(array('list' => $list));
+            $response = new Response();
             $response->setContent(json_encode(
                 array('list' => $list)
             ),
                 array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json')
             );
 
-            return $response;*/
+            return $response;
         }
-        $form = $this->createForm(ObservationType::class);
+        $form = $this->createForm(ObservationsExistType::class);
         return $this->render(':pages:observation_map.html.twig', array(
             'form' => $form->createView(),
+            'list' => $list
         ));
     }
 

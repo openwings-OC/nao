@@ -36,9 +36,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="large-12 columns">
+        <div class="large-12 columns" id="last-observations">
             <div class="large-8 columns">
-
                 <div class="row small-up-12 medium-up-2" data-equalizer data-equalize-on="medium">
                     <h2 class="callout greenBackground last-title">DERNIÈRES OBSERVATIONS D'OISEAUX</h2>
                 {% for bird in list %}
@@ -49,7 +48,7 @@
                                     <img src="{{ asset('img/' ~ bird.image.url) }}" style="width: 100%">
                                 </div>
                                 <div class="card-section">
-                                    <p>{{ bird.specy.nomVern }}</p>
+                                    <p>{{ bird.specy.nomVern }},  {{ bird.createdAt|date('d/m/Y') }}</p>
                                 </div>
                             </a>
                         </div>
@@ -59,9 +58,9 @@
                         <div >
                             <a href="{{ path('app_addObservation') }}">
                                 <div  data-equalizer-watch>
-                                    <a href="#" class="button third expanded" style="height: 18em;"><img height="50" width="50" src="{{ asset('images/png/doigt.png') }}" alt="NAO" style="margin-top: 4.5em;" />
+                                    <a href="#" class="button third expanded" style="height: 17.85em;"><img height="50" width="50" src="{{ asset('images/png/doigt.png') }}" alt="NAO" style="margin-top: 4.5em;" />
                                         <p>
-                                           AJOUTER UNE OBSERVATION
+                                           JE SIGNALE UN OISEAU
                                         </p>
                                     </a>
                                 </div>
@@ -77,7 +76,7 @@
                     </p></a>
             </div>
             <div class="large-4 columns text-center">
-                <a href="{{ path('app_addObservation') }}" class="button third expanded">
+                <a href="{{ path('app_addObservation') }}" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/icone_don.png') }}" alt="NAO" />
                     <p>
                         JE FAIS UN DON A L'ASSOCIATION
                     </p></a>

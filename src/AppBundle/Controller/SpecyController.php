@@ -80,7 +80,6 @@ class SpecyController extends Controller
                     array_push($list, $bird->getlbNom());
                 }
             }
-
             $response = new Response();
             $response->setContent(json_encode(
                 array('list' => $list)

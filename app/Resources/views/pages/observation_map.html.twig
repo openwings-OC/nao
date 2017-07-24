@@ -1,12 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    <div class="text-center callout ccf">
+        <h1>CARTE DES OBSERVATIONS</h1>
+    </div>
     <div class="row" id="recherche_carte">
-        <h1>Carte des observations</h1>
-        <h2>Sélectionnez l'espèce recherchée</h2>
+
+        <h3>Sélectionnez l'espèce recherchée</h3>
 
         {{ form_start(form) }}
-        {{ form_widget(form.specy) }}
+        {{ form_widget(form.specy, {'attr' : {'class' : 'js-example-basic-single'}}) }}
     </div>
 
     <div class="large-6 row">
