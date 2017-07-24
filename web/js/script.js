@@ -370,8 +370,3 @@ $('#changecible').click(function(position){
     if(navigator.geolocation)
         navigator.geolocation.getCurrentPosition(maPosition);
 
-//Carte des observations chargement
-
-if($('#select2-appbundle_observation_specy-container')){
-    console.log('salut');
-}
