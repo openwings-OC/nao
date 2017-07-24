@@ -116,7 +116,7 @@ class Image
         return $this->url;
     }
 
-    public function upload($date, $cdNom){
+    public function upload($date, $cdNom, $dir){
 
         if(null === $this->file){
             return;
@@ -124,18 +124,10 @@ class Image
         $uniqid = uniqid();
         $date = $date->format('ym');
         $name = $date . $cdNom . $uniqid .".jpg";
-        $this->file->move($this->getUploadRootDir(), $name);
+        $this->file->move($dir, $name);
 
         $this->url = $name;
         $this->alt = $name;
-    }
-
-    public function getUploadDir(){
-        return 'img';
-    }
-
-    protected function getUploadRootDir(){
-        return 'C:\wamp\www\nao\web\img';
     }
 
 }

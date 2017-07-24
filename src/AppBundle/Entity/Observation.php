@@ -57,7 +57,7 @@ class Observation
      * @var int
      *
      * @ORM\Column(name="latitude", type="decimal", precision=12, scale=9)
-     * @Assert\Type("integer")
+     *
      */
     private $latitude;
 
@@ -65,7 +65,7 @@ class Observation
      * @var int
      *
      * @ORM\Column(name="longitude", type="decimal", precision=12, scale=9)
-     * @Assert\Type("integer")
+     *
      */
     private $longitude;
 

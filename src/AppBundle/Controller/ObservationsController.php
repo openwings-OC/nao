@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Kernel;
 
 class ObservationsController extends Controller
 {
@@ -53,8 +54,9 @@ class ObservationsController extends Controller
         $form = $this->createForm(ObservationType::class, $observation);
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
+            $dir = $this->container->get('kernel')->getProjectDir() . '\web\img';
             $em = $this->getDoctrine()->getManager();
-            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
+            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
             $date = $observation->getCreatedAt();
             $observation->setState('pending');
             $observation->setUpdatedAt($date);

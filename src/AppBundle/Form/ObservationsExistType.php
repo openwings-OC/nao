@@ -20,10 +20,12 @@ class ObservationsExistType extends AbstractType
                 'label' => 'Choisir l\'espèce observée',
                 'class' => 'AppBundle:Taxref',
                 'query_builder' => function( EntityRepository $er){
-                    return $er->createQueryBuilder('s')
+                    $t = $er->createQueryBuilder('s')
                         ->orderBy('s.nomVern', 'ASC')
                         ->where('s.cdTaxsup > :taxsup')
                         ->setParameter('taxsup', 0);
+                    dump($t);
+                    return $t;
                 },
             ));
     }

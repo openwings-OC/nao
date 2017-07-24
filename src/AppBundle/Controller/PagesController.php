@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Kernel;
 
 class PagesController extends Controller
 {
@@ -22,6 +23,7 @@ class PagesController extends Controller
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
         $lastObservations = $em->findLastObservations(3);
+
         return $this->render('pages/homepage.html.twig', array(
             'list' => $lastObservations
         ));
