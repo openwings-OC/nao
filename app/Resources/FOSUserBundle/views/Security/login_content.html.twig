@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="callout alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
 <form name="fos_user_login_form" action="{{ path("fos_user_security_check") }}" method="post" id="loginform" data-abide novalidate>
@@ -35,6 +35,6 @@
     <div class="columns large-12 text-center">
         <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
         <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-        <button class="button third" type="submit">{{ 'JE M\'INSCRIS' }}</button>
+        <button class="button third" type="submit">{{ 'JE ME CONNECTE' }}</button>
     </div>
 </form>

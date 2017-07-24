@@ -68,8 +68,16 @@
                                 <li class="naoMenuItem orangeMenuItem">
                                     <a href="#"><img height="50" width="50" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
                                     <ul class="menu vertical">
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                            <li class="orangeMenuItem"><a href="{{ path('fos_user_profile_show') }}" class="button expanded">MON PROFIL</a></li>
+                                            <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">MES OBSERVATIONS</a></li>
+                                            <li class="orangeMenuItem"><a href="{{ path('app_addObservation') }}" class="button expanded">AJOUTER UNE OBSERVATION</a></li>
+                                            <li class="orangeMenuItem"><a href="{{ path('fos_user_security_logout') }}" class="button expanded">SE DÉCONNECTER</a></li>
+                                        {% else %}
+                                            <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
+                                            <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                             </ul>

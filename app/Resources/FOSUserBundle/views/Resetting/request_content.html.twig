@@ -1,9 +1,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <div>
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request" data-abide novalidate>
+    <div class="columns large-12">
         <label for="username">{{ 'resetting.request.username'|trans }}</label>
         <input type="text" id="username" name="username" required="required" />
+        <span class="form-error">
+            Votre identifiant ou adresse e-mail est incorrect
+        </span>
     </div>
     <div class="columns large-12 text-center">
         <button class="button third" type="submit">{{ 'VALIDER' }}</button>
