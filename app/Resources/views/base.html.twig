@@ -103,7 +103,7 @@
         {% block body %}{% endblock %}
 
         {% block javascripts %}
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&callback=initMap&libraries=places" async defer></script>
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script src="{{ asset('js/vendor/motionui.js') }}"></script>

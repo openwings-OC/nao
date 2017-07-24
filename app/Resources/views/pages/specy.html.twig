@@ -13,7 +13,7 @@
                         <h4>La dernière observation : </h4>
                         <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
                         <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
-                        <p>Observée par : {{ observation.user.username }}</p>
+                        <p>Observée par : {{ observation.author }}</p>
                         <p>Commentaire : {{ observation.comment }}</p>
             </div>
             <div class="large-5 columns">
