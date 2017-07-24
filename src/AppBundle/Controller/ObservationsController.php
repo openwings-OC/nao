@@ -54,11 +54,11 @@ class ObservationsController extends Controller
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
             $em = $this->getDoctrine()->getManager();
-
             $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom());
             $date = $observation->getCreatedAt();
             $observation->setState('pending');
             $observation->setUpdatedAt($date);
+            $observation->setSpecy($observation->getSpecy());
             $observation->setUser($this->getUser());
 
             $em->persist($observation);

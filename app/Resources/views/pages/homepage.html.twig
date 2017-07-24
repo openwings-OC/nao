@@ -48,7 +48,13 @@
                                     <img src="{{ asset('img/' ~ bird.image.url) }}" style="width: 100%">
                                 </div>
                                 <div class="card-section">
-                                    <p>{{ bird.specy.nomVern }},  {{ bird.createdAt|date('d/m/Y') }}</p>
+                                    <p>
+                                        Observé par {{ bird.user.userName }}, le  {{ bird.createdAt|date('d/m/Y') }}<br>
+                                        {% if bird.specy.nomVern == "" %}
+                                            {{ bird.specy.lbNom|slice(0, 20) ~ '...' }}
+                                        {% else %}
+                                            {{ bird.specy.nomVern|slice(0, 20) ~ '...' }}
+                                        {% endif %}
                                 </div>
                             </a>
                         </div>
@@ -58,7 +64,7 @@
                         <div >
                             <a href="{{ path('app_addObservation') }}">
                                 <div  data-equalizer-watch>
-                                    <a href="#" class="button third expanded" style="height: 17.85em;"><img height="50" width="50" src="{{ asset('images/png/doigt.png') }}" alt="NAO" style="margin-top: 4.5em;" />
+                                    <a href="#" id="bouton-signaler" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/doigt.png') }}" alt="NAO" style="margin-top: 4.5em;" />
                                         <p>
                                            JE SIGNALE UN OISEAU
                                         </p>

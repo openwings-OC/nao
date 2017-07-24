@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Image;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Observation
@@ -26,6 +27,7 @@ class Observation
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref")
      * @ORM\JoinColumn(name="specy", referencedColumnName="CD_NOM")
+     * @Assert\NotNull(message="Cette espèce n'existe pas")
      */
     private $specy;
 
@@ -55,6 +57,7 @@ class Observation
      * @var int
      *
      * @ORM\Column(name="latitude", type="decimal", precision=12, scale=9)
+     * @Assert\Type("integer")
      */
     private $latitude;
 
@@ -62,10 +65,12 @@ class Observation
      * @var int
      *
      * @ORM\Column(name="longitude", type="decimal", precision=12, scale=9)
+     * @Assert\Type("integer")
      */
     private $longitude;
 
     /**
+     *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
