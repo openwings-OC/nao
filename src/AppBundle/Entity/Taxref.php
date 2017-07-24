@@ -2,8 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -36,6 +38,20 @@ class Taxref
         }
         return $this->nomVern ." - ". $this->lbNom;
     }
+    function __construct()
+    {
+        $this->observations = new ArrayCollection();
+    }
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Observation", mappedBy="specy", cascade="all")
+     * @Assert\All({
+     *   @Assert\Type(type="AppBundle\Entity\Taxref")
+     * })
+     * @Assert\Valid
+     */
+    private $observations;
 
     /**
      * @var string
@@ -261,7 +277,7 @@ class Taxref
      */
     private $cli;
 
-
+    
 
 
     /**
@@ -279,6 +295,16 @@ class Taxref
     }
 
     /**
+     * Get observations
+     *
+     * @return ArrayCollection
+     */
+    public function getObservations()
+    {
+        return $this->observations;
+    }
+
+    /**
      * Get regne
      *
      * @return string
@@ -287,7 +313,6 @@ class Taxref
     {
         return $this->regne;
     }
-
     /**
      * Set phylum
      *
