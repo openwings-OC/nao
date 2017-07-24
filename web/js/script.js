@@ -1,3 +1,8 @@
+$(document).ready(function() {
+    $(".js-example-basic-single").select2();
+});
+
+
 //Nom image uploadée
 var inputs = $('#appbundle_observation_image_file');
 Array.prototype.forEach.call(inputs, function(input) {
@@ -11,8 +16,8 @@ Array.prototype.forEach.call(inputs, function(input) {
     });
 });
 
-//Autocompletion moteur de recherche
-$('#search').autocomplete({
+//Autocompletion moteur de recherche home
+$('#search-home').autocomplete({
     maxShowItems: 10,
     minLength: 3,
     source: function(requete, reponse) {
@@ -21,30 +26,56 @@ $('#search').autocomplete({
             type: "POST",
             dataType: 'JSON',
             data: {
-                'bird': $('#search').val(),
+                'bird': $('#search-home').val(),
 
             },
             success: function(data, statut) {
-                console.log(data)
                 reponse($.map(data, function(objet) {
                     return objet
                 }));
                 $('#ui-id-1 li div').addClass('results');
-                $('#ui-id-1 li div').addClass('large-12');
+                $('#ui-id-1 li div').addClass('large-10');
                 $('.ui-helper-hidden-accessible').hide();
             },
         });
     },
     select: function(event, ui) {
-        $('#form').attr('action', 'espece/' + ui.item.id);
-        $('#form').submit();
+        $('#form-home').attr('action', 'espece/' + ui.item.id);
+        $('#form-home').submit();
     }
 });
 
+//Autocompletion moteur de recherche page recherche
+$('#search-page-search').autocomplete({
+    maxShowItems: 10,
+    minLength: 3,
+    source: function(requete, reponse) {
+        $.ajax({
+            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            type: "POST",
+            dataType: 'JSON',
+            data: {
+                'bird': $('#search-page-search').val(),
+
+            },
+            success: function(data, statut) {
+                reponse($.map(data, function(objet) {
+                    return objet
+                }));
+                $('#ui-id-2 li div').addClass('results');
+                $('#ui-id-2 li div').addClass('large-10');
+                $('.ui-helper-hidden-accessible').hide();
+            },
+        });
+    },
+    select: function(event, ui) {
+        $('#form-search').attr('action', 'espece/' + ui.item.id);
+        $('#form-search').submit();
+    }
+});
 
 //Requete AJAX carte des observations
-//$selectBird = $('#appbundle_observation_specy');
-$selectBird = $('#recherche_carte>#appbundle_observation_specy');
+$selectBird = $('#appbundle_observation_specy');
 $($selectBird).change(function() {
     $.ajax({
         url: window.location.host + "/observation_map",
@@ -283,6 +314,5 @@ var maPosition = (function(position) {
     return self;
 });
 
-if (navigator.geolocation) {
+if (navigator.geolocation)
     navigator.geolocation.getCurrentPosition(maPosition);
-}

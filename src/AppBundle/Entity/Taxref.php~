@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * Taxref
  *
@@ -14,13 +16,32 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Taxref
 {
+
+    const PAGE_NUMBER = 50;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Observation", mappedBy="taxref")
+     */
+    private $observations;
+
+
     /**
      * @var integer
      * @ORM\Id
      * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
+     *
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $cdNom;
+
+    function __toString()
+    {
+        if($this->nomVern === ""){
+            $this->nomVern = $this->lbNom;
+        }
+        return $this->nomVern ." - ". $this->lbNom;
+    }
 
 
     /**
@@ -251,15 +272,6 @@ class Taxref
 
 
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set regne

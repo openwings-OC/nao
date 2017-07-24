@@ -24,7 +24,7 @@ class Observation
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref", inversedBy="observations")
      * @ORM\JoinColumn(name="specy", referencedColumnName="CD_NOM")
      */
     private $specy;
