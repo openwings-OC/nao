@@ -1,0 +1,25 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+# Security AppBundle
+imports:
+    - { resource: "@AppBundle/Resources/config/security.yml" }
+
+# Security General
+security:
+
+    role_hierarchy:
+        ROLE_NATURALISTE: ROLE_USER
+        ROLE_ADMIN:       ROLE_NATURALISTE
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_NATURALISTE, ROLE_USER]
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/observations/voir/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/observations/ajouter$, role: ROLE_USER }
+        - { path: ^/observations/editer, role: ROLE_USER }
+        - { path: ^/observations/supprimer, role: ROLE_USER }
+        - { path: ^/mesobservations, role: ROLE_USER }
+        - { path: ^/observations, role: ROLE_NATURALISTE }
+        - { path: ^/users, role: ROLE_ADMIN }

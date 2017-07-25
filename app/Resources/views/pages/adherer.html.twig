@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Adhérez à NAO pour participer à notre vaste programme et devenir acteur "/>
+    </head>
+    <div id="adherer">
+        <div class="text-center callout ccf">
+            <h1 >ADHÉRER A NOS AMIS LES OISEAUX</h1>
+        </div>
+        <div class="row">
+            <div class="medium-8 columns">
+                <h3>Adhérer à NAO c'est:</h3>
+                <ul class="adherer-cest">
+                    <li>Participer à notre vaste programme participatif et devenir acteur!</li>
+                    <li>Se mobiliser autour d'un programme de recherche en saisissant des observations d'oiseaux, afin de constituer une vaste base de données utilisée par les professionnels de l’ornithologie pour effectuer le recensement des espèces sur notre territoire.</li>
+                    <li>"Vos signalements permettront d'étudier les effets du climat, de l'urbanisation et de l'agriculture sur la biodiversité".</ul>
+                </ul>
+                <h3 >Mais c'est aussi :</h3>
+                <ul class="list-objectifs-adhesion">
+                    <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>accèder</strong> à l'ensemble des observations</li>
+                    <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>être</strong> ecoresponsable</li>
+                    <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>opter</strong> pour la défense de l'environnement</li>
+                    <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>protèger</strong> les oiseaux et leur habitat</li>
+                    <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>oeuvrer</strong> pour les générations futures</li>
+                    <p >...</p>
+                </ul>
+
+            </div>
+            <div class="medium-4 columns">
+                <img src="{{ asset('images/jpg/photographe_nature.jpg') }}" alt="">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div id="biodiversite" class="row ">
+                <div class="small-2 medium-2 columns medium-offset-3 hide-for-small-only"><img src="{{ asset('images/png/Logo_NAO.png') }}" alt="Logo Nos Amis les Oiseaux"></div>
+                <div class="small-11 medium-7 columns"><p >Avec NAO, je m'engage pour la préservation<br>des oiseaux et de la biodiversité</p></div>
+            </div>
+            <br><br>
+            <a href="{{ asset('fichiers/bulletin_adhesion.pdf') }}" target="_blank" class="button large third" id="bulletin">TÉLÉCHARGER LE BULLETIN D'ADHÉSION</a>
+        </div>
+        <div class="row">
+            <h3>Comment adhérer ?</h3>
+            <p>Pour participer il suffit de cliquer sur le bouton ci-dessus et de complèter les rubriques:</p>
+            <ul class="list-comment-adherer">
+                <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>Identité</strong> <span class="italic">Nom et prénom</span></li>
+                <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">&nbsp;<strong>Email</strong></li>
+                <li><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;"><strong>Compte utilisateur</strong> <span class="italic">Pseudo et mot de passe</span></li>
+            </ul>
+            <strong><p>Rien de plus simple, on vous guide! </p></strong>
+        </div>
+
+        </div>
+    </div>
+{% endblock %}

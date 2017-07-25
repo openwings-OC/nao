@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="text-center callout ccf">
+        <h1>L'ÉQUIPE</h1>
+    </div>
+    <br>
+    <div class="row equipe">
+        <div class="medium-4 columns">
+            <img src="{{ asset('images/jpg/samuel.jpg') }}" alt="Avatar"/><br>
+            <h3>Samuel</h3>
+            <p>Samuel arpente les montagnes dès que le temps le lui permet. Il accompagne l'association depuis 10 ans en photographiant les espèces d'oiseaux.</p>
+            <div><i class="fa fa-facebook"></i><i class="fa fa-pinterest"></i></div>
+        </div>
+        <div class="medium-4 columns">
+            <img src="{{ asset('images/jpg/hector.jpg') }}" alt="Appareil photos"/><br>
+            <h3>Hector</h3>
+            <p>Ornithologue dont la réputaiton n'est plus à faire, Hector suit depuis près de 30 ans la migration des espèces en France et en Europe</p>
+            <div><i class="fa fa-linkedin"></i><i class="fa fa-facebook"></i></div>
+        </div>
+        <div class="medium-4 columns">
+            <img src="{{ asset('images/jpg/laurene.jpg') }}" alt="Ecran ordinateur"/><br>
+            <h3>Laurène</h3>
+            <p>Professeur de CM2, laurène essaye d'inculquer à ses élèves le sens de la préservation de notre planète et de sa biodiversité. Elle a notamment créé le guide du débutant et exploite la dimension pédagogique de notre projet</p>
+            <div><i class="fa fa-linkedin"></i><i class="fa fa-pinterest"></i></div>
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

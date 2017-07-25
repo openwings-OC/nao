@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <meta name="description" content="Nos amis les oiseaux association vouée à la protection des oiseaux et de leur habitat"/>
+    <div class="text-center callout ccf">
+        <h1>L'ASSOCIATION</h1>
+    </div>
+
+    <div class="row association">
+        <h3>Nos amis les oiseaux</h3>
+        <p>L’association <strong>Nos Amis les Oiseaux</strong> est une association à but non lucratif créée en juin 2015 qui compte aujourd’hui 861 adhérents.<br>L’association a pour but l’observation et le référencement des oiseaux en France métropolitaine et contribue grâce à ses données à un vaste<br>programme de recherche visant à étudier les effets du climat, de l’urbanisation et de l’agriculture sur la biodiversité.<br>
+        </p>
+        <img src="{{ asset('images/jpg/bandeau_association.jpg') }}" alt="">
+        <h3>Comment nous soutenir ?</h3>
+        <p>Regroupant des passionnés d'ornithologie, des ptérophiles, des scientifiques et autres passionnés de nature, nous développons des partenariats avec<br>
+        des acteurs reconnus comme la <strong><a href="https://www.lpo.fr/" onclick="window.open(this.href); return false;">LPO (Ligue pour la Protection des Oiseaux)</a></strong> et le <strong><a href="https://www.mnhn.fr/" onclick="window.open(this.href); return false;">Muséum national d'Histoire naturelle</a></strong>.</p><br><br>
+        <div class="row text-center">
+            <a href="{{ path('app_adherer') }}" class="button large third ">Adhérer à l'association</a>
+        </div>
+        <br>
+
+    </div>
+{% endblock %}

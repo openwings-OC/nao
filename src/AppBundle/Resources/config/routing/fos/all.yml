@@ -1,0 +1,18 @@
+fos_user_security:
+    resource: "@AppBundle/Resources/config/routing/fos/security.yml"
+
+fos_user_profile:
+    resource: "@AppBundle/Resources/config/routing/fos/profil.yml"
+    prefix: /profil
+
+fos_user_register:
+    resource: "@AppBundle/Resources/config/routing/fos/registration.yml"
+    prefix: /inscription
+
+fos_user_resetting:
+    resource: "@AppBundle/Resources/config/routing/fos/resetting.yml"
+    prefix: /reinitialiser
+
+fos_user_change_password:
+    resource: "@AppBundle/Resources/config/routing/fos/change_password.yml"
+    prefix: /changer-de-mot-passe

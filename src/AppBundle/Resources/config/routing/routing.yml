@@ -1,0 +1,2 @@
+fos_user:
+    resource: "@AppBundle/Resources/config/routing/fos/all.yml"

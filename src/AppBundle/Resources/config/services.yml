@@ -1,0 +1,4 @@
+services:
+    app.observation_creation:
+            class: AppBundle\Service\observationCreation
+            arguments: [ "@doctrine.orm.entity_manager" ]

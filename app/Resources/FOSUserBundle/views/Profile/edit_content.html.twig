@@ -1,0 +1,17 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr':{ 'novalidate': 'novalidate', 'data-abide': null,  } }) }}
+    <div class="columns large-12">
+        <label for="username">Nom d'utilisateur</label>
+        {{ form_widget(form.username) }}
+        {{ form_errors(form.username) }}
+    </div>
+    <div class="columns large-12">
+        <label for="current_password">Mot de passe actuel</label>
+        {{ form_widget(form.current_password) }}
+        {{ form_errors(form.current_password) }}
+    </div>
+    <div class="columns large-12 text-center">
+        <button class="button third" type="submit">METTRE À JOUR</button>
+    </div>
+{{ form_end(form) }}

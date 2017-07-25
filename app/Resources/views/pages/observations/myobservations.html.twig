@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <button class="button" id="see">Voir</button>
+    <button class="button success" id="edit">Éditer</button>
+    <button class="button alert" id="delete">Supprimer</button>
+    <a class="button third" href="{{ path('app_addObservation') }}">Ajouter une observation</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Selection</th>
+            <th>Date</th>
+            <th>Espèce</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for observation in userObservations %}
+            <tr>
+                <td>
+                    {{ form_start(formsArray[loop.index0], {'action': path('app_deleteObservation', {'id': observation.id}), 'method': 'DELETE', 'attr': {'id': observation.id}}) }}
+                    {{ form_widget(formsArray[loop.index0]) }}
+                    {{ form_end(formsArray[loop.index0]) }}
+                    <input data-js="checkbox" type="checkbox" id="{{ observation.id }}">
+                </td>
+                <td>{{ observation.createdAt|date("d/m/Y H:m") }}</td>
+                <td>{{ observation.specy }}</td>
+                <td>{% if observation.state == "pending" %}En cours de validation{% elseif observation.state == "review" %}À revoir{% else %}Validé{% endif %}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if userObservations|length == 0 %}
+        <p>Vous n'avez pas encore d'observation</p>
+    {% endif %}
+</div>
+    <script>
+        var editModule = function(){
+            var $seeButton = $('#see'),
+                $editButton = $('#edit'),
+                $deleteButton = $('#delete'),
+                $checkboxes = $("[data-js='checkbox']");
+            $checkboxes.change(function () {
+                $checkboxes.not(this).prop('checked', false);
+            });
+            var returnIdOfSelectedCheckbox = function () {
+                var checkboxId = false;
+                for(var i = 0; i < $checkboxes.length; i++){
+                    if ($checkboxes[i].checked){
+                        checkboxId = $checkboxes[i].id;
+                        break;
+                    }
+                }
+                return checkboxId;
+            };
+            $seeButton.click(function (e) {
+                e.preventDefault();
+                var checkboxSelected = returnIdOfSelectedCheckbox();
+                if(checkboxSelected) {
+                    document.location.href = "http://" + window.location.host + "/observations/voir/" + returnIdOfSelectedCheckbox();
+                }
+            });
+            $editButton.click(function (e) {
+                e.preventDefault();
+                var checkboxSelected = returnIdOfSelectedCheckbox();
+                if(checkboxSelected) {
+                    document.location.href = "http://" + window.location.host + "/observations/editer/" + returnIdOfSelectedCheckbox();
+                }
+            });
+            $deleteButton.click(function (e) {
+                e.preventDefault();
+                var checkboxSelected = returnIdOfSelectedCheckbox();
+                if(checkboxSelected) {
+                    confirm("Êtes vous supprimer cette élément ?");
+                    $('form#'+returnIdOfSelectedCheckbox()).submit();
+                }
+            });
+        }
+    </script>
+{% endblock %}

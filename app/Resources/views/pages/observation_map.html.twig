@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="text-center callout ccf">
+        <h1>CARTE DES OBSERVATIONS</h1>
+    </div>
+    <div class="row" id="recherche_carte">
+        <div class="large-12 colums">
+        <h3>Sélectionnez l'espèce recherchée</h3>
+
+        <select id="appbundle_observation_specy" name="appbundle_observation[specy]" class="js-example-basic-single observationMap">
+            {% for specy in speciesWithObservations %}
+                <option value="{{ specy.cdNom }}">{{ specy.nomVern }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    </div>
+    <div class="large-6 row">
+        <div id="map">
+
+            {{ include(':modules:map.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

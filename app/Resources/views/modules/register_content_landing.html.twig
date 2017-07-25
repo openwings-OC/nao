@@ -1,0 +1,56 @@
+{% trans_default_domain 'FOSUserBundle' %}
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr':{ 'novalidate': 'novalidate', 'data-abide': null, 'id': 'form-landing'}}) }}
+<div class="columns large-12">
+    <label class="secondary" for="lastname">IDENTITÉ</label>
+</div>
+<div class="columns large-6 ">
+    {{ form_widget(form.lastname) }}
+    {{ form_errors(form.lastname) }}
+</div>
+<div class="columns large-6">
+    {{ form_widget(form.firstname) }}
+    {{ form_errors(form.firstname) }}
+</div>
+<div class="columns large-12">
+    <label class="secondary" for="prenom">EMAIL</label>
+</div>
+{% for emailField in form.email %}
+    <div class="columns large-6">
+        {{ form_widget(emailField) }}
+        {{ form_errors(emailField) }}
+    </div>
+{% endfor %}
+<div class="columns large-12">
+    <label class="secondary" for="username">COMPTE UTLISATEUR</label>
+</div>
+<div class="columns large-12">
+    {{ form_widget(form.username) }}
+    {{ form_errors(form.username) }}
+</div>
+{% for passwordField in form.plainPassword %}
+    <div class="columns large-6">
+        {{ form_widget(passwordField) }}
+        {{ form_errors(passwordField) }}
+    </div>
+{% endfor %}
+
+<div class="columns large-6 small-12 text-center">
+    <div class="hide-for-medium small-12" id="accedez-rapports-small">
+        <p>ACCÉDEZ À L'INTEGRALITÉ DE NOS RAPPORTS SCIENTIFIQUES</p>
+    </div>
+    <button class="button third small-8 large-12" type="submit">{{ 'JE M\'INSCRIS' }}</button>
+    <div class="small-12 hide-for-small-only">
+    <span>Vous avez déja un compte ?</span>
+    <a  href="">Connectez-vous</a>
+    </div>
+</div>
+<div class="columns large-6 small-12 inscription-reseaux text-center">
+    <button class="button small-7 large-12 text-center"><i class="fa fa-google-plus"></i>S'INSCRIRE VIA GOOGLE+</button>
+    <button class="button small-7 large-12 text-center"><i class="fa fa-facebook"></i>S'INSCRIRE VIA FACEBOOK</button>
+</div>
+<div class="columns large-12 text-center hide-for-medium" id="deja-compte">
+    <label for="">Vous avez déja un compte ?</label>
+    <a class="bold" href="{{ path('fos_user_security_login') }}">Connectez-vous</a>
+</div>
+{{ form_end(form) }}
+

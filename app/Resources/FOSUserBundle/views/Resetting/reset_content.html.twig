@@ -1,0 +1,8 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    {{ form_widget(form) }}
+<div class="columns large-12 text-center">
+    <button class="button third" type="submit">{{ 'VALIDER' }}</button>
+</div>
+{{ form_end(form) }}

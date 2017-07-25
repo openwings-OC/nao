@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="text-center callout ccf">
+        <h1>LES DERNIÈRES OBSERVATIONS</h1>
+    </div>
+
+    <div class="row small-up-12 medium-up-4" data-equalizer data-equalize-on="medium">
+        {% for bird in list %}
+            <div class="columns">
+                <div class="card">
+                    <a href="{{ path('app_observation', {'id' :  bird.id}) }}">
+                        <div class="img-card" data-equalizer-watch style="max-height: 200px; overflow: hidden;">
+                            {% if bird.image is null %}
+                                <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ bird.specy.nomVern }}">
+                            {% else %}
+                                <img src="{{ asset('img/' ~ bird.image.url) }}" style="width: 100%">
+                            {% endif %}
+                        </div>
+                        <div class="card-section">
+                            <p>
+                                {% if bird.specy.nomVern == "" %}
+                                    {{ bird.specy.lbNom|slice(0, 25) ~ '...' }}
+                                {% else %}
+                                    {{ bird.specy.nomVern }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

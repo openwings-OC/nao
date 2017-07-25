@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
+    </div>
+    <div class="row">
+        <div class="large-4 columns">
+            <h3>{{ observation.specy.nomVern }}</h3>
+            {% if observation.image is null %}
+                <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ observation.specy.nomVern }}">
+            {% else %}
+                <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
+             {% endif %}
+            <p>Commentaire : {{ observation.comment }}</p>
+        </div>
+        <div class="large-5 columns">
+            {% include ':modules:map.html.twig' %}
+        </div>
+        <div class="large-3 columns">
+            {{ include(':modules:sidebar.html.twig') }}
+        </div>
+    </div>
+
+
+{% endblock %}
