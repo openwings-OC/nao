@@ -18,7 +18,8 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/observations/voir/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/observations/ajouter$, role: ROLE_USER }
-        - { path: ^/observations/editer$, role: ROLE_USER }
+        - { path: ^/observations/editer, role: ROLE_USER }
+        - { path: ^/observations/supprimer, role: ROLE_USER }
         - { path: ^/mesobservations, role: ROLE_USER }
         - { path: ^/observations, role: ROLE_NATURALISTE }
         - { path: ^/users, role: ROLE_ADMIN }

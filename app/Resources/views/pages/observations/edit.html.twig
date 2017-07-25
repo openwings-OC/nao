@@ -1,4 +1,86 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    <div class="row">
+        <h1>Éditer une observation</h1>
+        <div class="large-12 row">
+            <p class="panel callout radius text-center alert-box alert round">Attention, toute observation doit être validée par un naturaliste pour être pûbliée</p>
+        </div>
+        <div class="large-12 row">
+            <p id="infoposition"></p>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="large-3 columns">
+                {{ form_widget(form.image) }}
+                {{ form_widget(form.image) }}
+                {{ form_errors(form.image) }}
+            </div>
+            <div class="large-6 columns">
+                <div class="large-12 columns">
+                    {{ form_label(form.specy) }}
+                    {{ form_widget(form.specy, {'attr':{'class': 'mapAdd'}}) }}
+                    {{ form_errors(form.specy) }}
+
+                </div>
+
+                <div class="large-5 columns">
+                    {{ form_label(form.latitude) }}
+                    {{ form_widget(form.latitude) }}
+                    {{ form_errors(form.latitude) }}
+                </div>
+                <div class="large-5 columns">
+                    {{ form_label(form.longitude) }}
+                    {{ form_widget(form.longitude) }}
+                    {{ form_errors(form.longitude) }}
+                </div>
+                <div class="large-2 columns">
+                    <a id="changecible"><i id="cible" class="fa fa-dot-circle-o fa-2x"></i></a>
+                </div>
+                <br>
+                <div class="large-12 columns">
+                    {{ form_label(form.createdAt) }}
+                    {{ form_widget(form.createdAt) }}
+                    {{ form_errors(form.createdAt) }}
+                </div>
+                <div class="large-12 columns">
+                    {{ form_label(form.comment) }}
+                    {{ form_widget(form.comment) }}
+                    {{ form_errors(form.comment) }}
+                </div>
+            </div>
+            <div class="large-2 columns">
+                {{ form_widget(form.save, {'attr' : {'class' : 'hollow button large-12' }}) }}
+                <a href="#" class="hollow button secondary large-12">Annuler</a>
+            </div>
+            {{ form_rest(form) }}
+        </div>
+        <div class="large-12 row">
+            <p class="panel callout radius text-center alert-box warning round">Déplacez le curseur pour récupérer automatiquement les coordonnées</p>
+        </div>
+        <div class="row large-12">
+            {% include "modules/mapAdd.html.twig" %}
+        </div>
+    </div>
+    <script>
+        //Geolocalisation
+
+        $('#changecible').click(function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    maPosition(position);
+                });
+            }
+        });
+
+        function maPosition(position) {
+            document.getElementById("appbundle_observation_latitude").value = position.coords.latitude;
+            document.getElementById("appbundle_observation_longitude").value = position.coords.longitude;
+        };
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                maPosition(position);
+            });
+        }
+    </script>
 {% endblock %}

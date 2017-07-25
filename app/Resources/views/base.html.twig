@@ -78,6 +78,12 @@
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                         {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
                                         <li class="orangeMenuItem"><a href="{{ path('fos_user_profile_show') }}" class="button expanded">MON PROFIL</a></li>
+                                        {% if is_granted("ROLE_NATURALISTE") %}
+                                            <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">VALIDATION DES OBSERVATIONS</a></li>
+                                        {% endif %}
+                                        {% if is_granted("ROLE_ADMIN") %}
+                                            <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">MES OBSERVATIONS</a></li>
+                                        {% endif %}
                                         <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">MES OBSERVATIONS</a></li>
                                         <li class="orangeMenuItem"><a href="{{ path('app_addObservation') }}" class="button expanded">AJOUTER UNE OBSERVATION</a></li>
                                         <li class="orangeMenuItem"><a href="{{ path('fos_user_security_logout') }}" class="button expanded">SE DÉCONNECTER</a></li>

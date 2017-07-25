@@ -59,7 +59,7 @@ class User extends BaseUser
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Observation", mappedBy="user", cascade="all")
+     * @ORM\OneToMany(targetEntity="Observation", mappedBy="user", cascade="persist")
      * @Assert\All({
      *   @Assert\Type(type="AppBundle\Entity\Observation")
      * })

@@ -14,6 +14,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Observation
 {
+    const STATUS_VALIDATE = 'validate';
+    const STATUS_REVIEW = 'review';
+    const STATUS_PENDING = 'pending';
+
     /**
      * @var int
      *
@@ -72,13 +76,13 @@ class Observation
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="observations", cascade="all")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="observations", cascade="persist")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref", inversedBy="observations", cascade="all")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Taxref", inversedBy="observations", cascade="persist")
      * @ORM\JoinColumn(name="specy_id", referencedColumnName="CD_NOM")
      */
     private $specy;

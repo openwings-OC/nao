@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 use AppBundle\Entity\Observation;
 use AppBundle\Entity\Taxref;
+use AppBundle\Form\ObservationDeleteFormType;
 use AppBundle\Form\ObservationsExistType;
 use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -47,6 +48,22 @@ class ObservationsController extends Controller
     }
 
     /**
+     * @route("mesobservations", name="app_myobservations")
+     */
+    public function myObservationsAction(Request $request){
+        $userObservations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findByUser($this->getUser());
+        $formsArray = [];
+        foreach($userObservations as $observation){
+            $form = $this->createForm(ObservationDeleteFormType::class, $observation);
+            $formsArray[] = $form->createView();
+        }
+        return $this->render('pages/observations/myobservations.html.twig', array(
+            'userObservations' => $userObservations,
+            'formsArray' => $formsArray
+        ));
+    }
+
+    /**
      *
      * @route("/observations/ajouter", name="app_addObservation")
      */
@@ -68,25 +85,66 @@ class ObservationsController extends Controller
     }
 
     /**
-     * @route("mesobservations", name="app_myobservations")
-     */
-    public function myObservationsAction(Request $request){
-        return $this->render('pages/observations/myobservations.html.twig');
-    }
-    /**
      *
      * @route("/observations/editer/{id}", name="app_editObservation")
      */
-    public function editObservationAction(Request $request){
-        return $this->render('pages/observations/edit.html.twig');
+    public function editObservationAction(Request $request, $id){
+        $roles = $this->getUser()->getRoles();
+
+        $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find($id);
+        $form = $this->createForm(ObservationType::class, $observation);
+        $em = $this->getDoctrine()->getManager();
+
+        if(in_array("ROLE_USER", $roles) && $observation->getState() == "pending"|"review"){
+            if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
+                $dir = $this->container->get('kernel')->getProjectDir() . '\web\img';
+                $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
+                $date = $observation->getCreatedAt();
+                $observation->setState('pending');
+                $observation->setUpdatedAt($date);
+                $observation->setSpecy($observation->getSpecy());
+                $observation->setUser($this->getUser());
+                $em->persist($observation);
+                $em->flush();
+                return $this->redirectToRoute('app_myobservations', array('id' => $observation->getId()));
+            }
+            return $this->render('pages/observations/edit.html.twig', array(
+                'observation'   => $observation,
+                'form'          => $form->createView()
+            ));
+        }elseif (in_array("ROLE_NATURALISTE", $roles)){
+            return $this->render('pages/observations/edit.html.twig', array(
+                'observation' => $observation
+            ));
+        }else{
+            $request->getSession()
+                ->getFlashBag()
+                ->add('error', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
+            return $this->redirectToRoute('app_myobservations');
+        }
     }
 
     /**
      *
      * @route("/observations/supprimer/{id}", name="app_deleteObservation")
      */
-    public function deleteObservationAction(Request $request){
-        return $this->redirectToRoute('app_indexobservation');
+    public function deleteObservationAction(Request $request, $id){
+        $roles = $this->getUser()->getRoles();
+
+        $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        if(in_array("ROLE_USER", $roles) && $observation->getState() == "pending"|"review"){
+            $em->remove($observation);
+            $em->flush();
+        }elseif (in_array("ROLE_NATURALISTE", $roles)){
+
+        }else{
+            $request->getSession()
+                ->getFlashBag()
+                ->add('error', 'Vous ne pouvez plus supprimer une observation qui a été validé par un naturaliste');
+            return $this->redirectToRoute('app_myobservations');
+        }
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
