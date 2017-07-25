@@ -77,16 +77,20 @@ class PagesController extends Controller
     public function landingAAction(){
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
-        return $this->render(':pages:landing-a.html.twig');
+        return $this->render(':pages:landing-a.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
-     * @route("/participation-a", name="app_landing-b")
+     * @route("/participation-b", name="app_landing-b")
      */
     public function landingBAction(){
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
-        return $this->render(':pages:landing-b.html.twig');
+        return $this->render(':pages:landing-b.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
 }

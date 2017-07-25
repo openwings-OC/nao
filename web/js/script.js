@@ -49,9 +49,7 @@ $('#search-page-search').autocomplete({
     maxShowItems: 10,
     minLength: 3,
     source: function(requete, reponse) {
-        console.log(window.location.host);
         $.ajax({
-
             url: "http://localhost/nao/web/app_dev.php/autocomplete",
             type: "POST",
             dataType: 'JSON',

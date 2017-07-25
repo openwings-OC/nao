@@ -8,14 +8,14 @@
     <div class="row text-center">
 
         <div class="medium-4 columns">
-            <a href="#">
+            <a href="{{ path('fos_user_registration_register') }}">
                 <img height="100" width="100" src="{{ asset('images/svg/Picto internaute.svg') }}" alt="NAO" />
                 <p>Je m'inscris
                 </p>
             </a>
         </div>
         <div class="medium-4 columns">
-            <a href="">
+            <a href="{{ path('app_addObservation') }}">
                 <img height="100" width="100" src="{{ asset('images/svg/Picto photo.svg') }}" alt="NAO" />
                 <p>
                     Je signale un oiseau
@@ -69,7 +69,7 @@
                         <div >
                             <a href="{{ path('app_addObservation') }}">
                                 <div  data-equalizer-watch>
-                                    <a href="#" id="bouton-signaler" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/doigt.png') }}" alt="NAO" style="margin-top: 4.5em;" />
+                                    <a href="{{ path('app_addObservation') }}" id="bouton-signaler" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/doigt.png') }}" alt="NAO" style="margin-top: 4.5em;" />
                                         <p>
                                            JE SIGNALE UN OISEAU
                                         </p>

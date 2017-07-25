@@ -2,6 +2,12 @@ fos_user_registration_register:
     path: /creer-un-compte
     methods: [GET, POST]
     defaults: { _controller: FOSUserBundle:Registration:register}
+
+fos_user_registration_register_landing:
+    path: /participation-a
+    methods: [GET, POST]
+    defaults: { _controller: FOSUserBundle:Registration:register}
+
 fos_user_registration_check_email:
     path: /verificationemail
     methods: [GET]
