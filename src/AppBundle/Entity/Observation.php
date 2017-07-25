@@ -32,6 +32,8 @@ class Observation
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     * @Assert\LessThanOrEqual("now", message="Vous ne pouvez pas choisir de date future")
+     * @Assert\GreaterThanOrEqual("today - 1 year", message="Pour des raisons scientifiques, l'observation doit dater de moins d'un an")
      */
     private $createdAt;
 
@@ -68,6 +70,7 @@ class Observation
     /**
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
+     *
      */
     private $image;
 

@@ -21,7 +21,7 @@ $('#search-home').autocomplete({
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: window.location.host + "/autocomplete",
+            url: "http://localhost/nao/web/app_dev.php/autocomplete",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -49,8 +49,10 @@ $('#search-page-search').autocomplete({
     maxShowItems: 10,
     minLength: 3,
     source: function(requete, reponse) {
+        console.log(window.location.host);
         $.ajax({
-            url: window.location.host + "/autocomplete",
+
+            url: "http://localhost/nao/web/app_dev.php/autocomplete",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -77,7 +79,7 @@ $('#search-page-search').autocomplete({
 $selectBird = $('.observationMap');
 $($selectBird).change(function() {
     $.ajax({
-        url: "http://" + window.location.host + "/observation_map",
+        url: "http://localhost/nao/web/app_dev.php/observation_map",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -292,4 +294,5 @@ $($selectBird).change(function() {
 })
 
 //Ajuste la largeur du moteur de recherche
+
 $('#ui-id-1').addClass('large-4');

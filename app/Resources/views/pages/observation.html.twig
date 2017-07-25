@@ -7,8 +7,11 @@
     <div class="row">
         <div class="large-4 columns">
             <h3>{{ observation.specy.nomVern }}</h3>
-            {#<img src="{{ asset('img/' ~ observation.createdAt|date("ym") ~ observation.specy.cdNom ~ '.jpg') }}" alt="{{ observation.specy.nomVern }}">#}
-            <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
+            {% if observation.image is null %}
+                <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ observation.specy.nomVern }}">
+            {% else %}
+                <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
+             {% endif %}
             <p>Commentaire : {{ observation.comment }}</p>
         </div>
         <div class="large-5 columns">

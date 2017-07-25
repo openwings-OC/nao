@@ -4,7 +4,12 @@
 
     {% if observations is  defined %}
         <div class="row">
-            <h3 class="columns">{{ specy.nomVern }} - ({{ observations|length }} observations)</h3>
+            <h3 class="columns">
+                {% if specy.nomVern == "" %}
+                  {{ specy.lbNom }}
+                 {% else %}
+                {{ specy.nomVern }}
+                {% endif %}     - ({{ observations|length }} observations)</h3>
         </div>
         <div class="row">
             {% for observation in observations %}
