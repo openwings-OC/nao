@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -33,6 +34,7 @@ class Image
 
     /**
      * @var UploadedFile
+     *
      */
     private $file;
 
@@ -117,7 +119,6 @@ class Image
     }
 
     public function upload($date, $cdNom, $dir){
-
         if(null === $this->file){
             return;
         }

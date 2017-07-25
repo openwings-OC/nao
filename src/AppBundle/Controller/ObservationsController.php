@@ -56,16 +56,10 @@ class ObservationsController extends Controller
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
             $dir = $this->container->get('kernel')->getProjectDir() . '\web\img';
-            $em = $this->getDoctrine()->getManager();
-            $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
-            $date = $observation->getCreatedAt();
-            $observation->setState('pending');
-            $observation->setUpdatedAt($date);
-            $observation->setSpecy($observation->getSpecy());
+            $this->container->get('app.observation_creation')->uploadImage($observation, $dir);
             $observation->setUser($this->getUser());
+            $this->container->get('app.observation_creation')->persistObservation($observation);
 
-            $em->persist($observation);
-            $em->flush();
             return $this->redirectToRoute('app_observation', array('id' => $observation->getId()));
         }
         return $this->render(':crud:add.html.twig', array(

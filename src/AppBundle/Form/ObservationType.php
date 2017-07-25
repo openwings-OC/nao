@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,9 +21,9 @@ class ObservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('createdAt', DateType::class, array(
+            ->add('createdAt', DateTimeType::class, array(
                 'label' => 'Date de l\'observation',
-                'data' => new \DateTime()
+                'data' => new \DateTime(),
             ))
             ->add('latitude', TextType::class)
             ->add('longitude', TextType::class)
@@ -39,7 +40,9 @@ class ObservationType extends AbstractType
                         ->setParameter('taxsup', 0);
                 },
             ))
-            ->add('image', ImageType::class)
+            ->add('image', ImageType::class, array(
+                'required' => false
+            ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Envoyer'
             ));

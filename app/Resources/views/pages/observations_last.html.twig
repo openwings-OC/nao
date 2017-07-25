@@ -11,10 +11,20 @@
                 <div class="card">
                     <a href="{{ path('app_observation', {'id' :  bird.id}) }}">
                         <div class="img-card" data-equalizer-watch style="max-height: 200px; overflow: hidden;">
-                            <img src="{{ asset('img/' ~ bird.image.url) }}" style="width: 100%">
+                            {% if bird.image is null %}
+                                <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ bird.specy.nomVern }}">
+                            {% else %}
+                                <img src="{{ asset('img/' ~ bird.image.url) }}" style="width: 100%">
+                            {% endif %}
                         </div>
                         <div class="card-section">
-                            <p>{{ bird.specy.nomVern }}</p>
+                            <p>
+                                {% if bird.specy.nomVern == "" %}
+                                    {{ bird.specy.lbNom|slice(0, 25) ~ '...' }}
+                                {% else %}
+                                    {{ bird.specy.nomVern }}
+                                {% endif %}
+                            </p>
                         </div>
                     </a>
                 </div>

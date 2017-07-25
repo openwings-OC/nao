@@ -35,7 +35,7 @@
                 <div class="top-bar" id="nao-menu">
                     <div class="top-bar-right">
                         <ul class="menu vertical medium-horizontal dropdown" data-responsive-menu="accordion medium-dropdown">
-                            <li class="naoMenuItem blueMenuItem has-submenu">
+                            <li class="naoMenuItem blueMenuItem has-submenu menu-left">
                                 <a href="#">NOS AMIS LES OISEAUX</a>
                                 <ul class="vertical menu" >
                                     <li><a href="{{ path('app_association') }}">L'association</a></li>
@@ -45,7 +45,7 @@
                                     <li><a href="#">Nous contacter</a></li>
                                 </ul>
                             </li>
-                            <li class="naoMenuItem greenMenuItem " >
+                            <li class="naoMenuItem greenMenuItem menu-left" >
                                 <a href="#">OBSERVATION</a>
                                 <ul class="menu vertical">
                                     <li class="greenMenuItem"><a href="{{ path('app_last_observations') }}">Dernières observations</a></li>
@@ -103,7 +103,7 @@
         {% block body %}{% endblock %}
 
         {% block javascripts %}
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false" async defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap" type="text/javascript" async defer></script>
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script src="{{ asset('js/vendor/motionui.js') }}"></script>
