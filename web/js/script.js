@@ -16,12 +16,13 @@ Array.prototype.forEach.call(inputs, function(input) {
 });
 
 //Autocompletion moteur de recherche home
+console.log("http://"+window.location.host+"/autocomplete")
 $('#search-home').autocomplete({
     maxShowItems: 10,
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: "http://"+window.location.host+"/autocomplete",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -50,7 +51,7 @@ $('#search-page-search').autocomplete({
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: "http://"+window.location.host+"/autocomplete",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -77,7 +78,7 @@ $('#search-page-search').autocomplete({
 $selectBird = $('.observationMap');
 $($selectBird).change(function() {
     $.ajax({
-        url: "http://localhost/nao/web/app_dev.php/observation_map",
+        url: "http://"+window.location.host+"/observation_map",
         type: "POST",
         dataType: 'JSON',
         data: {
