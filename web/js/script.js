@@ -293,25 +293,3 @@ $($selectBird).change(function() {
 
 //Ajuste la largeur du moteur de recherche
 $('#ui-id-1').addClass('large-4');
-
-//Geolocalisation
-
-$('#changecible').click(function(position){
-    if(navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(maPosition);
-    maPosition(position);
-})
-
-// if($('#infoposition') != null){
-    function maPosition(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        console.log(latitude)
-        document.getElementById("appbundle_observation_latitude").value = latitude;
-        document.getElementById("appbundle_observation_longitude").value = longitude;
-    }
-
-    if(navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(maPosition);
-
-

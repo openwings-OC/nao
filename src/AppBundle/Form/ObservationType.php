@@ -44,7 +44,7 @@ class ObservationType extends AbstractType
                 'label' => 'Envoyer'
             ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

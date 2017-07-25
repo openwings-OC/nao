@@ -45,7 +45,7 @@ class Taxref
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Observation", mappedBy="specy", cascade="all")
+     * @ORM\OneToMany(targetEntity="Observation", mappedBy="specy", cascade="persist")
      * @Assert\All({
      *   @Assert\Type(type="AppBundle\Entity\Taxref")
      * })
