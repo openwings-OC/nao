@@ -64,9 +64,6 @@ class Image
     public function setFile(File $file = null)
     {
         $this->file = $file;
-       /* var_dump($this->file);
-        die();*/
-
         return $this;
     }
 
@@ -136,21 +133,6 @@ class Image
 
         $this->url = $name;
         $this->alt = $name;
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function checkSizeImage (ExecutionContextInterface $context){
-
-        if($this->getFile()->getExtension() === 'jpg'){
-            $context
-                ->buildViolation('Il est 19h passé, vous ne pouvez plus commander de billets pour aujourd\'hui')
-                ->atPath('file')
-                ->addViolation();
-        }
-        die();
-
     }
 
 }
