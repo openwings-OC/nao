@@ -21,7 +21,7 @@ $('#search-home').autocomplete({
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: $('#search-home').data('url'),
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -50,7 +50,7 @@ $('#search-page-search').autocomplete({
     minLength: 3,
     source: function(requete, reponse) {
         $.ajax({
-            url: "http://localhost/nao/web/app_dev.php/autocomplete",
+            url: $('#search-page-search').data('url'),
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -77,7 +77,7 @@ $('#search-page-search').autocomplete({
 $selectBird = $('.observationMap');
 $($selectBird).change(function() {
     $.ajax({
-        url: "http://localhost/nao/web/app_dev.php/observation_map",
+        url: $('.observationMap').data('url'),
         type: "POST",
         dataType: 'JSON',
         data: {

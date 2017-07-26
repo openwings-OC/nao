@@ -2,3 +2,6 @@ services:
     app.observation_creation:
             class: AppBundle\Service\observationCreation
             arguments: [ "@doctrine.orm.entity_manager" ]
+    app.envoi_email:
+            class: AppBundle\Service\SendEmail
+            arguments: [ "@mailer", "@templating", "@service_container", "@request_stack" ]

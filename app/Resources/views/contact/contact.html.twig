@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ parent() }} Contact
+{% endblock %}
+
+{% block body %}
+    <div class="text-center callout ccf">
+        <h1>NOUS CONTACTER</h1>
+    </div>
+    {{ form_start(form) }}
+    <div class="row large-5">
+        <label class="secondary" for="lastname">{{ form_label(form.name) }}</label>
+    </div>
+    <div class="row large-5 ">
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+    </div>
+    <div class="row large-5">
+        <label class="secondary" for="lastname">{{ form_label(form.email) }}</label>
+    </div>
+    <div class="row large-5">
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+    <div class="row large-5">
+        <label class="secondary" for="prenom">{{ form_label(form.subject) }}</label>
+    </div>
+        <div class="row large-5">
+            {{ form_widget(form.subject) }}
+            {{ form_errors(form.subject) }}
+        </div>
+    <div class="row large-5">
+        <label class="secondary" for="username">{{ form_label(form.content) }}</label>
+    </div>
+    <div class="row large-5 ">
+        {{ form_widget(form.content) }}
+        {{ form_errors(form.content) }}
+    </div>
+
+    <div class="row large-5 text-center">
+        {{ form_widget(form.submit, {'attr' : {'class' : 'third'}}) }}
+    </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}
