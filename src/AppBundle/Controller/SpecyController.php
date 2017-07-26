@@ -25,7 +25,7 @@ class SpecyController extends Controller
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
         if ($request->isMethod('POST')) {
-            $bird = $em->findBirdByLetter($_POST['search']/*, $_GET['page']*/);
+            $bird = $em->findBirdByLetter($_POST['search']);
         }
         else {
             $bird = $em->findAll();
