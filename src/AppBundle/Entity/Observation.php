@@ -5,12 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Image;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Observation
  *
  * @ORM\Table(name="observation")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ObservationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Observation
 {
@@ -55,6 +57,7 @@ class Observation
      * @var int
      *
      * @ORM\Column(name="latitude", type="decimal", precision=12, scale=9)
+     * @Assert\Range(min="41.59101", max="51.03457", minMessage="Votre observation doit de situer en France métropolitaine", maxMessage="Votre observation doit de situer en France métropolitaine")
      *
      */
     private $latitude;
@@ -63,6 +66,7 @@ class Observation
      * @var int
      *
      * @ORM\Column(name="longitude", type="decimal", precision=12, scale=9)
+     * @Assert\Range(min="-4.65", max="9.45", minMessage="Votre observation doit de situer en France métropolitaine", maxMessage="Votre observation doit de situer en France métropolitaine")
      *
      */
     private $longitude;
@@ -90,6 +94,8 @@ class Observation
     /**
      * @var string
      * @ORM\Column(name="comment", type="text")
+     *
+     * @Assert\Length(min= 50, max= 400, minMessage="Votre observation doit comporter au moins 50 caractères", maxMessage="Maximum 400 caractères")
      */
     private $comment;
 
@@ -275,7 +281,6 @@ class Observation
     public function setImage(Image $image = null)
     {
         $this->image = $image;
-
         return $this;
     }
 
@@ -292,5 +297,36 @@ class Observation
 
     public function getUser(){
         return $this->user;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function checkMimeTypeImage (ExecutionContextInterface $context){
+        if($this->getImage() != null){
+            if($this->getImage()->getFile()->getmimeType() !== 'image/png' && $this->getImage()->getFile()->getmimeType() !== 'image/jpeg'){
+                $context
+                    ->buildViolation('Votre image doit être de format jpeg ou png')
+                    ->atPath('image')
+                    ->addViolation();
+            }
+        }
+
+
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function checkSizeImage (ExecutionContextInterface $context){
+        if($this->getImage() != null) {
+            if ($this->getImage()->getFile()->getSize() > 20971520) {
+                $context
+                    ->buildViolation('Votre image ne doit pas dépasser 20 Mo')
+                    ->atPath('image')
+                    ->addViolation();
+            }
+        }
+
     }
 }
