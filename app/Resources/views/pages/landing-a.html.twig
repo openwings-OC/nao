@@ -2,7 +2,7 @@
 {% extends '@FOSUser/layout.html.twig' %}
 
 {% block body %}
-<body class="body-landing-b">
+<body class="body-landing-a">
     <div id="header-landing">
         <div class="logo-slogan columns">
             <div class="logo-landing medium-3 small-5 columns">
@@ -21,6 +21,7 @@
         <div class="columns panel-program">
             <div class="panel callout radius medium-5 text-center">
                 <p>Un programme de science participative pour la préservation des oiseaux et de la biodiversité</p>
+                {#<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=1566465300059710" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>#}
             </div>
         </div>
         {#<div class="row medium-5 medium-offset-0 grid-margin-x">
@@ -85,6 +86,6 @@
         <h3 class="small-8 row">CHAQUE OBSERVATION EST ANALYSÉE PAR DES PROFESSIONNELLS</h3>
         <a href="http://www.mnhn.fr/fr" target="_blank"><img class="medium-2 small-5" src="{{ asset('images/png/logomnhn.png') }}" alt=""></a>
     </footer>
-
+</body>
     {% endblock %}
 

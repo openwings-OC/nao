@@ -1,6 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+    <div class="text-center callout ccf">
+        <h1>RECHERCHER UNE ESPÈCE</h1>
+    </div>
     <div class="large-12 columns">
         <form action="{{ path('app_search') }}" method="post" id="form-search">
             <div class="row">
