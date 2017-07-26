@@ -4,11 +4,12 @@
         <meta charset="UTF-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}NAO | {% endblock %}</title>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
         {% block stylesheets %}
             {% stylesheets 'css/app.css'
-            filter='cssrewrite' output='css/compiled/app.css' %}
+            filter='cssrewrite' output='css/app.css' %}
+            {#css/compiled/app.css#}
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
