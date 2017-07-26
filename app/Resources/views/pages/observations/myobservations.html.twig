@@ -6,6 +6,9 @@
     <button class="button success" id="edit">Éditer</button>
     <button class="button alert" id="delete">Supprimer</button>
     <a class="button third" href="{{ path('app_addObservation') }}">Ajouter une observation</a>
+    <div class="text-center">
+        {{ knp_pagination_render(pagination, ':modules:pagination.html.twig') }}
+    </div>
     <table>
         <thead>
         <tr>
@@ -16,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for observation in userObservations %}
+        {% for observation in pagination %}
             <tr>
                 <td>
                     {{ form_start(formsArray[loop.index0], {'action': path('app_deleteObservation', {'id': observation.id}), 'method': 'DELETE', 'attr': {'id': observation.id}}) }}
@@ -32,7 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if userObservations|length == 0 %}
+    {% if pagination|length == 0 %}
         <p>Vous n'avez pas encore d'observation</p>
     {% endif %}
 </div>
@@ -59,22 +62,23 @@
                 e.preventDefault();
                 var checkboxSelected = returnIdOfSelectedCheckbox();
                 if(checkboxSelected) {
-                    document.location.href = "http://" + window.location.host + "/observations/voir/" + returnIdOfSelectedCheckbox();
+                    document.location.href = "//" + window.location.host + "/observations/voir/" + returnIdOfSelectedCheckbox();
                 }
             });
             $editButton.click(function (e) {
                 e.preventDefault();
                 var checkboxSelected = returnIdOfSelectedCheckbox();
                 if(checkboxSelected) {
-                    document.location.href = "http://" + window.location.host + "/observations/editer/" + returnIdOfSelectedCheckbox();
+                    document.location.href = "//" + window.location.host + "/observations/editer/" + returnIdOfSelectedCheckbox();
                 }
             });
             $deleteButton.click(function (e) {
                 e.preventDefault();
                 var checkboxSelected = returnIdOfSelectedCheckbox();
                 if(checkboxSelected) {
-                    confirm("Êtes vous supprimer cette élément ?");
-                    $('form#'+returnIdOfSelectedCheckbox()).submit();
+                   if( confirm("Êtes vous supprimer cette élément ?") == true){
+                       $('form#'+returnIdOfSelectedCheckbox()).submit();
+                   }
                 }
             });
         }
