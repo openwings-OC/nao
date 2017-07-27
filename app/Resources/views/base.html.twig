@@ -24,11 +24,11 @@
     <div class="header">
         <img class="hide-for-small-only" src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" style="
     width: 100%;"/>
-        <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="medium">
+        <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="large">
             <button class="menu-icon" type="button" data-toggle></button>
         </div>
         <div data-sticky-container>
-            <div class="menutest sticky" data-sticky id="menutest" data-sticky-on="medium">
+            <div class="menutest sticky" data-sticky id="menutest" data-sticky-on="large">
                 <div class="logo-menu">
                     <a href="{{ path('homepage') }}">
                         <img height="250" width="250" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
@@ -36,7 +36,7 @@
                 </div>
                 <div class="top-bar" id="nao-menu">
                     <div class="top-bar-right">
-                        <ul class="menu vertical medium-horizontal dropdown" data-responsive-menu="accordion medium-dropdown">
+                        <ul class="menu vertical medium-horizontal dropdown" data-responsive-menu="accordion large-dropdown">
                             <li class="naoMenuItem blueMenuItem has-submenu menu-left">
                                 <a href="#">NOS AMIS LES OISEAUX</a>
                                 <ul class="vertical menu" >
@@ -76,7 +76,7 @@
                             </li>
                             <li class="naoMenuItem orangeMenuItem" id="profile">
                                 <a href="#" id="menu-utilisateur"><img height="20" width="20" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
-                                <ul class="menu vertical">
+                                <ul class="menu vertical text-center">
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                         {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
                                         <li class="orangeMenuItem"><a href="{{ path('fos_user_profile_show') }}" class="button expanded">MON PROFIL</a></li>
