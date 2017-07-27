@@ -154,7 +154,7 @@ class ObservationsController extends Controller
     public function observationMap(Request $request){
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
 
-        //$list = $em->findLastObservations(50);
+       $list = $this->getDoctrine()->getRepository('AppBundle:Observation')->findLastObservations(4);
         if($request->isXmlHttpRequest()){
             $specyId = (int)$request->get('bird');
             $req = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specyId);
@@ -163,15 +163,14 @@ class ObservationsController extends Controller
             foreach($req as $bird){
                 $list[] = [$bird->getLatitude(), $bird->getLongitude(), $bird->getId()];
             }
-//            return new JsonResponse(array('list' => $list));
             $response = new Response();
             $response->setContent(json_encode(
                 array('list' => $list)
             ),
                 array('Access-Control-Allow-Origin' => '*', 'Content-Type' => 'application/json')
             );
-
             return $response;
+
         }
         $query = $em->createQueryBuilder('s')
             ->orderBy('s.nomVern', 'ASC')
@@ -188,7 +187,7 @@ class ObservationsController extends Controller
         $form = $this->createForm(ObservationsExistType::class);
         return $this->render(':pages:observation_map.html.twig', array(
             'form' => $form->createView(),
-            //'list' => $list,
+//            'list' => $list,
             'speciesWithObservations' => $speciesWithObservations
         ));
     }

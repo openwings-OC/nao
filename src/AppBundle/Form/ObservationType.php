@@ -28,7 +28,9 @@ class ObservationType extends AbstractType
             ->add('latitude', TextType::class)
             ->add('longitude', TextType::class)
             ->add('image', TextType::class)
-            ->add('comment', TextareaType::class)
+            ->add('comment', TextareaType::class, array(
+                'label' => 'Commentaires'
+            ))
             ->add('specy', EntityType::class, array(
                 'label' => 'Choisir l\'espèce observée',
                 'class' => 'AppBundle:Taxref',
@@ -44,7 +46,7 @@ class ObservationType extends AbstractType
                 'required' => false
             ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Envoyer'
+                'label' => 'ENVOYER'
             ));
     }
 

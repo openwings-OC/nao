@@ -6,11 +6,12 @@
     <div class="text-center callout ccf">
         <h1>CARTE DES OBSERVATIONS</h1>
     </div>
-    <div class="row" id="recherche_carte">
+    <div class="row large-6" id="recherche_carte">
         <div class="large-12 colums">
         <h3>Sélectionnez l'espèce recherchée</h3>
 
         <select id="appbundle_observation_specy" name="appbundle_observation[specy]" class="js-example-basic-single observationMap" data-url="{{ path('app_observation_map') }}">
+            <option value="" disabled selected>Cliquez pour rechercher ou sélectionner</option>
             {% for specy in speciesWithObservations %}
                 <option value="{{ specy.cdNom }}">{{ specy.nomVern }}</option>
             {% endfor %}
@@ -18,9 +19,13 @@
     </div>
     </div>
     <div class="large-6 row">
-        <div id="map">
-
+        <h3>Zones où l'espèce a été aperçue</h3>
+        <div id="map" style="margin-bottom: 100px;">
             {{ include(':modules:map.html.twig') }}
         </div>
     </div>
+
+    {% if list is defined %}
+        salut
+    {% endif %}
 {% endblock %}
