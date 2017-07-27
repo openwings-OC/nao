@@ -1,5 +1,4 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{{ dump(form) }}
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr':{ 'novalidate': 'novalidate', 'data-abide': null, 'id': 'registerform'}}) }}
         <div class="columns large-12">
             <label class="secondary" for="lastname">IDENTITÉ</label>
