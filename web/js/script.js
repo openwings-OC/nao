@@ -39,7 +39,8 @@ $('#search-home').autocomplete({
         });
     },
     select: function(event, ui) {
-        $('#form-home').attr('action', 'espece/' + ui.item.id);
+        $('#form-home').attr('action', '/espece/' + ui.item.id);
+        $('#form-home').attr('action', $('#search-home').data('target') + 'espece/' + ui.item.id);
         $('#form-home').submit();
     }
 });
