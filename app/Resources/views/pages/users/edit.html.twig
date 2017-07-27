@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>Promouvoir un utilisateur</h1>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+                <div class="large-12 columns">
+                    {{ form_label(form.role) }}
+                    {{ form_widget(form.role) }}
+                    {{ form_errors(form.role) }}
+                </div>
+                {{ form_rest(form) }}
+            <div class="columns large-12 text-center">
+                <button class="button third" type="submit">{{ 'VALIDER' }}</button>
+            </div>
+    </div>
+{% endblock %}

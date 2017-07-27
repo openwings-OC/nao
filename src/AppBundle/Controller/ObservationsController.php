@@ -13,6 +13,7 @@ use AppBundle\Entity\Taxref;
 use AppBundle\Form\ObservationDeleteFormType;
 use AppBundle\Form\ObservationsExistType;
 use AppBundle\Form\ObservationType;
+use AppBundle\Form\ObservationEditType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ObservationsController extends Controller
 {
@@ -29,7 +31,27 @@ class ObservationsController extends Controller
      * @route("/observations", name="app_indexobservation")
      */
     public function indexAction(Request $request){
-        return $this->render('pages/observations/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $dql = "SELECT a FROM AppBundle:Observation a";
+        $qb = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            20
+        );
+        $observations = $pagination->getItems();
+        $formsArray = [];
+        foreach($observations as $observation){
+            $form = $this->createForm(ObservationDeleteFormType::class, $observation);
+            $formsArray[] = $form->createView();
+        }
+        $pagination->setTemplate('modules:pagination.html.twig');
+        return $this->render('pages/observations/index.html.twig', array(
+            'pagination' => $pagination,
+            'formsArray' => $formsArray
+        ));
     }
 
     /**
@@ -52,14 +74,25 @@ class ObservationsController extends Controller
      * @route("mesobservations", name="app_myobservations")
      */
     public function myObservationsAction(Request $request){
-        $userObservations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findByUser($this->getUser());
+        $em = $this->getDoctrine()->getManager();
+        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId();
+        $qb = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            20
+        );
+        $userObservations = $pagination->getItems();
         $formsArray = [];
         foreach($userObservations as $observation){
             $form = $this->createForm(ObservationDeleteFormType::class, $observation);
             $formsArray[] = $form->createView();
         }
+        $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/observations/myobservations.html.twig', array(
-            'userObservations' => $userObservations,
+            'pagination' => $pagination,
             'formsArray' => $formsArray
         ));
     }
@@ -78,7 +111,7 @@ class ObservationsController extends Controller
             $observation->setUser($this->getUser());
             $this->container->get('app.observation_creation')->persistObservation($observation);
 
-            return $this->redirectToRoute('app_observation', array('id' => $observation->getId()));
+            return $this->redirectToRoute('app_myobservations');
         }
         return $this->render(':crud:add.html.twig', array(
             'form' => $form->createView(),
@@ -93,12 +126,13 @@ class ObservationsController extends Controller
         $roles = $this->getUser()->getRoles();
 
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find($id);
-        $form = $this->createForm(ObservationType::class, $observation);
         $em = $this->getDoctrine()->getManager();
+        if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() == "pending"|"review"){
+            $form = $this->createForm(ObservationType::class, $observation);
 
-        if(in_array("ROLE_USER", $roles) && $observation->getState() == "pending"|"review"){
             if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
-                $dir = $this->container->get('kernel')->getProjectDir() . '\web\img';
+
+                $dir = $this->container->get('kernel')->getProjectDir() . '/web/img';
                 $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
                 $date = $observation->getCreatedAt();
                 $observation->setState('pending');
@@ -114,8 +148,18 @@ class ObservationsController extends Controller
                 'form'          => $form->createView()
             ));
         }elseif (in_array("ROLE_NATURALISTE", $roles)){
-            return $this->render('pages/observations/edit.html.twig', array(
-                'observation' => $observation
+            $form = $this->createForm(ObservationEditType::class, $observation);
+            if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
+                $observation = $form->getData();
+                $observation->setUpdatedAt(new \DateTime());
+                $observation->setSpecy($observation->getSpecy());
+                $em->persist($observation);
+                $em->flush();
+                return $this->redirectToRoute('app_indexobservation', array('id' => $observation->getId()));
+            }
+            return $this->render('pages/observations/editNaturaliste.html.twig', array(
+                'observation' => $observation,
+                'form'          => $form->createView()
             ));
         }else{
             $request->getSession()
