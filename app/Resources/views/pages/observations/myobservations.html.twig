@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}
+    {{ parent() }}Mes observations
+{% endblock %}
 {% block body %}
 <div class="row">
     <button class="button" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}">Voir</button>
@@ -27,7 +29,7 @@
                     {{ form_end(formsArray[loop.index0]) }}
                     <input data-js="checkbox" type="checkbox" id="{{ observation.id }}">
                 </td>
-                <td>{{ observation.createdAt|date("d/m/Y H:m") }}</td>
+                <td>{{ observation.createdAt|date("d/m/Y H:i") }}</td>
                 <td>{{ observation.specy }}</td>
                 <td>{% if observation.state == "pending" %}En cours de validation{% elseif observation.state == "review" %}À revoir{% else %}Validé{% endif %}</td>
 
@@ -39,6 +41,7 @@
         <p>Vous n'avez pas encore d'observation</p>
     {% endif %}
 </div>
+
 {% endblock %}
 
 {% block javascripts %}

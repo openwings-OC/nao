@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}
+    {{ parent() }}Carte des observations
+{% endblock %}
 {% block body %}
     <div class="text-center callout ccf">
         <h1>CARTE DES OBSERVATIONS</h1>
@@ -8,7 +10,7 @@
         <div class="large-12 colums">
         <h3>Sélectionnez l'espèce recherchée</h3>
 
-        <select id="appbundle_observation_specy" name="appbundle_observation[specy]" class="js-example-basic-single observationMap">
+        <select id="appbundle_observation_specy" name="appbundle_observation[specy]" class="js-example-basic-single observationMap" data-url="{{ path('app_observation_map') }}">
             {% for specy in speciesWithObservations %}
                 <option value="{{ specy.cdNom }}">{{ specy.nomVern }}</option>
             {% endfor %}

@@ -4,18 +4,20 @@
         <meta charset="UTF-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block meta %} {% endblock %}
+        <title>{% block title %}NAO | {% endblock %}</title>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
         {% block stylesheets %}
             {% stylesheets 'css/app.css'
-            filter='cssrewrite' output='css/compiled/app.css' %}
+            filter='cssrewrite' output='css/app.css' %}
+            {#css/compiled/app.css#}
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-
+        {% block scripts %}{% endblock %}
     </head>
     <body>
 
@@ -26,7 +28,7 @@
             <button class="menu-icon" type="button" data-toggle></button>
         </div>
         <div data-sticky-container>
-            <div class="menutest sticky" data-sticky id="menutest" data-sticky-on="large">
+            <div class="menutest sticky" data-sticky id="menutest" data-sticky-on="medium">
                 <div class="logo-menu">
                     <a href="{{ path('homepage') }}">
                         <img height="250" width="250" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
@@ -42,7 +44,7 @@
                                     <li><a href="{{ path('app_adherer') }}">Adhérer à NAO</a></li>
                                     <li><a href="{{ path('app_mission') }}">Mission</a></li>
                                     <li><a href="{{ path('app_equipe') }}">Équipe</a></li>
-                                    <li><a href="#">Nous contacter</a></li>
+                                    <li><a href="{{ path('app_contact') }}">Nous contacter</a></li>
                                 </ul>
                             </li>
                             <li class="naoMenuItem greenMenuItem menu-left" >
@@ -62,7 +64,7 @@
                                         <div class="large-12 columns">
                                             <div class="row collapse">
                                                 <div class="small-10 columns">
-                                                    <input type="text"  name="search" placeholder="RECHERCHE D'ESPÈCE" class="search" id="search-home" >
+                                                    <input type="text"  name="search" placeholder="RECHERCHE D'ESPÈCE" class="search" id="search-home" data-url="{{ path('app_autocomplete') }}" >
                                                 </div>
                                                 <div class="small-2 columns">
                                                     <button type="submit" href="#" class="button postfix secondary button-search"><i class="fa fa-search fa-2x"></i></button>
@@ -123,6 +125,7 @@
             <script src="{{ asset('js/app.js') }}"></script>
             <script src="{{ asset('js/script.js') }}"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+            <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us15.list-manage.com","uuid":"e9d7b9c5a9c6eb8316fda00f1","lid":"104e5167c7"}) })</script>
         {% endblock %}
 
     </body>
@@ -139,7 +142,7 @@
                 <a href="https://www.mnhn.fr"><img height="150" width="150" src="{{ asset('images/png/LogoMNHN.png') }}" alt="Muséum national d'Histoire naturelle" /></a>
             </div>
             <div class="small-6 columns text-center linksFooter">
-                <li><a href="">Contact</a></li>
+                <li><a href="{{ path('app_contact') }}">Contact</a></li>
                 <li><a href="">Conditions générales d'utilisation</a></li>
                 <li><a href="">Crédits</a></li>
                 <li><a href="">Mentions légales</a></li>

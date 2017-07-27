@@ -1,8 +1,9 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}
+    {{ parent() }}Éditer une observation
+{% endblock %}
 {% block body %}
     <div class="row">
-        <h1>Éditer une observation</h1>
         <div class="large-12 row">
             <p class="panel callout radius text-center alert-box alert round">Attention, toute observation doit être validée par un naturaliste pour être pûbliée</p>
         </div>

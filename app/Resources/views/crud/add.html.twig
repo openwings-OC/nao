@@ -1,20 +1,26 @@
 {% extends '::base.html.twig' %}
-
+{% block title %}
+    {{ parent() }}Ajouter une observation
+{% endblock %}
 {% block body %}
     <div class="row">
-        <h1>Ajouter une observation</h1>
         <div class="large-12 row">
-            {% if is_granted("ROLE_AMATEUR")%} <p class="panel callout radius text-center alert-box alert round">Attention, toute observation doit être validée par un naturaliste pour être pûbliée</p>{% endif %}
+            {% if is_granted("ROLE_AMATEUR") %} <p class="panel callout radius text-center alert-box alert round">Attention, toute observation doit etre validée par un naturaliste pour être pûbliée</p>{% endif %}
+        </div>
+        <div id="form-errors">
+            {{ form_errors(form) }}
         </div>
         <div class="large-12 row">
             <p id="infoposition"></p>
             {{ form_start(form) }}
-            {{ form_errors(form) }}
+
             <div class="large-2 columns">
+                <div class="large-12">
+                    {{ form_widget(form.image) }}
+                </div>
                 {{ form_widget(form.image) }}
-                {{ form_widget(form.image) }}
-                {{ form_errors(form.image) }}
             </div>
+
             <div class="large-7 columns">
                 <div class="large-12 columns">
                     {{ form_label(form.specy) }}
@@ -40,7 +46,6 @@
                 <div class="large-12 columns">
                     {{ form_label(form.createdAt) }}
                     {{ form_widget(form.createdAt) }}
-                    {#{{ form_widget(form.createdAt) }}#}
                     {{ form_errors(form.createdAt) }}
                 </div>
                 <div class="large-12 columns">
@@ -51,7 +56,7 @@
             </div>
             <div class="large-2 columns">
                 {{ form_widget(form.save, {'attr' : {'class' : 'hollow button large-12' }}) }}
-                <a href="#" class="hollow button secondary large-12">Annuler</a>
+                <a href="{{ path('app_myobservations') }}" class="hollow button secondary large-12">Annuler</a>
             </div>
             {{ form_rest(form) }}
         </div>
@@ -62,7 +67,7 @@
             {% include "modules/mapAdd.html.twig" %}
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         //Geolocalisation
 
         $('#changecible').click(function() {
@@ -84,4 +89,8 @@
             });
         }
     </script>
+
 {% endblock %}
+
+
+
