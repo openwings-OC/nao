@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
-{% block title %}Accueil{% endblock %}
+{% block title %}
+    {{ parent() }}Accueil
+{% endblock %}
+{% block meta %}<meta name="description" content="Nos Amis les Oiseaux association à but non lucratif pour la protection des oiseaux et de leur habitat !"/>{% endblock %}
 {% block body %}
-
     <div class="text-center callout ccf">
             <h1>COMMENT ÇA FONCTIONNE ?</h1>
     </div>
@@ -81,13 +83,13 @@
                 </div>
             </div>
             <div class="large-4 columns greenBackground text-center">
-                <a href="/informations" class="button secondary expanded"><img height="50" width="50" src="{{ asset('images/png/Info.png') }}" alt="NAO" />
+                <a href="http://eepurl.com/cQc9PD" target="_blank" class="button secondary expanded"><img height="50" width="50" src="{{ asset('images/png/Info.png') }}" alt="NAO" />
                     <p>
                         JE M'INFORME
                     </p></a>
             </div>
             <div class="large-4 columns text-center">
-                <a href="{{ path('app_addObservation') }}" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/icone_don.png') }}" alt="NAO" />
+                <a href="https://www.donnerenligne.fr/nos-amis-les-oiseaux/faire-un-don" target="_blank" class="button third expanded"><img height="50" width="50" src="{{ asset('images/png/icone_don.png') }}" alt="NAO" />
                     <p>
                         JE FAIS UN DON A L'ASSOCIATION
                     </p></a>

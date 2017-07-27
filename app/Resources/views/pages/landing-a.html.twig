@@ -1,8 +1,21 @@
 
 {% extends '@FOSUser/layout.html.twig' %}
-
+{% block title %}
+    {{ parent() }}Participation
+{% endblock %}
+{% block meta %}<meta name="description" content="Participez au projet participatif de recensement des oiseaux de France ! Protègez la biodiversité !"/>{% endblock %}
+{% block scripts %}<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-102513371-1', 'auto');
+    ga('send', 'pageview');
+</script>{% endblock %}
 {% block body %}
-<body class="body-landing-b">
+
+
+<body class="body-landing-a">
     <div id="header-landing">
         <div class="logo-slogan columns">
             <div class="logo-landing medium-3 small-5 columns">
@@ -23,53 +36,6 @@
                 <p>Un programme de science participative pour la préservation des oiseaux et de la biodiversité</p>
             </div>
         </div>
-        {#<div class="row medium-5 medium-offset-0 grid-margin-x">
-            <form action="" id="form-landing">
-                <div class="columns large-12 small-8">
-                    <label for="prenom">IDENTITÉ</label>
-                </div>
-                <div class="columns large-6 small-8">
-                    <input type="text" name="prenom" placeholder="PRÉNOM">
-                </div>
-                <div class="large-6 small-8 columns">
-                    <input type="text" name="nom" placeholder="NOM">
-                </div>
-
-                <div class="columns large-12 small-8">
-                    <label for="prenom">EMAIL</label>
-                </div>
-                <div class="columns large-6 small-8">
-                    <input type="text" name="email1" placeholder="E-MAIL">
-                </div>
-                <div class="large-6 small-8 columns">
-                    <input type="text" name="email2" placeholder="CONFIRMER L'EMAIL">
-                </div>
-
-                    <div class="columns large-12 small-8">
-                        <label for="prenom">COMPTE UTILISATEUR</label>
-                    </div>
-                    <div class="columns large-12 small-8">
-                         <input type="text" name="identifiant" placeholder="NOM D'UTILISATEUR">
-                    </div>
-
-                    <div class="large-6 small-8 columns">
-                        <input type="password" name="password1" placeholder="MOT DE PASSE">
-                    </div>
-                    <div class="large-6 small-8 columns">
-                        <input type="password" name="password2" placeholder="CONFIRMER LE MOT DE PASSE">
-                    </div>
-                <div class="columns large-6 small-8 text-center">
-                    <button type="submit" class="button third large-12">JE M'INSCRIS</button>
-                    <span>Vous avez déja un compte ?</span>
-                    <a  href="">Connectez-vous</a>
-                </div>
-                <div class="columns large-6 inscription-reseaux">
-                    <button class="button large-12"><i class="fa fa-google-plus"></i>S'INSCRIRE VIA GOOGLE+</button>
-                    <button class="button large-12"><i class="fa fa-facebook"></i>S'INSCRIRE VIA FACEBOOK</button>
-                </div>
-
-            </form>
-        </div>#}
         {% block fos_user_content %}
         <div class="row medium-5 medium-offset-0 grid-margin-x">
             {% include ":modules:register_content_landing.html.twig" %}
@@ -85,6 +51,6 @@
         <h3 class="small-8 row">CHAQUE OBSERVATION EST ANALYSÉE PAR DES PROFESSIONNELLS</h3>
         <a href="http://www.mnhn.fr/fr" target="_blank"><img class="medium-2 small-5" src="{{ asset('images/png/logomnhn.png') }}" alt=""></a>
     </footer>
-
+</body>
     {% endblock %}
 

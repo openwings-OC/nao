@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+{{ parent() }}Erreur {{ status_code }}
+{% endblock %}
+{% block body %}
+
+    <div class="text-center callout ccf">
+        <h1>ERREUR</h1>
+    </div>
+    <div class="row">
+        <div class="columns medium-6">
+            <img src="{{ asset('images/jpg/Failed_araignée_desk.jpg') }}" alt="Erreur">
+        </div>
+        <div class="columns medium-6 text-center erreur-desc">
+            <h3>ERREUR {{ status_code }}</h3>
+            {% if status_text == "Not Found" %}
+                <p>La page n'existe pas ou plus</p>
+            {% elseif status_text == "Internal Error" %}
+                <p>Erreur interne au serveru ou serveur saturé</p>
+             {% endif %}
+
+            <a href="{{ path('homepage') }}" class="button third">RETOUR À L'ACCUEIL </a>
+        </div>
+    </div>
+
+{% endblock %}

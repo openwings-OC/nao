@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+{% block title %}
+    {{ parent() }}Éditer une observation
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <h1>Éditer une observation</h1>
+        <div class="large-12 row">
+            <p id="infoposition"></p>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <div class="large-6 columns">
+                <div class="large-12 columns">
+                    {{ form_label(form.specy) }}
+                    {{ form_widget(form.specy, {'attr':{'class': 'mapAdd'}}) }}
+                    {{ form_errors(form.specy) }}
+
+                </div>
+
+                <div class="large-5 columns">
+                    <label for="">Latitude</label>
+                    {{ observation.latitude }}
+                </div>
+                <div class="large-5 columns">
+                    <label for="">Longitude</label>
+                    {{ observation.longitude }}
+                </div>
+                <br>
+                <div class="large-12 columns">
+                    <label for="">Date et heure de l'observation</label>
+                    {{ observation.createdAt|date('d/m/Y H:m') }}
+                </div>
+                <div class="large-12 columns">
+                    {{ form_label(form.comment) }}
+                    {{ form_widget(form.comment) }}
+                    {{ form_errors(form.comment) }}
+                </div>
+                <div class="large-12 columns">
+                    {{ form_label(form.observationComment) }}
+                    {{ form_widget(form.observationComment) }}
+                    {{ form_errors(form.observationComment) }}
+                </div>
+                <div class="large-12 columns">
+                    {{ form_label(form.state) }}
+                    {{ form_widget(form.state) }}
+                    {{ form_errors(form.state) }}
+                </div>
+            </div>
+            <div class="large-2 columns">
+                {{ form_widget(form.save, {'attr' : {'class' : 'hollow button large-12' }}) }}
+                <a href="#" class="hollow button secondary large-12">Annuler</a>
+            </div>
+            {{ form_rest(form) }}
+        </div>
+        <div class="large-12 row">
+            <p class="panel callout radius text-center alert-box warning round">Déplacez le curseur pour récupérer automatiquement les coordonnées</p>
+        </div>
+        <div class="row large-12">
+            {% include "modules/mapAdd.html.twig" %}
+        </div>
+    </div>
+{% endblock %}

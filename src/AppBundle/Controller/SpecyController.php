@@ -25,7 +25,7 @@ class SpecyController extends Controller
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
         if ($request->isMethod('POST')) {
-            $bird = $em->findBirdByLetter($_POST['search']/*, $_GET['page']*/);
+            $bird = $em->findBirdByLetter($_POST['search']);
         }
         else {
             $bird = $em->findAll();
@@ -34,7 +34,7 @@ class SpecyController extends Controller
         $pagination = $paginator->paginate(
             $bird,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', Taxref::PAGE_NUMBER)
+            Taxref::PAGE_NUMBER
         );
         $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/search.html.twig', array(

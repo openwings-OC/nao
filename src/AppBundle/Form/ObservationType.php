@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class ObservationType extends AbstractType
 {
     /**
@@ -28,7 +29,9 @@ class ObservationType extends AbstractType
             ->add('latitude', TextType::class)
             ->add('longitude', TextType::class)
             ->add('image', TextType::class)
-            ->add('comment', TextareaType::class)
+            ->add('comment', TextareaType::class, array(
+                'label' => 'Commentaire'
+            ))
             ->add('specy', EntityType::class, array(
                 'label' => 'Choisir l\'espèce observée',
                 'class' => 'AppBundle:Taxref',
@@ -44,7 +47,7 @@ class ObservationType extends AbstractType
                 'required' => false
             ))
             ->add('save', SubmitType::class, array(
-                'label' => 'Envoyer'
+                'label' => 'ENVOYER'
             ));
     }
 

@@ -24,7 +24,6 @@ class ObservationsExistType extends AbstractType
                         ->orderBy('s.nomVern', 'ASC')
                         ->where('s.cdTaxsup > :taxsup')
                         ->setParameter('taxsup', 0);
-                    dump($t);
                     return $t;
                 },
             ));
