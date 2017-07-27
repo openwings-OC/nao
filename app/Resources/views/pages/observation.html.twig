@@ -21,7 +21,10 @@
             {% else %}
                 <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
              {% endif %}
+            <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
+            <p>Observée par : {{ observation.user.username }}</p>
             <p>Commentaire : {{ observation.comment }}</p>
+            <p>Observé le {{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
         </div>
         <div class="large-5 columns">
             {% include ':modules:map.html.twig' %}

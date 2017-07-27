@@ -4,7 +4,7 @@ fos_user_registration_register:
     defaults: { _controller: FOSUserBundle:Registration:register}
 
 fos_user_registration_register_landing:
-    path: /participation-a
+    path: inscription/participation-a
     methods: [GET, POST]
     defaults: { _controller: FOSUserBundle:Registration:register}
 
@@ -12,10 +12,12 @@ fos_user_registration_check_email:
     path: /verificationemail
     methods: [GET]
     defaults: { _controller: FOSUserBundle:Registration:checkEmail }
+
 fos_user_registration_confirm:
     path: /confirme/{token}
     methods: [GET]
     defaults: { _controller: FOSUserBundle:Registration:confirm }
+
 fos_user_registration_confirmed:
     path: /confirmer
     methods: [GET]

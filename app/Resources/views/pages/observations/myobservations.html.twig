@@ -4,8 +4,8 @@
 {% endblock %}
 {% block body %}
 <div class="row">
-    <button class="button" id="see">Voir</button>
-    <button class="button success" id="edit">Éditer</button>
+    <button class="button" id="see" data-url="{{ path('homepage') }}">Voir</button>
+    <button class="button success" id="edit" data-url="{{ path('homepage') }}">Éditer</button>
     <button class="button alert" id="delete">Supprimer</button>
     <a class="button third" href="{{ path('app_addObservation') }}">Ajouter une observation</a>
     <table>
@@ -26,7 +26,7 @@
                     {{ form_end(formsArray[loop.index0]) }}
                     <input data-js="checkbox" type="checkbox" id="{{ observation.id }}">
                 </td>
-                <td>{{ observation.createdAt|date("d/m/Y H:m") }}</td>
+                <td>{{ observation.createdAt|date("d/m/Y H:i") }}</td>
                 <td>{{ observation.specy }}</td>
                 <td>{% if observation.state == "pending" %}En cours de validation{% elseif observation.state == "review" %}À revoir{% else %}Validé{% endif %}</td>
 
@@ -45,6 +45,7 @@
                 $deleteButton = $('#delete'),
                 $checkboxes = $("[data-js='checkbox']");
             $checkboxes.change(function () {
+                console.log($(this).data('url'));
                 $checkboxes.not(this).prop('checked', false);
             });
             var returnIdOfSelectedCheckbox = function () {
@@ -61,7 +62,8 @@
                 e.preventDefault();
                 var checkboxSelected = returnIdOfSelectedCheckbox();
                 if(checkboxSelected) {
-                    document.location.href = "http://" + window.location.host + "/observations/voir/" + returnIdOfSelectedCheckbox();
+                    document.location.href = $('#see').data('url') + 'observations/voir/' + returnIdOfSelectedCheckbox();
+                    //document.location.href = "http://" + window.location.host + "/observations/voir/" + returnIdOfSelectedCheckbox();
 
                 }
             });
@@ -69,7 +71,8 @@
                 e.preventDefault();
                 var checkboxSelected = returnIdOfSelectedCheckbox();
                 if(checkboxSelected) {
-                    document.location.href = "http://" + window.location.host + "/observations/editer/" + returnIdOfSelectedCheckbox();
+                    document.location.href = $('#edit').data('url') + 'observations/editer/' + returnIdOfSelectedCheckbox();
+                    //document.location.href = "http://" + window.location.host + "/observations/editer/" + returnIdOfSelectedCheckbox();
                 }
             });
             $deleteButton.click(function (e) {

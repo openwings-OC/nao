@@ -5,3 +5,5 @@ services:
     app.envoi_email:
             class: AppBundle\Service\SendEmail
             arguments: [ "@mailer", "@templating", "@service_container", "@request_stack" ]
+    app.random_landing:
+                class: AppBundle\Service\randomLanding
