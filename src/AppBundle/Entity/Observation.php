@@ -94,7 +94,7 @@ class Observation
     private $comment;
     /**
      * @var string
-     * @ORM\Column(name="observation_comment", type="text")
+     * @ORM\Column(name="observation_comment", type="text", nullable=true)
      */
     private $observationComment;
 

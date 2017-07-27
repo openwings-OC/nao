@@ -47,7 +47,7 @@ class ObservationsController extends Controller
             $formsArray[] = $form->createView();
         }
         $pagination->setTemplate('modules:pagination.html.twig');
-        return $this->render('pages/observations/myobservations.html.twig', array(
+        return $this->render('pages/observations/index.html.twig', array(
             'pagination' => $pagination,
             'formsArray' => $formsArray
         ));

@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>Tous les utilisateurs</h1>
+        <button class="button success" id="edit"  data-url="{{ path('app_edituser', {'id': '__id__'}) }}">Éditer</button>
+        <button class="button alert" id="delete">Supprimer</button>
+        <div class="text-center">
+            {{ knp_pagination_render(pagination, ':modules:pagination.html.twig') }}
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Selection</th>
+                <th>Inscris le</th>
+                <th>Dernière connexion</th>
+                <th>Email</th>
+                <th>Nom d'utilisateur</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Nombre d'oservations</th>
+                <th>Rôle</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in pagination %}
+                <tr>
+                    <td>
+                        {{ form_start(formsArray[loop.index0], {'action': path('app_deleteuser', {'id': user.id}), 'method': 'DELETE', 'attr': {'id': user.id}}) }}
+                        {{ form_widget(formsArray[loop.index0]) }}
+                        {{ form_end(formsArray[loop.index0]) }}
+                        <input data-js="checkbox" type="checkbox" id="{{ user.id }}">
+                    </td>
+                    <td>{{ user.createdAt|date("d/m/Y") }}</td>
+                    <td>{{ user.lastLogin|date("d/m/Y H:m") }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.observations|length }}</td>
+                    <td>
+                        {% if 'ROLE_ADMIN' in user.roles %}
+                            Administrateur
+                        {% elseif 'ROLE_NATURALISTE' in user.roles %}
+                            Naturaliste
+                        {% else %}
+                            Amateur
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/editModule.js') }}"></script>
+    {% endblock %}
+{% endblock %}

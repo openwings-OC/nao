@@ -7,12 +7,12 @@
  */
 
 namespace AppBundle\Form;
+use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Entity\Observation;
 
-class ObservationDeleteFormType extends AbstractType
+class UserDeleteFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,7 +22,7 @@ class ObservationDeleteFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Observation::class,
+            'data_class' => User::class,
         ));
     }
 

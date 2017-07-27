@@ -82,7 +82,10 @@ class User extends BaseUser
      */
     protected $plainPassword;
 
-
+    /**
+     * @Assert\NotBlank(message="Ce champs est vide",groups={"editUser"})
+     */
+    protected $roles;
 
     /**
      * User constructor.
@@ -148,5 +151,33 @@ class User extends BaseUser
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getObservations()
+    {
+        return $this->observations;
+    }
+
+    /**
+     * @param ArrayCollection $observations
+     */
+    public function setObservations($observations)
+    {
+        $this->observations = $observations;
+    }
+    public function getRole(){
+        if(in_array('ROLE_SUPER_ADMIN', $this->getRoles())||in_array('ROLE_ADMIN', $this->getRoles())){
+            return 'ROLE_ADMIN';
+        }elseif (in_array('ROLE_NATURALISTE', $this->getRoles())){
+            return 'ROLE_NATURALISTE';
+        }else{
+            return 'ROLE_USER';
+        }
+    }
+    public function setRole($role){
+        $this->roles = array($role);
     }
 }

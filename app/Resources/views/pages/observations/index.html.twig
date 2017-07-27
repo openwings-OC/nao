@@ -2,8 +2,9 @@
 
 {% block body %}
     <div class="row">
-        <button class="button" id="see">Voir</button>
-        <button class="button success" id="edit">Éditer</button>
+        <h1>Validation des observations</h1>
+        <button class="button" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}">Voir</button>
+        <button class="button success" id="edit"  data-url="{{ path('app_editObservation', {'id': '__id__'}) }}">Éditer</button>
         <button class="button alert" id="delete">Supprimer</button>
         <div class="text-center">
             {{ knp_pagination_render(pagination, ':modules:pagination.html.twig') }}
@@ -34,51 +35,13 @@
             {% endfor %}
             </tbody>
         </table>
-        {% if userObservations|length == 0 %}
+        {% if pagination|length == 0 %}
             <p>Vous n'avez pas encore d'observation</p>
         {% endif %}
     </div>
-    <script>
-        var editModule = function(){
-            var $seeButton = $('#see'),
-                $editButton = $('#edit'),
-                $deleteButton = $('#delete'),
-                $checkboxes = $("[data-js='checkbox']");
-            $checkboxes.change(function () {
-                $checkboxes.not(this).prop('checked', false);
-            });
-            var returnIdOfSelectedCheckbox = function () {
-                var checkboxId = false;
-                for(var i = 0; i < $checkboxes.length; i++){
-                    if ($checkboxes[i].checked){
-                        checkboxId = $checkboxes[i].id;
-                        break;
-                    }
-                }
-                return checkboxId;
-            };
-            $seeButton.click(function (e) {
-                e.preventDefault();
-                var checkboxSelected = returnIdOfSelectedCheckbox();
-                if(checkboxSelected) {
-                    document.location.href = "http://" + window.location.host + "/observations/voir/" + returnIdOfSelectedCheckbox();
-                }
-            });
-            $editButton.click(function (e) {
-                e.preventDefault();
-                var checkboxSelected = returnIdOfSelectedCheckbox();
-                if(checkboxSelected) {
-                    document.location.href = "http://" + window.location.host + "/observations/editer/" + returnIdOfSelectedCheckbox();
-                }
-            });
-            $deleteButton.click(function (e) {
-                e.preventDefault();
-                var checkboxSelected = returnIdOfSelectedCheckbox();
-                if(checkboxSelected) {
-                    confirm("Êtes vous supprimer cette élément ?");
-                    $('form#'+returnIdOfSelectedCheckbox()).submit();
-                }
-            });
-        }
-    </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/editModule.js') }}"></script>
 {% endblock %}
