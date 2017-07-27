@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}
+    {{ parent() }}Guide du débutant
+{% endblock %}
+{% block meta %} <meta name="description" content="Nos amis les oiseaux le guide du débutant"/>{% endblock %}
 {% block body %}
-    <head>
-        <meta charset="utf-8" />
-        <meta name="description" content="Nos amis les oiseaux le guide du débutant"/>
-    </head>
     <div class="text-center callout ccf">
         <h1>GUIDE DU DÉBUTANT</h1>
     </div>
