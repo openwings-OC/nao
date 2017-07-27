@@ -92,6 +92,11 @@ class Observation
      * @ORM\Column(name="comment", type="text")
      */
     private $comment;
+    /**
+     * @var string
+     * @ORM\Column(name="observation_comment", type="text", nullable=true)
+     */
+    private $observationComment;
 
     /**
      * Get id
@@ -270,7 +275,29 @@ class Observation
     {
         return $this->comment;
     }
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Observation
+     */
+    public function setObservationComment($observationComment)
+    {
+        $this->observationComment = $observationComment;
 
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getObservationComment()
+    {
+        return $this->observationComment;
+    }
 
     public function setImage(Image $image = null)
     {

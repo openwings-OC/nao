@@ -5,16 +5,19 @@ namespace AppBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Entity\Observation;
 
 
-class ObservationType extends AbstractType
+class ObservationEditType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,16 +25,12 @@ class ObservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('createdAt', DateTimeType::class, array(
-                'label' => 'Date de l\'observation',
-                'data' => new \DateTime(),
-            ))
-            ->add('latitude', TextType::class)
-            ->add('longitude', TextType::class)
-            ->add('image', TextType::class)
             ->add('comment', TextareaType::class, array(
                 'label' => 'Commentaire'
             ))
+            ->add('observationComment', TextareaType::class, array(
+                'label' => 'Commentaire du naturaliste'
+                ))
             ->add('specy', EntityType::class, array(
                 'label' => 'Choisir l\'espèce observée',
                 'class' => 'AppBundle:Taxref',
@@ -43,8 +42,15 @@ class ObservationType extends AbstractType
                         ->setParameter('taxsup', 0);
                 },
             ))
-            ->add('image', ImageType::class, array(
-                'required' => false
+            ->add('state', ChoiceType::class, array(
+                'label' => 'Status',
+                'choices' => array(
+                    'Non validé' => Observation::STATUS_PENDING,
+                    'À revoir' => Observation::STATUS_REVIEW,
+                    'Validé' => Observation::STATUS_VALIDATE,
+                ),
+                'expanded' => true,
+                'multiple' => false
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Envoyer'

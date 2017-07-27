@@ -3,12 +3,14 @@
 namespace AppBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ObservationsExistType extends AbstractType
+
+class UserEditType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,16 +18,15 @@ class ObservationsExistType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('specy', EntityType::class, array(
-                'label' => 'Choisir l\'espèce observée',
-                'class' => 'AppBundle:Taxref',
-                'query_builder' => function( EntityRepository $er){
-                    $t = $er->createQueryBuilder('s')
-                        ->orderBy('s.nomVern', 'ASC')
-                        ->where('s.cdTaxsup > :taxsup')
-                        ->setParameter('taxsup', 0);
-                    return $t;
-                },
+            ->add('role', ChoiceType::class, array(
+                'label' => 'Promouvoir',
+                'choices' => array(
+                    'Amateur' => 'ROLE_USER',
+                    'Naturaliste' => 'ROLE_NATURALISTE',
+                    'Administrateur' => 'ROLE_ADMIN',
+                ),
+                'expanded' => true,
+                'multiple' => false
             ));
     }
 
@@ -35,7 +36,8 @@ class ObservationsExistType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Observation'
+            'validation_groups' => array('editUser'),
+            'data_class' => 'AppBundle\Entity\User'
         ));
     }
 
