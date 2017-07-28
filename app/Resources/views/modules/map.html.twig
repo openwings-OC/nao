@@ -6,17 +6,6 @@
 <script>
     function initMap() {
         {% if speciesWithObservations is defined %}
-            {#var species = [];#}
-            {#{% for specie in speciesWithObservations %}#}
-        {#var specie = {{ specie }}#}
-                {#species.push(specie)#}
-            {#{% endfor %}#}
-        {#console.log(species)#}
-            {#var uluru = [];#}
-        {#for (var i = 0; i < species.length; i++) {#}
-            {#uluru.push(data.list[i])#}
-        {#}#}
-        {#console.log(uluru)#}
         var uluru = [];
         {% elseif observation is defined %}
             var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };

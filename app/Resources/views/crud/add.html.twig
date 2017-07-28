@@ -3,9 +3,6 @@
     {{ parent() }}Ajouter une observation
 {% endblock %}
 {% block body %}
-    <div class="text-center callout ccf">
-        <h1 >AJOUTER UNE OBSERVATION</h1>
-    </div>
     <div class="row">
         <div id="form-errors">
             {{ form_errors(form) }}
@@ -75,7 +72,9 @@
     </div>
     <script type="text/javascript">
         //Geolocalisation
-
+        $(document).ready(function() {
+            $(".mapAdd").select2();
+        });
         $('#changecible').click(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {

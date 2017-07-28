@@ -1,11 +1,8 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Fiche d'observation
+    Fiche d'observation
 {% endblock %}
 {% block body %}
-    <div class="text-center callout ccf">
-        <h1>OBSERVATION</h1>
-    </div>
     <div class="row">
         <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
     </div>
@@ -22,7 +19,7 @@
                 <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
              {% endif %}
             <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
-            <p>Observée par : {{ observation.user.username }}</p>
+            <p>Observée par :{% if observation.user != null %} {{ observation.user.username }}{% else %}Inconnu{% endif %}</p>
             <p>Commentaire : {{ observation.comment }}</p>
             <p>Observé le {{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
         </div>
@@ -33,6 +30,4 @@
             {{ include(':modules:sidebar.html.twig') }}
         </div>
     </div>
-
-
 {% endblock %}

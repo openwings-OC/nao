@@ -11,6 +11,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -87,6 +88,7 @@ class User extends BaseUser
      */
     protected $roles;
 
+    protected $enabled;
     /**
      * User constructor.
      */
@@ -168,6 +170,7 @@ class User extends BaseUser
     {
         $this->observations = $observations;
     }
+
     public function getRole(){
         if(in_array('ROLE_SUPER_ADMIN', $this->getRoles())||in_array('ROLE_ADMIN', $this->getRoles())){
             return 'ROLE_ADMIN';
@@ -177,7 +180,17 @@ class User extends BaseUser
             return 'ROLE_USER';
         }
     }
+
     public function setRole($role){
         $this->roles = array($role);
+    }
+
+    public function getEnabled(){
+       return $this->enabled;
+    }
+
+    public function setEnabled($enabled){
+        $this->enabled = $enabled;
+        return $this;
     }
 }
