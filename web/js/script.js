@@ -294,5 +294,5 @@ $($selectBird).change(function() {
 })
 
 //Ajuste la largeur du moteur de recherche
-
-$('#ui-id-1').addClass('large-4');
+$('#ui-id-1').addClass('small-3');
+$('#ui-id-2').addClass('small-8');

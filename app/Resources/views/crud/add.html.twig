@@ -6,22 +6,30 @@
     <div class="text-center callout ccf">
         <h1 >AJOUTER UNE OBSERVATION</h1>
     </div>
+    {% block flash_messages %}
+        {% for message in app.session.flashbag.get('errors') %}
+            <div class="row small-8">
+                <div class="callout row flash-errors">
+                    <div><img width="30" src="{{ asset('images/png/echec.png') }}" alt=""></div><p>{{ message|trans }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endblock %}
     <div class="row">
         <div id="form-errors">
             {{ form_errors(form) }}
         </div>
         <div class="large-12 row" id="form-add-observation">
             <p id="infoposition"></p>
-            {{ form_start(form) }}
+            {{ form_start(form, { 'attr' : {'id' : 'form-add-observation-form'}}) }}
 
             <div class="large-3 columns">
                 <div class="large-12">
                     {{ form_widget(form.image, {'attr' : { 'class' : 'large-8 columns'}}) }}
                     <img class="large-4" width="50" src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="">
                 </div>
-
                 <div class="large-12" id="information-validation">
-                   {% if is_granted("ROLE_AMATEUR") %} <p class="callout round primary">Attention, toute observation doit etre validée par un naturaliste pour être pûbliée</p>{% endif %}
+                   {% if is_granted("ROLE_USER") %} <p class="callout round primary">Attention, toute observation doit etre validée par un naturaliste pour être pûbliée</p>{% endif %}
                 </div>
             </div>
             <div class="large-7 columns">
@@ -62,7 +70,7 @@
                     {{ form_errors(form.comment) }}
                 </div>
                 <div class="columns text-center large-12">
-                    {{ form_widget(form.save, {'attr' : {'class' : 'button large-2 third' }}) }}
+                    <button class="button large-2 third button-confirm">Valider</button>
                     <a href="{{ path('app_myobservations') }}" id="annuler-add" class="button large-2 text-center third hollow">ANNULER</a>
                 </div>
                 {{ form_rest(form) }}
@@ -75,7 +83,6 @@
     </div>
     <script type="text/javascript">
         //Geolocalisation
-
         $('#changecible').click(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -94,6 +101,19 @@
                 maPosition(position);
             });
         }
+
+        $('#form-add-observation').submit(function(e) {
+            e.preventDefault();
+            console.log($('#label-image')["0"].innerHTML)
+            if($('#label-image')["0"].innerHTML === "CHOISIR UNE IMAGE"){
+                if( confirm("Vous n'avez pas ajouté d'image. Etes-vous sûr de vouloir envoyer votre observation sans image ?") == true){
+                    $('#form-add-observation-form').submit();
+                }
+            }
+            else {
+                $('#form-add-observation-form').submit();
+            }
+        });
     </script>
 
 {% endblock %}

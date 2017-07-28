@@ -114,8 +114,11 @@
         <img class="hide-for-medium" src="{{ asset('images/jpg/bandeau_smartphone.jpg') }}" alt="NAO" style="
     width: 100%;"/>
     </div>
+        {% block body %}
+            {% block flash_messages %}
 
-        {% block body %}{% endblock %}
+            {% endblock %}
+        {% endblock %}
 
         {% block javascripts %}
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap" type="text/javascript" async defer></script>

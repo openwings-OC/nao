@@ -9,3 +9,5 @@ services:
                 class: AppBundle\Service\randomLanding
     app.convert_array:
                 class: AppBundle\Service\ConvertCsvToArray
+    app.delete_image:
+                    class: AppBundle\Service\DeleteImage
