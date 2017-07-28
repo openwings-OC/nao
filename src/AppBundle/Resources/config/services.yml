@@ -7,3 +7,5 @@ services:
             arguments: [ "@mailer", "@templating", "@service_container", "@request_stack" ]
     app.random_landing:
                 class: AppBundle\Service\randomLanding
+    app.convert_array:
+                class: AppBundle\Service\ConvertCsvToArray

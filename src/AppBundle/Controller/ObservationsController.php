@@ -76,7 +76,6 @@ class ObservationsController extends Controller
     public function myObservationsAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.createdAt DESC";
-        var_dump($dql);
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');

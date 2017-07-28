@@ -26,8 +26,6 @@ class Taxref
      * @ORM\Id
      * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
      *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $cdNom;
 

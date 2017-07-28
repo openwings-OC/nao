@@ -77,7 +77,7 @@ class User extends BaseUser
 
     /**
      * @Assert\Length(min = 8,  max = 20, minMessage="Votre mot de passe doit contenir au moins 8 caractères", maxMessage="Votre mot de passe peut contenir 20 caractères maximum")
-     * @Assert\Regex(pattern="/[a-zA-Z0-9]/", match=true, message="Votre mot de passe doit contenir des chiffres, des lettres et au moins une majuscule")
+     *
      * @Assert\NotBlank(message="Ce champs est vide")
      */
     protected $plainPassword;
