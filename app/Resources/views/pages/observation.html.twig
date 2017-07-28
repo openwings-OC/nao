@@ -4,32 +4,38 @@
 {% endblock %}
 {% block body %}
     <div class="text-center callout ccf">
-        <h1>OBSERVATION</h1>
+        <h1>FICHE OBSERVATION</h1>
     </div>
-    <div class="row">
-        <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
-    </div>
-    <div class="row">
-        <div class="large-4 columns">
-            <h3>{% if observation.specy.nomVern == "" %}
+
+    <div class="row large-8 description-observation">
+        <div class="columns">
+            <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
+        </div>
+        <div class="columns small-12">
+            <h4 class="titre-observation callout">{{ observation.specy.nomVern }}</h4>
+        </div>
+        <div class="small-12 large-6 columns">
+            <h5>{% if observation.specy.nomVern == "" %}
                     {{ observation.specy.lbNom }}
                 {% else %}
                     {{ observation.specy.nomVern }}
-                {% endif %}</h3>
+                {% endif %}</h5>
             {% if observation.image is null %}
                 <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ observation.specy.nomVern }}">
             {% else %}
                 <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
              {% endif %}
-            <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
-            <p>Observée par : {{ observation.user.username }}</p>
-            <p>Commentaire : {{ observation.comment }}</p>
-            <p>Observé le {{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
         </div>
-        <div class="large-5 columns">
+        <div class="small-12 large-6 columns">
             {% include ':modules:map.html.twig' %}
         </div>
-        <div class="large-3 columns">
+        <div class="columns">
+            <p><span class="gras">Coordonnées : </span>{{ observation.longitude }}, {{ observation.latitude }}</p>
+            <p><span class="gras">Observée par : </span>{{ observation.user.username }}</p>
+            <p><span class="gras">Commentaire : </span>{{ observation.comment }}</p>
+            <p><span class="gras">Observé le </span>{{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
+        </div>
+        <div class="medium-6 small-12 columns dernieres-observations">
             {{ include(':modules:sidebar.html.twig') }}
         </div>
     </div>

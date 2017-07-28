@@ -1,7 +1,15 @@
-<h4>Les autres observations de cette espèce</h4>
+<h5>Les autres observations de cette espèce</h5>
+<table class="table-dernieres-observations">
+    <tbody>
 {% for observation in observations %}
     {% if loop.index > 1 %}
-        {{ observation.user.username }} - {{ observation.createdAt|date('d-m-Y') }} - <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
-        <br>
+        <tr>
+            <td>{{ observation.user.username }}</td>
+            <td>{{ observation.createdAt|date('d/m/Y') }}</td>
+            <td><a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a></td>
+        </tr>
     {% endif %}
 {% endfor %}
+    </tbody>
+</table>
+<br>

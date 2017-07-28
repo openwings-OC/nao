@@ -75,7 +75,7 @@ class ObservationsController extends Controller
      */
     public function myObservationsAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId();
+        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.createdAt DESC";
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -110,8 +110,11 @@ class ObservationsController extends Controller
             $this->container->get('app.observation_creation')->uploadImage($observation, $dir);
             $observation->setUser($this->getUser());
             $this->container->get('app.observation_creation')->persistObservation($observation);
-
+            $request->getSession()->getFlashBag()->add('success', 'Observation ajoutée. Elle est maintenant en attente de validation');
             return $this->redirectToRoute('app_myobservations');
+        }
+        elseif($request->isMethod('POST')) {
+            $request->getSession()->getFlashBag()->add('errors', 'Il ya des erreurs dans le formulaire');
         }
         return $this->render(':crud:add.html.twig', array(
             'form' => $form->createView(),
@@ -139,6 +142,7 @@ class ObservationsController extends Controller
                 $observation->setUpdatedAt($date);
                 $observation->setSpecy($observation->getSpecy());
                 $observation->setUser($this->getUser());
+                $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
                 $em->persist($observation);
                 $em->flush();
                 return $this->redirectToRoute('app_myobservations', array('id' => $observation->getId()));
@@ -153,6 +157,7 @@ class ObservationsController extends Controller
                 $observation = $form->getData();
                 $observation->setUpdatedAt(new \DateTime());
                 $observation->setSpecy($observation->getSpecy());
+                $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
                 $em->persist($observation);
                 $em->flush();
                 return $this->redirectToRoute('app_indexobservation', array('id' => $observation->getId()));
@@ -179,8 +184,12 @@ class ObservationsController extends Controller
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find($id);
         $em = $this->getDoctrine()->getManager();
         if(in_array("ROLE_USER", $roles) && $observation->getState() == "pending"|"review"){
+            $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été supprimée');
+            $dir = $this->container->get('kernel')->getProjectDir() . '\web\img';
+            $this->container->get('app.delete_image')->deleteImageWhenObservationDeleted($observation, $dir);
             $em->remove($observation);
             $em->flush();
+
         }elseif (in_array("ROLE_NATURALISTE", $roles)){
 
         }else{

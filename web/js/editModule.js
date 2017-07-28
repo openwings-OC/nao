@@ -35,7 +35,7 @@ $deleteButton.click(function (e) {
     e.preventDefault();
     var checkboxSelected = returnIdOfSelectedCheckbox();
     if(checkboxSelected) {
-        if( confirm("Êtes vous supprimer cette élément ?") == true){
+        if( confirm("Êtes vous sûr de vouloir supprimer cet élément ?") == true){
             $('form#'+returnIdOfSelectedCheckbox()).submit();
         }
     }

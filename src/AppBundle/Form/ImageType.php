@@ -17,7 +17,7 @@ class ImageType extends AbstractType
         $builder
             ->add('file', FileType::class, array(
                 'label' => 'CHOISIR UNE IMAGE',
-                'label_attr' => array('class' => 'button secondary')
+                'label_attr' => array('class' => 'button secondary', 'id' => 'label-image')
             ))
             ;
     }

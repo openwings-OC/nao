@@ -19,15 +19,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Taxref
 {
 
-    const PAGE_NUMBER = 50;
+    const PAGE_NUMBER = 20;
 
     /**
      * @var integer
      * @ORM\Id
      * @ORM\Column(name="CD_NOM", type="integer", nullable=true)
      *
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $cdNom;
 
