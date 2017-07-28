@@ -17,3 +17,9 @@
 > Le javascript
 8. php
 > Le code php
+
+Importation de la TAXREF :
+1. S'assurer de bien disposer du fichier TAXREF renommé 'TAXREF10.0.csv' dans le dossier nao
+2. Avoir auparavant créé la base et l'avoir mise à jour (doctrine:schema:update --force)
+3. Lancer la commande php bin/console import:csv
+4. Et voila!
