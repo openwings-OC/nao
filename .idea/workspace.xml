@@ -2,73 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1bc0e39-bc4d-4a81-bfc0-d97149f4a5ae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Service/DeleteImage.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/12013420.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/12014444223596c62b26f85b.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/12014444223596c62b873706.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1201444422596c628aaeb56.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1201444422596c62cecf765.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170711052597a1ff6e98fb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707199413596c9b7a39c0a.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707199413596ca1d12a9f8.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17072566597600e46ea15.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170726435976f5dd595f5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17072645.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170726515970c2bfeaf9a.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170726515976195687720.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170726515976f36c3ae85.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170726515978970ecda45.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17072660" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17072660.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17072895.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170739965975fccd05082.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074188235975fe12013bb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707441604596dc16c8b51a.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074418615975f9588cf96.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074421165975fafc73d17.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074423165976f58170cae.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596c633414305.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596c8a3db4eb2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596c8bd94922a.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596c8c0b1d627.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596dc3bc3a2f7.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596f683e40b70.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17074525596f6abe6594e.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170745255970c0dc07932.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707533083597999f815697.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707533083597afc4bdc80b.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17078289285975fa810b9d1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17078289285975ff33386de.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170782892859760ef7bdafb.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707828928597614fb484a0.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/170782892859770ed27e22c.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/1707828928597865eebfb34.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17078289285978da4e78d0c.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/17078289285979e16362be6.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/Bandeau_desktop.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/epervier.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/img/photo.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/crud/add.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/crud/add.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/modules/map.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/modules/map.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/modules/pagination.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/modules/pagination.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/modules/sidebar.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/modules/sidebar.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/pages/observation.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/pages/observation.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/pages/observations/myobservations.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/pages/observations/myobservations.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/pages/search.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/pages/search.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/pages/specy.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/pages/specy.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Command/ImportCommand.php" afterPath="$PROJECT_DIR$/src/AppBundle/Command/ImportCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/ObservationsController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ObservationsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/UsersController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Taxref.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Taxref.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/ImageType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/ImageType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/services.yml" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/services.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/css/app.css" afterPath="$PROJECT_DIR$/web/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/script.js" afterPath="$PROJECT_DIR$/web/js/script.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -161,7 +95,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
@@ -171,7 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConvertCsvToArray.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ConvertCsvToArray.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/ConvertCsvToArray.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="23">
@@ -310,7 +244,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="95" />
     <option name="y" value="111" />
     <option name="width" value="1296" />
@@ -618,12 +552,12 @@
       <workItem from="1501167382812" duration="6983000" />
       <workItem from="1501174641072" duration="1562000" />
       <workItem from="1501223047907" duration="11819000" />
-      <workItem from="1501237297520" duration="11599000" />
+      <workItem from="1501237297520" duration="12396000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412638000" />
+    <option name="totallyTimeSpent" value="413435000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -635,8 +569,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16080937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -645,7 +578,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32832617" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973376" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31008583" sideWeight="0.49574015" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31008583" sideWeight="0.49574015" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -955,14 +888,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/ConvertCsvToArray.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="28" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/routing/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1063,6 +988,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/ConvertCsvToArray.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="28" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="28" />
           <folding />
         </state>
       </provider>
