@@ -67,7 +67,7 @@ class UsersController extends Controller
             ));
             $request->getSession()
                 ->getFlashBag()
-                ->add('Le rôle de '.$user->getUsername().' a été modifié avec succès.', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
+                ->add('success', 'Le rôle de '.$user->getUsername().' a été modifié avec succès.', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
             return $this->redirectToRoute('app_indexuser');
     }
     /**
