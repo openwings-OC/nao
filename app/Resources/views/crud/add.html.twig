@@ -3,21 +3,6 @@
     {{ parent() }}Ajouter une observation
 {% endblock %}
 {% block body %}
-<<<<<<< HEAD
-    <div class="text-center callout ccf">
-        <h1 >AJOUTER UNE OBSERVATION</h1>
-    </div>
-    {% block flash_messages %}
-        {% for message in app.session.flashbag.get('errors') %}
-            <div class="row small-8">
-                <div class="callout row flash-errors">
-                    <div><img width="30" src="{{ asset('images/png/echec.png') }}" alt=""></div><p>{{ message|trans }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    {% endblock %}
-=======
->>>>>>> feature/entityFix
     <div class="row">
         <div id="form-errors">
             {{ form_errors(form) }}

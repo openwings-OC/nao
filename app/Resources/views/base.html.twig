@@ -33,26 +33,14 @@
             <div class="text-center callout ccf">
                 <h1>{{ block('title')|upper }}</h1>
             </div>
-<<<<<<< HEAD
-        </div>
 
-        <div class="text-center callout ccf title-mobile hide-for-medium">
-            <h1>NOS AMIS LES OISEAUX</h1>
-        </div>
-        <img class="hide-for-medium" src="{{ asset('images/jpg/bandeau_smartphone.jpg') }}" alt="NAO" style="
-    width: 100%;"/>
-    </div>
+        {% endblock %}
+
         {% block body %}
             {% block flash_messages %}
-
             {% endblock %}
         {% endblock %}
 
-=======
-        {% endblock %}
-
-        {% block body %}{% endblock %}
->>>>>>> feature/entityFix
         {% block javascripts %}
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBSnphNr1QRiDrwOXEdohkSe5KNfJQOCU&sensor=false&callback=initMap" type="text/javascript" async defer></script>
             <script src="{{ asset('js/vendor/jquery.js') }}"></script>
