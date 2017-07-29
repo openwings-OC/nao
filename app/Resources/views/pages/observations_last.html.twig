@@ -1,12 +1,8 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Dernières observations
+    Dernières observations
 {% endblock %}
 {% block body %}
-    <div class="text-center callout ccf">
-        <h1>LES DERNIÈRES OBSERVATIONS</h1>
-    </div>
-
     <div class="row small-up-12 medium-up-4" data-equalizer data-equalize-on="medium">
         {% for bird in list %}
             <div class="columns">

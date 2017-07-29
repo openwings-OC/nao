@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% block meta %} {% endblock %}
-        <title>{% block title %}NAO | {% endblock %}</title>
+        <title>NAO | {% block title %}{% endblock %}</title>
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
         {% block stylesheets %}
             {% stylesheets 'css/app.css'
@@ -27,96 +27,16 @@
         </script>
     </head>
     <body>
-
-    <div class="header">
-        <img class="hide-for-small-only" src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" style="
-    width: 100%;"/>
-        <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="large">
-            <button class="menu-icon" type="button" data-toggle></button>
-        </div>
-        <div data-sticky-container>
-            <div class="menutest sticky" data-sticky id="menutest" data-sticky-on="large">
-                <div class="logo-menu">
-                    <a href="{{ path('homepage') }}">
-                        <img height="250" width="250" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
-                    </a>
-                </div>
-                <div class="top-bar" id="nao-menu">
-                    <div class="top-bar-right">
-                        <ul class="menu vertical medium-horizontal dropdown" data-responsive-menu="accordion large-dropdown">
-                            <li class="naoMenuItem blueMenuItem has-submenu menu-left">
-                                <a href="#">NOS AMIS LES OISEAUX</a>
-                                <ul class="vertical menu" >
-                                    <li><a href="{{ path('app_association') }}">L'association</a></li>
-                                    <li><a href="{{ path('app_adherer') }}">Adhérer à NAO</a></li>
-                                    <li><a href="{{ path('app_mission') }}">Mission</a></li>
-                                    <li><a href="{{ path('app_equipe') }}">Équipe</a></li>
-                                    <li><a href="{{ path('app_contact') }}">Nous contacter</a></li>
-                                </ul>
-                            </li>
-                            <li class="naoMenuItem greenMenuItem menu-left" >
-                                <a href="#">OBSERVATION</a>
-                                <ul class="menu vertical">
-                                    <li class="greenMenuItem"><a href="{{ path('app_last_observations') }}">Dernières observations</a></li>
-                                    <li class="greenMenuItem"><a href="{{ path('app_observation_map') }}">Carte de France</a></li>
-                                    <li class="greenMenuItem"><a href="{{ path('app_guide_debutant') }}">Guide du débutant</a></li>
-                                </ul>
-                            </li>
-                            <li class="naoMenuItem blueMenuItem ">
-                                <a href="{{ path('app_projet') }}">DÉMARCHE SCIENTIFIQUE</a>
-                            </li>
-                            <li class="naoMenuItem greenMenuItem">
-                                <form action="{{ path('app_search') }}" method="post" id="form-home">
-                                    <div class="row">
-                                        <div class="large-12 columns">
-                                            <div class="row collapse">
-                                                <div class="small-10 columns">
-                                                    <input type="text"  name="search" placeholder="RECHERCHE D'ESPÈCE" class="search" id="search-home" data-target="{{ path('homepage') }}" data-url="{{ path('app_autocomplete') }}" >
-                                                </div>
-                                                <div class="small-2 columns">
-                                                    <button type="submit" href="#" class="button postfix secondary button-search"><i class="fa fa-search fa-2x"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </li>
-                            <li class="naoMenuItem orangeMenuItem" id="profile">
-                                <a href="#" id="menu-utilisateur"><img height="20" width="20" src="{{ asset('images/png/Menu_connexion.png') }}" alt="NAO" /></a>
-                                <ul class="menu vertical text-center">
-                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_profile_show') }}" class="button expanded">MON PROFIL</a></li>
-                                        {% if is_granted("ROLE_ADMIN") %}
-                                            <li class="orangeMenuItem"><a href="{{ path('app_indexuser') }}" class="button expanded">GESTION DES UTILISATEURS</a></li>
-                                        {% endif %}
-                                        {% if is_granted("ROLE_NATURALISTE") %}
-                                            <li class="orangeMenuItem"><a href="{{ path('app_indexobservation') }}" class="button expanded">VALIDATION DES OBSERVATIONS</a></li>
-                                        {% endif %}
-                                        <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">MES OBSERVATIONS</a></li>
-                                        <li class="orangeMenuItem"><a href="{{ path('app_addObservation') }}" class="button expanded">AJOUTER UNE OBSERVATION</a></li>
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_logout') }}" class="button expanded">SE DÉCONNECTER</a></li>
-                                    {% else %}
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
-                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
-                                    {% endif %}
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        {% include "modules/header.html.twig" %}
+        {% block mainTitle %}
+            <div class="text-center callout ccf">
+                <h1>{{ block('title')|upper }}</h1>
             </div>
-        </div>
 
-        <div class="text-center callout ccf title-mobile hide-for-medium">
-            <h1>NOS AMIS LES OISEAUX</h1>
-        </div>
-        <img class="hide-for-medium" src="{{ asset('images/jpg/bandeau_smartphone.jpg') }}" alt="NAO" style="
-    width: 100%;"/>
-    </div>
+        {% endblock %}
+
         {% block body %}
             {% block flash_messages %}
-
             {% endblock %}
         {% endblock %}
 
@@ -135,33 +55,8 @@
             <script src="{{ asset('js/app.js') }}"></script>
             <script src="{{ asset('js/script.js') }}"></script>
            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
         {% endblock %}
-
     </body>
-    <footer class="footer">
-    <div class="callout text-center socialLinks">
-        <a href="https://twitter.com/naodujardin"><i class="fa fa-twitter fa-3x"></i></a>
-        <a href="https://www.facebook.com/Nos-amis-les-oiseaux-1724481754517162/"><i class="fa fa-facebook fa-3x"></i></a>
-        <a href="https://plus.google.com/u/0/114909314086156892767"><i class="fa fa-google-plus fa-3x"></i></a>
-        <a href="https://fr.pinterest.com/naodujardin/"><i class="fa fa-pinterest fa-3x"></i></a>
-    </div>
-        <div class="row">
-            <div class="small-6 columns">
-                <p>EN PARTENARIAT AVEC</p>
-                <a href="https://www.mnhn.fr"><img height="150" width="150" src="{{ asset('images/png/LogoMNHN.png') }}" alt="Muséum national d'Histoire naturelle" /></a>
-            </div>
-            <div class="small-6 columns text-center linksFooter">
-                <li><a href="{{ path('app_contact') }}">Contact</a></li>
-                <li><a href="">Conditions générales d'utilisation</a></li>
-                <li><a href="">Crédits</a></li>
-                <li><a href="">Mentions légales</a></li>
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns text-center">
-                Copyright © Nos Amis les Oiseaux 2017
-            </div>
-        </div>
-    </footer>
+    {% include "modules/footer.html.twig" %}
 </html>
+

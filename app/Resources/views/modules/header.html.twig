@@ -1,0 +1,84 @@
+{% block header %}
+    <div class="header">
+        <img class="hide-for-small-only" src="{{ asset('images/jpg/Bandeau_desktop_part1.jpg') }}" alt="NAO" style="
+        width: 100%;"/>
+        <div class="title-bar" data-responsive-toggle="nao-menu" data-hide-for="large">
+            <button class="menu-icon" type="button" data-toggle></button>
+        </div>
+        <div data-sticky-container>
+            <div class="menutest sticky" data-sticky id="menutest" data-sticky-on="large">
+                <div class="logo-menu">
+                    <a href="{{ path('homepage') }}">
+                        <img height="250" width="250" src="{{ asset('images/svg/Logo NAO.png') }}" alt="NAO" />
+                    </a>
+                </div>
+                <div class="top-bar" id="nao-menu">
+                    <div class="top-bar-right">
+                        <ul class="menu vertical medium-horizontal dropdown" data-responsive-menu="accordion large-dropdown">
+                            <li class="naoMenuItem blueMenuItem has-submenu menu-left">
+                                <a href="#">NOS AMIS LES OISEAUX</a>
+                                <ul class="vertical menu" >
+                                    <li><a href="{{ path('app_association') }}">L'association</a></li>
+                                    <li><a href="{{ path('app_adherer') }}">Adhérer à NAO</a></li>
+                                    <li><a href="{{ path('app_mission') }}">Mission</a></li>
+                                    <li><a href="{{ path('app_equipe') }}">Équipe</a></li>
+                                    <li><a href="{{ path('app_contact') }}">Nous contacter</a></li>
+                                </ul>
+                            </li>
+                            <li class="naoMenuItem greenMenuItem menu-left" >
+                                <a href="#">OBSERVATION</a>
+                                <ul class="menu vertical">
+                                    <li class="greenMenuItem"><a href="{{ path('app_last_observations') }}">Dernières observations</a></li>
+                                    <li class="greenMenuItem"><a href="{{ path('app_observation_map') }}">Carte de France</a></li>
+                                    <li class="greenMenuItem"><a href="{{ path('app_guide_debutant') }}">Guide du débutant</a></li>
+                                </ul>
+                            </li>
+                            <li class="naoMenuItem blueMenuItem ">
+                                <a href="{{ path('app_projet') }}">DÉMARCHE SCIENTIFIQUE</a>
+                            </li>
+                            <li class="naoMenuItem greenMenuItem">
+                                <form action="{{ path('app_search') }}" method="post" id="form-home">
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div class="row collapse">
+                                                <div class="small-10 columns">
+                                                    <input type="text"  name="search" placeholder="RECHERCHE D'ESPÈCE" class="search" id="search-home" data-target="{{ path('homepage') }}" data-url="{{ path('app_autocomplete') }}" >
+                                                </div>
+                                                <div class="small-2 columns">
+                                                    <button type="submit" href="#" class="button postfix secondary button-search"><i class="fa fa-search fa-2x"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="naoMenuItem orangeMenuItem" id="profile">
+                                <a href="#" id="menu-utilisateur"><img height="35" width="35" src="{% if is_granted("ROLE_ADMIN") %}{{ asset('images/png/Admin.png') }}{% elseif is_granted("ROLE_NATURALISTE") %}{{ asset('images/png/Naturaliste.png') }}{% elseif is_granted("IS_AUTHENTICATED_REMEMBERED") %}{{ asset('images/png/Amateur.png') }}{% else %}{{ asset('images/png/Menu_connexion.png') }}{% endif %}" alt="NAO" /></a>
+                                <ul class="menu vertical text-center">
+                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_profile_show') }}" class="button expanded">MON PROFIL</a></li>
+                                        {% if is_granted("ROLE_ADMIN") %}
+                                            <li class="orangeMenuItem"><a href="{{ path('app_indexuser') }}" class="button expanded">GESTION DES UTILISATEURS</a></li>
+                                        {% endif %}
+                                        {% if is_granted("ROLE_NATURALISTE") %}
+                                            <li class="orangeMenuItem"><a href="{{ path('app_indexobservation') }}" class="button expanded">VALIDATION DES OBSERVATIONS</a></li>
+                                        {% endif %}
+                                        <li class="orangeMenuItem"><a href="{{ path('app_myobservations') }}" class="button expanded">MES OBSERVATIONS</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('app_addObservation') }}" class="button expanded">AJOUTER UNE OBSERVATION</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_logout') }}" class="button expanded">SE DÉCONNECTER</a></li>
+                                    {% else %}
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_registration_register') }}" class="button expanded">S'INSCRIRE</a></li>
+                                        <li class="orangeMenuItem"><a href="{{ path('fos_user_security_login') }}" class="button expanded">SE CONNECTER</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="hide-for-medium" src="{{ asset('images/jpg/bandeau_smartphone.jpg') }}" alt="NAO" style="
+        width: 100%;"/>
+    </div>
+{% endblock %}
