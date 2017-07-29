@@ -1,8 +1,9 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Fiche d'observation
+    Fiche d'observation
 {% endblock %}
 {% block body %}
+<<<<<<< HEAD
     <div class="text-center callout ccf">
         <h1>FICHE OBSERVATION</h1>
     </div>
@@ -16,6 +17,14 @@
         </div>
         <div class="small-12 large-6 columns">
             <h5>{% if observation.specy.nomVern == "" %}
+=======
+    <div class="row">
+        <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
+    </div>
+    <div class="row">
+        <div class="large-4 columns">
+            <h3>{% if observation.specy.nomVern == "" %}
+>>>>>>> feature/entityFix
                     {{ observation.specy.lbNom }}
                 {% else %}
                     {{ observation.specy.nomVern }}
@@ -25,6 +34,13 @@
             {% else %}
                 <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
              {% endif %}
+<<<<<<< HEAD
+=======
+            <p>Coordonnées : {{ observation.longitude }}, {{ observation.latitude }}</p>
+            <p>Observée par :{% if observation.user != null %} {{ observation.user.username }}{% else %}Inconnu{% endif %}</p>
+            <p>Commentaire : {{ observation.comment }}</p>
+            <p>Observé le {{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
+>>>>>>> feature/entityFix
         </div>
         <div class="small-12 large-6 columns">
             {% include ':modules:map.html.twig' %}
@@ -39,6 +55,4 @@
             {{ include(':modules:sidebar.html.twig') }}
         </div>
     </div>
-
-
 {% endblock %}

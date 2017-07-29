@@ -14,9 +14,7 @@
                     {{ form_label(form.specy) }}
                     {{ form_widget(form.specy, {'attr':{'class': 'mapAdd'}}) }}
                     {{ form_errors(form.specy) }}
-
                 </div>
-
                 <div class="large-5 columns">
                     <label for="">Latitude</label>
                     {{ observation.latitude }}
@@ -59,4 +57,9 @@
             {% include "modules/mapAdd.html.twig" %}
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $(".mapAdd").select2();
+        });
+    </script>
 {% endblock %}

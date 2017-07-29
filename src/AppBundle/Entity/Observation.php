@@ -80,8 +80,8 @@ class Observation
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="observations", cascade="persist")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="observations")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $user;
 
@@ -95,7 +95,7 @@ class Observation
      * @var string
      * @ORM\Column(name="comment", type="text")
      *
-     * @Assert\Length(min= 50, max= 400, minMessage="Votre observation doit comporter au moins 50 caractères", maxMessage="Maximum 400 caractères")
+     * @Assert\Length(min= 10, max= 400, minMessage="Votre observation doit comporter au moins 10 caractères", maxMessage="Maximum 400 caractères")
      */
     private $comment;
     /**

@@ -3,6 +3,7 @@
     {{ parent() }}Ajouter une observation
 {% endblock %}
 {% block body %}
+<<<<<<< HEAD
     <div class="text-center callout ccf">
         <h1 >AJOUTER UNE OBSERVATION</h1>
     </div>
@@ -15,6 +16,8 @@
             </div>
         {% endfor %}
     {% endblock %}
+=======
+>>>>>>> feature/entityFix
     <div class="row">
         <div id="form-errors">
             {{ form_errors(form) }}
@@ -83,6 +86,12 @@
     </div>
     <script type="text/javascript">
         //Geolocalisation
+<<<<<<< HEAD
+=======
+        $(document).ready(function() {
+            $(".mapAdd").select2();
+        });
+>>>>>>> feature/entityFix
         $('#changecible').click(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {

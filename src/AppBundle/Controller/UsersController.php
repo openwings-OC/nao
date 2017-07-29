@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UsersController extends Controller
 {
@@ -33,16 +34,20 @@ class UsersController extends Controller
             $request->query->getInt('page', 1),
             20
         );
-        $observations = $pagination->getItems();
+        $users = $pagination->getItems();
         $formsArray = [];
-        foreach($observations as $observation){
-            $form = $this->createForm(UserDeleteFormType::class, $observation);
+        $formsBlockArray = [];
+        foreach($users as $user){
+            $form = $this->createForm(UserDeleteFormType::class, $user);
             $formsArray[] = $form->createView();
+            $formBlock = $this->createForm(UserDeleteFormType::class, $user);
+            $formsBlockArray[] = $formBlock->createView();
         }
         $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/users/index.html.twig', array(
             'pagination' => $pagination,
-            'formsArray' => $formsArray
+            'formsArray' => $formsArray,
+            'formsBlockArray' => $formsBlockArray
         ));
     }
     /**
@@ -72,13 +77,38 @@ class UsersController extends Controller
     }
     /**
      * @Route("/users/supprimer/{id}", name="app_deleteuser")
+     * @Method({"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
         $flashmessage = $user->getUsername()." a bien été supprimé";
         $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
+        $em->remove($user);
+        $em->flush();
+        $request->getSession()
+            ->getFlashBag()
+            ->add('success', $flashmessage);
+        return $this->redirectToRoute('app_indexuser');
+    }
+    /**
+     * @Route("/users/enable/{id}", name="app_enableuser")
+     * @Method({"POST"})
+     */
+    public function enableAction(Request $request, $id)
+    {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        $flashmessage = "";
+
+        if($user->getEnabled()){
+            $user->setEnabled(false);
+            $flashmessage = $user->getUsername()." a bien été bloqué et ne pourra plus avoir accès au site";
+        }else{
+            $user->setEnabled(true);
+            $flashmessage = $user->getUsername()." a bien été débloqué et pourra de nouveau accèder au site";
+        }
+        $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
             $em->flush();
             $request->getSession()
                 ->getFlashBag()

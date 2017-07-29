@@ -19,7 +19,6 @@ $seeButton.click(function (e) {
     e.preventDefault();
     var checkboxId = returnIdOfSelectedCheckbox();
     if(checkboxId) {
-        console.log($(this).data('url'));
         document.location.href = $(this).data('url').replace('__id__', checkboxId);
     }
 });
@@ -27,7 +26,6 @@ $editButton.click(function (e) {
     e.preventDefault();
     var checkboxId = returnIdOfSelectedCheckbox();
     if(checkboxId) {
-        console.log($(this).data('url'));
         document.location.href = $(this).data('url').replace('__id__', checkboxId);
     }
 });
@@ -35,8 +33,13 @@ $deleteButton.click(function (e) {
     e.preventDefault();
     var checkboxSelected = returnIdOfSelectedCheckbox();
     if(checkboxSelected) {
+<<<<<<< HEAD
         if( confirm("Êtes vous sûr de vouloir supprimer cet élément ?") == true){
             $('form#'+returnIdOfSelectedCheckbox()).submit();
+=======
+        if( confirm("Êtes vous supprimer cette élément ?") == true){
+            $('form#'+checkboxSelected).submit();
+>>>>>>> feature/entityFix
         }
     }
 });

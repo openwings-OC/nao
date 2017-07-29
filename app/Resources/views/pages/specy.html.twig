@@ -1,11 +1,28 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Fiche espèce
+    Fiche espèce -
+    {% if specy.nomVern == "" %}
+        {{ specy.lbNom }}
+    {% else %}
+        {{ specy.nomVern }}
+    {% endif %}     - ({{ observations|length }} observations)
 {% endblock %}
+{% block mainTitle %}
 
+{% endblock %}
 {% block body %}
     <div class="text-center callout ccf">
+<<<<<<< HEAD
         <h1>FICHE ESPÈCE</h1>
+=======
+        <h1>
+            {% if specy.nomVern == "" %}
+                {{ specy.lbNom }}
+            {% else %}
+                {{ specy.nomVern }}
+            {% endif %}     - ({{ observations|length }} observations)
+        </h1>
+>>>>>>> feature/entityFix
     </div>
     {% if observations is defined %}
         <div class="row large-8 description-observation">

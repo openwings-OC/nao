@@ -3,11 +3,16 @@
     <tbody>
 {% for observation in observations %}
     {% if loop.index > 1 %}
+<<<<<<< HEAD
         <tr>
             <td>{{ observation.user.username }}</td>
             <td>{{ observation.createdAt|date('d/m/Y') }}</td>
             <td><a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a></td>
         </tr>
+=======
+        {% if observation.user != null %} {{ observation.user.username }} {% else %}Inconnu{% endif %} - {{ observation.createdAt|date('d-m-Y') }} - <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
+        <br>
+>>>>>>> feature/entityFix
     {% endif %}
 {% endfor %}
     </tbody>
