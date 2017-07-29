@@ -15,5 +15,9 @@
 /vendor/
 /web/bundles/
 .idea/
+<<<<<<< HEAD
+bash.exe.stackdump
+=======
 web/img
 
+>>>>>>> e4d0c8ef66edf00f4d7c94fcafb0832f20ebdad7
