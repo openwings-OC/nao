@@ -12,9 +12,6 @@
 {% endblock %}
 {% block body %}
     <div class="text-center callout ccf">
-<<<<<<< HEAD
-        <h1>FICHE ESPÈCE</h1>
-=======
         <h1>
             {% if specy.nomVern == "" %}
                 {{ specy.lbNom }}
@@ -22,23 +19,26 @@
                 {{ specy.nomVern }}
             {% endif %}     - ({{ observations|length }} observations)
         </h1>
->>>>>>> feature/entityFix
     </div>
     {% if observations is defined %}
         <div class="row large-8 description-observation">
             {% for observation in observations %}
                 {% if loop.index == 1 %}
                 <div class="columns small-12">
-                    <h4 class="titre-observation callout">{{ observation.specy.nomVern }} - {{ observations|length }} observation(s)</h4>
+                    <h4 class="titre-observation callout">
+                        {% if observation.specy.nomVern == "" %}
+                            {{ observation.specy.lbNom }}
+                        {% else %}
+                            {{ observation.specy.nomVern }}
+                        {% endif %} - {{ observations|length }} observation(s)</h4>
                 </div>
                 <div class="large-6 small-12 columns">
-                            <h5>La dernière observation : </h5>
-                            {% if observation.image is null %}
-                                <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ observation.specy.nomVern }}">
-                            {% else %}
-                                <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
-                            {% endif %}
-
+                    <h5>La dernière observation : </h5>
+                    {% if observation.image is null %}
+                        <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ observation.specy.nomVern }}">
+                    {% else %}
+                        <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
+                    {% endif %}
                 </div>
             <div class="large-6 small-12 columns">
                 {% include ':modules:map.html.twig' %}

@@ -5,15 +5,11 @@
 
 <script>
     function initMap() {
-<<<<<<< HEAD
-=======
-        {% if speciesWithObservations is defined %}
->>>>>>> feature/entityFix
         var uluru = [];
         {% if observation is defined %}
-            var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };
+        var uluru = {lat: {{ observation.latitude }}, lng:{{ observation.longitude}} };
         {% elseif observation is not defined %}
-            var uluru = {lat: 48.857762 , lng: 2.348699}
+        var uluru = {lat: 48.857762 , lng: 2.348699}
         {% endif %}
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 6,
@@ -270,4 +266,3 @@
         });
     }
 </script>
-
