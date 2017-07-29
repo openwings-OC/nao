@@ -29,7 +29,7 @@
                     <img class="large-4" width="50" src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="">
                 </div>
                 <div class="large-12" id="information-validation">
-                   {% if is_granted("ROLE_USER") %} <p class="callout round primary">Attention, toute observation doit etre validée par un naturaliste pour être pûbliée</p>{% endif %}
+                   {% if is_granted("ROLE_USER") %} <p class="callout round primary">Attention, toute observation doit etre validée par un naturaliste pour être pûbliée</p>{% elseif is_granted("ROLE_ADMIN") %}<p></p>{% endif %}
                 </div>
             </div>
             <div class="large-7 columns">
