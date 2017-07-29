@@ -6,8 +6,8 @@
     <div class="row">
         <h1>Tous les utilisateurs</h1>
         <button class="button success" id="edit"  data-url="{{ path('app_edituser', {'id': '__id__'}) }}">Éditer</button>
+        <button class="button warning" id="block">Bloquer/débloquer</button>
         <button class="button alert" id="delete">Supprimer</button>
-        <button class="button alert" id="post">Supprimer</button>
         <div class="text-center">
             {{ knp_pagination_render(pagination, ':modules:pagination.html.twig') }}
         </div>
@@ -23,6 +23,7 @@
                 <th>Prénom</th>
                 <th>Nombre d'oservations</th>
                 <th>Rôle</th>
+                <th>Compte actif</th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +33,7 @@
                         {{ form_start(formsArray[loop.index0], {'action': path('app_deleteuser', {'id': user.id}), 'method': 'DELETE', 'attr': {'id': user.id}}) }}
                         {{ form_widget(formsArray[loop.index0]) }}
                         {{ form_end(formsArray[loop.index0]) }}
-                        {{ form_start(formsBlockArray[loop.index0], {'action': path('app_enableuser', {'id': user.id}), 'method': 'DELETE', 'attr': {'id': user.id}}) }}
+                        {{ form_start(formsBlockArray[loop.index0], {'action': path('app_enableuser', {'id': user.id}), 'method': 'POST', 'attr': {'id': 'block'~user.id}}) }}
                         {{ form_widget(formsBlockArray[loop.index0]) }}
                         {{ form_end(formsBlockArray[loop.index0]) }}
                         <input data-js="checkbox" type="checkbox" id="{{ user.id }}">
@@ -53,6 +54,7 @@
                             Amateur
                         {% endif %}
                     </td>
+                    <td>{% if user.enabled %}OUI{% else %}NON{% endif %}</td>
                 </tr>
             {% endfor %}
             </tbody>
