@@ -19,7 +19,7 @@ class UserEditType extends AbstractType
     {
         $builder
             ->add('role', ChoiceType::class, array(
-                'label' => 'Promouvoir',
+                'label' => 'Rôle',
                 'choices' => array(
                     'Amateur' => 'ROLE_USER',
                     'Naturaliste' => 'ROLE_NATURALISTE',

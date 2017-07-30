@@ -1,42 +1,41 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Le projet et ses partenaires
+    Le projet et ses partenaires
 {% endblock %}
 {% block meta %}<meta name="description" content="NAO son projet écologique et scientifique et ses partenaires"/>{% endblock %}
 {% block body %}
-
-
-    <div class="text-center callout ccf">
-        <h1>LE PROJET ET SES PARTENAIRES</h1>
-    </div>
 <div class="projet">
     <div class="row">
-        <h3>Le projet</h3>
-        <div class="columns medium-9 small-12 medium-offset-0">
-            <p>Le programme vise à recenser les oiseaux en fonction de leur espèce, du lieu et du moment de l'observation.<br>L'ensemble des observations saisies servira à alimenter une base de donnée en vue de l'étude du comportement des oiseaux<br>face aux différents changements tant de leur écosystème que du climat.<br>Apprenez à reconnaître les oiseaux et comptez-les régulièrement dans votre jardin, dans un parc public, lors de balades champêtres<br>ou même sur votre balcon !<br><br>D'autres programmes ont déjà été mis en place notamment <strong>l’atlas des oiseaux nicheurs de France métropolitaine</strong>,<br>un projet collectif initié par la<a href="https://www.lpo.fr/" onclick="window.open(this.href); return false;"> Ligue pour la Protection des Oiseaux</a>et la <a href="http://seofalauda.wixsite.com/seof" onclick="window.open(this.href); return false;">Société d’Etudes Ornithologiques de France</a>.<br>Les données collectées serviront également à alimenter et faire évoluer <a href="https://fr.wikipedia.org/wiki/Atlas_ornithologique" onclick="window.open(this.href); return false;">L'Atlas ornithologique.</a><br>
+        <h2>Le projet</h2>
+        <div class="small-12">
+            <img src="{{ asset('images/jpg/le_projet.jpg') }}" alt="">
+        </div>
+        <div class="columns medium-12 small-12 medium-offset-0">
+            <p class="blue">Le programme vise à recenser les oiseaux en fonction de leur espèce, du lieu et du moment de l'observation.<br>L'ensemble des observations saisies servira à alimenter une base de donnée en vue de l'étude du comportement des oiseaux<br>face aux différents changements tant de leur écosystème que du climat.<br>Apprenez à reconnaître les oiseaux et comptez-les régulièrement dans votre jardin, dans un parc public, lors de balades champêtres<br>ou même sur votre balcon !<br><br>D'autres programmes ont déjà été mis en place notamment <strong>l’atlas des oiseaux nicheurs de France métropolitaine</strong>,<br>un projet collectif initié par la<a href="https://www.lpo.fr/" onclick="window.open(this.href); return false;"> Ligue pour la Protection des Oiseaux</a>et la <a href="http://seofalauda.wixsite.com/seof" onclick="window.open(this.href); return false;">Société d’Etudes Ornithologiques de France</a>.<br>Les données collectées serviront également à alimenter et faire évoluer <a href="https://fr.wikipedia.org/wiki/Atlas_ornithologique" onclick="window.open(this.href); return false;">L'Atlas ornithologique.</a><br>
             </p>
         </div>
-        <div class="columns medium-3">
-            <a href="{{ asset('images/jpg/couple_mesanges.jpg') }}"><img class="Float_right" alt="Couple de mésanges sur une mangeoire" src="{{ asset('images/jpg/couple_mesanges.jpg') }}"></a>
-        </div>
+            <h2>Les 8 espèces suivantes sont en danger critique d'extinction</h2>
+        <ul>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Echenilleur de la réunion</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Petrel noir de Bourbon</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Puffin des Baléares</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Egothene Calédonien</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Lori à Diadème</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Rale de Lafresnaye</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Martin-pêcheur des Gambier</li>
+            <li class="blue"><img src="{{ asset('images/png/Oeuf.png') }}" alt="Oeuf vert" style="width: 20px; height: 28px;">Monarque de Tahiti</li>
+        </ul>
     </div>
     <div class="row">
-        <div class="columns medium-3 hide-for-small-only">
-            <a href="{{ asset('images/jpg/Paruline_a_ailes_bleues.jpg') }}"><img class="Float_right" alt="Couple de mésanges sur une mangeoire" src="{{ asset('images/jpg/Paruline_a_ailes_bleues.jpg') }}"></a>
-        </div>
-        <div class="columns medium-9 small-12  medium-offset-0">
-            <p>Depuis des décénnies l'homme n'a de cesse de forger la planête à son gré et pour son propre avantage! <br> Les espèces menacées sont classées en 3 catégories selon le risque d'extinction qu'elles encourent : <strong>CR</strong>: En danger critique d'extinction ; <strong>EN</strong>: en danger ;<strong>VU</strong>: vulnérable. En france De 79 espèces en 2011, nous sommes passés à 90 espèces menacées aujourd’hui (14 CR, 26 EN et 50 VU).<br>Un bilan d’autant plus préoccupant que le territoire national (avec ses collectivités et ses territoires d’Outre-mer) abrite près de 1 500 espèces d’oiseaux et occupe le haut du palmarès des pays dont l’avifaune est la plus riche au monde!<br>Un bilan d’autant plus préoccupant que le territoire national (avec ses collectivités et ses territoires d’Outre-mer) abrite près de 1 500 espèces d’oiseaux et occupe le haut du palmarès des pays dont l’avifaune est la plus riche au monde !<br>Les 14 espèces suivantes présentes en France sont en danger critique d’extinction : Échenilleur de la Réunion, Pétrel noir de Bourbon,<br>Puffin des Baléares, Égothèle calédonien, Engoulevent moustac, Lori à diadème, Méliphage toulou, Râle de Lafresnaye, Turnix néocalédonien, Martin-chasseur des Gambier, Martin-pêcheur des Marquises, Monarque de Fatuhiva, Monarque de Tahiti et Albatros d'Amsterdam.<br>Elles pourraient s’éteindre si rien n’est entrepris pour les sauvegarder dans les années à venir.<br>
-                <strong> Notre responsabilité est donc entière !</strong> </p>
-        </div>
-    </div>
-    <div class="row">
-        <h3>Les partenaires</h3>
+        <h2>Les partenaires</h2>
         <br>
         <div class="logo columns small-6"><a href="https://www.mnhn.fr/"><img src="{{ asset('images/png/logomnhn.png') }}" alt="Logo Muséum national d'histoite naturelle"></a>
         </div>
         <div class="logo columns small-6"><a href="https://www.lpo.fr/"><img src="{{ asset('images/png/logolpo.png') }}" alt="Logo Ligue de protection des oiseaux"></a>
         </div>
     </div>
+
+
 </div>
 
 

@@ -11,10 +11,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Form\UserDeleteFormType;
+use AppBundle\Form\UserSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UsersController extends Controller
 {
@@ -31,18 +33,24 @@ class UsersController extends Controller
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
-            20
+            50
         );
-        $observations = $pagination->getItems();
+        $users = $pagination->getItems();
         $formsArray = [];
-        foreach($observations as $observation){
-            $form = $this->createForm(UserDeleteFormType::class, $observation);
+        $formsBlockArray = [];
+        foreach($users as $user){
+            $form = $this->createForm(UserDeleteFormType::class, $user);
             $formsArray[] = $form->createView();
+            $formBlock = $this->createForm(UserDeleteFormType::class, $user);
+            $formsBlockArray[] = $formBlock->createView();
         }
+        $formSearch = $this->createForm(UserSearchType::class);
         $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/users/index.html.twig', array(
             'pagination' => $pagination,
-            'formsArray' => $formsArray
+            'formsArray' => $formsArray,
+            'formsBlockArray' => $formsBlockArray,
+            'formSearch'    => $formSearch->createView()
         ));
     }
     /**
@@ -53,6 +61,7 @@ class UsersController extends Controller
         $roles = $this->getUser()->getRoles();
 
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        if($user === null){ throw $this->createNotFoundException('Cette utilisateur n\'existe pas'); }
         $em = $this->getDoctrine()->getManager();
             $form = $this->createForm(UserEditType::class, $user);
 
@@ -72,17 +81,83 @@ class UsersController extends Controller
     }
     /**
      * @Route("/users/supprimer/{id}", name="app_deleteuser")
+     * @Method({"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
         $flashmessage = $user->getUsername()." a bien été supprimé";
         $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
+        $em->remove($user);
+        $em->flush();
+        $request->getSession()
+            ->getFlashBag()
+            ->add('success', $flashmessage);
+        return $this->redirectToRoute('app_indexuser');
+    }
+    /**
+     * @Route("/users/enable/{id}", name="app_enableuser")
+     * @Method({"POST"})
+     */
+    public function enableAction(Request $request, $id)
+    {
+        $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        $flashmessage = "";
+
+        if($user->getEnabled()){
+            $user->setEnabled(false);
+            $flashmessage = $user->getUsername()." a bien été bloqué et ne pourra plus avoir accès au site";
+        }else{
+            $user->setEnabled(true);
+            $flashmessage = $user->getUsername()." a bien été débloqué et pourra de nouveau accèder au site";
+        }
+        $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
             $em->flush();
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', $flashmessage);
             return $this->redirectToRoute('app_indexuser');
+    }
+    /**
+     * @Route("/users/search", name="app_searchuser")
+     * @Method({"GET","HEAD","POST"})
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getRepository('AppBundle:User');
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all()['user_search']['user'];
+            $user = $em->findUserByLetter($data);
+            $formSearch = $this->createForm(UserSearchWithParamType::class, array('data' => $data));
+        }
+        else {
+            $user = $em->findAll();
+            $formSearch = $this->createForm(UserSearchType::class);
+        }
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $user,
+            $request->query->getInt('page', 1),
+            50
+        );
+        $pagination->setTemplate('modules:pagination.html.twig');
+
+        $users = $pagination->getItems();
+        $formsArray = [];
+        $formsBlockArray = [];
+        foreach($users as $user){
+            $form = $this->createForm(UserDeleteFormType::class, $user);
+            $formsArray[] = $form->createView();
+            $formBlock = $this->createForm(UserDeleteFormType::class, $user);
+            $formsBlockArray[] = $formBlock->createView();
+        }
+
+        return $this->render('pages/users/search.html.twig', array(
+            'pagination' => $pagination,
+            'formsArray' => $formsArray,
+            'formsBlockArray' => $formsBlockArray,
+            'formSearch'    => $formSearch->createView()
+        ));
     }
 }

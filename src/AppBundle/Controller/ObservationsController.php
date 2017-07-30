@@ -60,7 +60,8 @@ class ObservationsController extends Controller
      * @route("/observations/voir/{id}", name="app_observation")
      */
     public function observationAction(Request $request){
-        $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationById((int)$request->get('id'));
+        $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find((int)$request->get('id'));
+        if($observation === null){ throw $this->createNotFoundException('Cette observation n\'existe pas'); }
         $specy = $observation->getSpecy()->getCdNom();
         $observations = $this->getDoctrine()->getRepository('AppBundle:Observation')->findObservationsBySpecieId($specy);
         return $this->render('pages/observation.html.twig', array(
@@ -106,15 +107,24 @@ class ObservationsController extends Controller
         $form = $this->createForm(ObservationType::class, $observation);
 
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
-            $dir = $this->container->get('kernel')->getProjectDir() . '\web\img';
+            $dir = $this->container->get('kernel')->getProjectDir() . '/web/img/';
+            dump($dir);
             $this->container->get('app.observation_creation')->uploadImage($observation, $dir);
-            $observation->setUser($this->getUser());
+            $user = $this->getUser();
+            $observation->setUser($user);
+            if($user->getRole() == 'ROLE_AMATEUR'){
+                $observation->setState(Observation::STATUS_PENDING);
+                $request->getSession()->getFlashBag()->add('success', 'Observation ajoutée. Elle est maintenant en attente de validation');
+            }else{
+                $observation->setState(Observation::STATUS_VALIDATE);
+                $request->getSession()->getFlashBag()->add('success', 'Observation ajoutée avec le status validé');
+            }
+
             $this->container->get('app.observation_creation')->persistObservation($observation);
-            $request->getSession()->getFlashBag()->add('success', 'Observation ajoutée. Elle est maintenant en attente de validation');
             return $this->redirectToRoute('app_myobservations');
         }
         elseif($request->isMethod('POST')) {
-            $request->getSession()->getFlashBag()->add('errors', 'Il ya des erreurs dans le formulaire');
+            $request->getSession()->getFlashBag()->add('errors', 'Il y a des erreurs dans le formulaire');
         }
         return $this->render(':crud:add.html.twig', array(
             'form' => $form->createView(),
@@ -129,6 +139,8 @@ class ObservationsController extends Controller
         $roles = $this->getUser()->getRoles();
 
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find($id);
+        if($observation === null){ throw $this->createNotFoundException('Cette observation n\'existe pas'); }
+
         $em = $this->getDoctrine()->getManager();
         if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() == "pending"|"review"){
             $form = $this->createForm(ObservationType::class, $observation);

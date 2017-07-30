@@ -11,3 +11,6 @@ services:
                 class: AppBundle\Service\ConvertCsvToArray
     app.delete_image:
                     class: AppBundle\Service\DeleteImage
+    app.flashbag_fosuser:
+                class: AppBundle\Service\FlashBagFosUser
+                arguments: [ "@session" ]

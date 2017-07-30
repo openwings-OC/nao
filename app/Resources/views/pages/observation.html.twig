@@ -1,37 +1,33 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Fiche d'observation
+    Fiche d'observation
 {% endblock %}
 {% block body %}
-    <div class="text-center callout ccf">
-        <h1>FICHE OBSERVATION</h1>
-    </div>
-
     <div class="row large-8 description-observation">
         <div class="columns">
             <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
         </div>
         <div class="columns small-12">
-            <h4 class="titre-observation callout">{{ observation.specy.nomVern }}</h4>
-        </div>
-        <div class="small-12 large-6 columns">
-            <h5>{% if observation.specy.nomVern == "" %}
+            <h4 class="titre-observation callout">{% if observation.specy.nomVern == "" %}
                     {{ observation.specy.lbNom }}
                 {% else %}
                     {{ observation.specy.nomVern }}
-                {% endif %}</h5>
+                {% endif %}</h4>
+        </div>
+        <div class="small-12 large-6 columns">
+            <h5></h5>
             {% if observation.image is null %}
                 <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="{{ observation.specy.nomVern }}">
             {% else %}
                 <img src="{{ asset('img/' ~ observation.image.url) }}" alt="{{ observation.specy.nomVern }}">
-             {% endif %}
+            {% endif %}
         </div>
         <div class="small-12 large-6 columns">
             {% include ':modules:map.html.twig' %}
         </div>
         <div class="columns">
             <p><span class="gras">Coordonnées : </span>{{ observation.longitude }}, {{ observation.latitude }}</p>
-            <p><span class="gras">Observée par : </span>{{ observation.user.username }}</p>
+            <p><span class="gras">Observée par : </span>{% if observation.user != null %} {{ observation.user.username }} {% else %}Inconnu{% endif %}</p>
             <p><span class="gras">Commentaire : </span>{{ observation.comment }}</p>
             <p><span class="gras">Observé le </span>{{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
         </div>

@@ -16,7 +16,6 @@ Array.prototype.forEach.call(inputs, function(input) {
 });
 
 //Autocompletion moteur de recherche home
-console.log("http://"+window.location.host+"/autocomplete")
 $('#search-home').autocomplete({
     maxShowItems: 10,
     minLength: 3,
