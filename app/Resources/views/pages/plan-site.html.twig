@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+{% block title %}
+   Plan du site
+{% endblock %}
+{% block body %}
+   <div class="row plan-site">
+      <div class="columns medium-6 small-12">
+         <h2 class="green">NOS AMIS LES OISEAUX</h2>
+         <div>
+            <ul>
+               <li class="blue"><a class="blue" href="{{ path('app_association') }}">L'association</a></li>
+               <li class="blue"><a class="blue" href="{{ path('app_adherer') }}">Adhérer à Nos Amis les Oiseaux</a></li>
+               <li class="blue"><a class="blue" href="{{ path('app_equipe') }}">L'équipe</a></li>
+               <li class="blue"><a class="blue" href="{{ path('app_contact') }}">Contact</a></li>
+            </ul>
+         </div>
+         <h2 class="green">OBSERVATION</h2>
+         <div>
+            <ul>
+               <li class="blue"><a class="blue" href="{{ path('app_last_observations') }}">Dernières observations</a></li>
+               <li class="blue"><a class="blue" href="{{ path('app_observation_map') }}">Carte de France des observations</a></li>
+               <li class="blue"><a class="blue" href="{{ path('app_guide_debutant') }}">Guide du débutant</a></li>
+            </ul>
+         </div>
+         <h2 class="green">DEMARCHE SCIENTIFIQUE</h2>
+         <div>
+            <ul>
+               <li class="blue"><a class="blue" href="{{ path('app_projet') }}">Le projet et ses partenaires</a></li>
+            </ul>
+         </div>
+      </div>
+      <div class="columns medium-6 small-12">
+         <h2 class="green">DEMARCHE SCIENTIFIQUE</h2>
+         <div>
+            <ul>
+               <li class="blue"><a class="blue" href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
+               <li class="blue"><a class="blue" href="{{ path('fos_user_security_login') }}">S'identifier</a></li>
+            </ul>
+         </div>
+         <div>
+            <img width="900" src="{{ asset('images/jpg/oisillon_desk.jpg') }}" alt="">
+         </div>
+
+      </div>
+   </div>
+{% endblock %}

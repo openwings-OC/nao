@@ -75,7 +75,11 @@ class ImportCommand extends ContainerAwareCommand
             $specy->setCdRef($row['CD_REF']);
             $specy->setRang($row['RANG']);
             $specy->setLbNom($row['LB_NOM']);
-            $specy->setLbAuteur(utf8_encode($row['LB_AUTEUR']));
+            //Remplace les parenthèses pour le champs lb_auteur
+            $auteur = $specy->setLbAuteur($row['LB_AUTEUR']);
+            $parentheses = array("(", ")");
+            $auteur = str_replace($parentheses, "", $specy->getLbAuteur());
+            $specy->setLbAuteur(utf8_encode($auteur));
             $specy->setNomComplet($row['NOM_COMPLET']);
             $specy->setNomValide($row['NOM_VALIDE']);
             $specy->setNomVern(utf8_encode($row['NOM_VERN']));
