@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Form\UserDeleteFormType;
+use AppBundle\Form\UserSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,7 +33,7 @@ class UsersController extends Controller
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
-            20
+            50
         );
         $users = $pagination->getItems();
         $formsArray = [];
@@ -43,11 +44,13 @@ class UsersController extends Controller
             $formBlock = $this->createForm(UserDeleteFormType::class, $user);
             $formsBlockArray[] = $formBlock->createView();
         }
+        $formSearch = $this->createForm(UserSearchType::class);
         $pagination->setTemplate('modules:pagination.html.twig');
         return $this->render('pages/users/index.html.twig', array(
             'pagination' => $pagination,
             'formsArray' => $formsArray,
-            'formsBlockArray' => $formsBlockArray
+            'formsBlockArray' => $formsBlockArray,
+            'formSearch'    => $formSearch->createView()
         ));
     }
     /**
@@ -58,6 +61,7 @@ class UsersController extends Controller
         $roles = $this->getUser()->getRoles();
 
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($id);
+        if($user === null){ throw $this->createNotFoundException('Cette utilisateur n\'existe pas'); }
         $em = $this->getDoctrine()->getManager();
             $form = $this->createForm(UserEditType::class, $user);
 
@@ -114,5 +118,46 @@ class UsersController extends Controller
                 ->getFlashBag()
                 ->add('success', $flashmessage);
             return $this->redirectToRoute('app_indexuser');
+    }
+    /**
+     * @Route("/users/search", name="app_searchuser")
+     * @Method({"GET","HEAD","POST"})
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getRepository('AppBundle:User');
+        if ($request->isMethod('POST')) {
+            $data = $request->request->all()['user_search']['user'];
+            $user = $em->findUserByLetter($data);
+            $formSearch = $this->createForm(UserSearchWithParamType::class, array('data' => $data));
+        }
+        else {
+            $user = $em->findAll();
+            $formSearch = $this->createForm(UserSearchType::class);
+        }
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $user,
+            $request->query->getInt('page', 1),
+            50
+        );
+        $pagination->setTemplate('modules:pagination.html.twig');
+
+        $users = $pagination->getItems();
+        $formsArray = [];
+        $formsBlockArray = [];
+        foreach($users as $user){
+            $form = $this->createForm(UserDeleteFormType::class, $user);
+            $formsArray[] = $form->createView();
+            $formBlock = $this->createForm(UserDeleteFormType::class, $user);
+            $formsBlockArray[] = $formBlock->createView();
+        }
+
+        return $this->render('pages/users/search.html.twig', array(
+            'pagination' => $pagination,
+            'formsArray' => $formsArray,
+            'formsBlockArray' => $formsBlockArray,
+            'formSearch'    => $formSearch->createView()
+        ));
     }
 }
