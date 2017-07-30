@@ -1,16 +1,33 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    Changer le rôle
+    Éditer un utilisateur
 {% endblock %}
 {% block body %}
     <div class="row">
-        <h1>Promouvoir un utilisateur</h1>
+        <p class="blue">Nom d'utilisateur : {{ observation.username }}<br>
+        Rôle :
+            {% if observation.role == "ROLE_USER" %}
+                Amateur
+            {% elseif observation.role == "ROLE_NATURALISTE" %}
+                Naturaliste
+            {% else %}
+                Administrateur
+            {% endif %}
+        </p>
+    </div>
+    <div class="row text-center large-8">
             {{ form_start(form) }}
             {{ form_errors(form) }}
-                <div class="large-12 columns">
-                    {{ form_label(form.role) }}
-                    {{ form_widget(form.role) }}
-                    {{ form_errors(form.role) }}
+                <div class="large-12 columns form-edit-user">
+                    <img height="200" width="200" src="{% if observation.role == "ROLE_ADMIN" %}{{ asset('images/png/Admin.png') }}{% elseif observation.role == "ROLE_NATURALISTE" %}{{ asset('images/png/Naturaliste.png') }}{% elseif observation.role == "ROLE_USER" %}{{ asset('images/png/Amateur.png') }}{% endif %}" alt="NAO" />
+                    <div class="text-center small-12">
+                        <h2>{{ form_label(form.role) }}</h2>
+                    </div>
+                    <div class="text-center small-12">
+                        {{ form_widget(form.role) }}
+                        {{ form_errors(form.role) }}
+                    </div>
+
                 </div>
                 {{ form_rest(form) }}
             <div class="columns large-12 text-center">

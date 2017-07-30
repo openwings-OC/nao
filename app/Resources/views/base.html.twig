@@ -34,10 +34,11 @@
             </div>
 
         {% endblock %}
-
+        {% block flash_messages %}
+            {% include ('::modules/flash.html.twig') %}
+        {% endblock %}
         {% block body %}
-            {% block flash_messages %}
-            {% endblock %}
+
         {% endblock %}
 
         {% block javascripts %}

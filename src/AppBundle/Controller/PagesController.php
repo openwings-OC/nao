@@ -32,8 +32,8 @@ class PagesController extends Controller
     }
 
     /**
- * @route("/guide-debutant", name="app_guide_debutant")
- */
+    * @route("/guide-debutant", name="app_guide_debutant")
+    */
     public function debutantAction(){
         return $this->render(':pages:guide_debutant.html.twig');
     }
@@ -81,6 +81,14 @@ class PagesController extends Controller
         $route = $this->get('app.random_landing')->chooserNumberRandom();
         return $this->redirectToRoute($route);
     }
+
+    /**
+     * @route("/plan-du-site", name="app_plan_site")
+     */
+    public function planAction(){
+        return $this->render(':pages:plan-site.html.twig');
+    }
+
     /**
      * @route("/participation-a", name="app_landing-a")
      */

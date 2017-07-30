@@ -14,8 +14,10 @@
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                    <div class="columns large-12 text-center flash-{{ type }}">
-                        {{ message }}
+                    <div class="row small-8">
+                        <div class="callout row message-flash">
+                            <div><img width="30" src="{{ asset('images/png/ok.png') }}" alt=""></div><p>{{ message }}</p>
+                        </div>
                     </div>
                 {% endfor %}
             {% endfor %}

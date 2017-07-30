@@ -3,15 +3,6 @@
     {{ parent() }}Mes observations
 {% endblock %}
 {% block body %}
-    {% block flash_messages %}
-        {% for message in app.session.flashbag.get('success') %}
-            <div class="row small-8">
-                <div class="callout row message-flash">
-                    <div><img width="30" src="{{ asset('images/png/ok.png') }}" alt=""></div><p>{{ message|trans }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    {% endblock %}
 <div class="row">
 
     <button class="button" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}">Voir</button>

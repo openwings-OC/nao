@@ -3,7 +3,10 @@
     Dernières observations
 {% endblock %}
 {% block body %}
-    <div class="row small-up-12 medium-up-4" data-equalizer data-equalize-on="medium">
+    <div class="row small-up-12 medium-up-4 last-observations" data-equalizer data-equalize-on="medium">
+        <div>
+            <h2>Les dernières observations :</h2>
+        </div>
         {% for bird in list %}
             <div class="columns">
                 <div class="card">
@@ -21,7 +24,10 @@
                                     {{ bird.specy.lbNom|slice(0, 25) ~ '...' }}
                                 {% else %}
                                     {{ bird.specy.nomVern }}
-                                {% endif %}
+                                {% endif %},
+                            </p>
+                            <p>
+                                {{ bird.createdAt|date('d-m-Y') }}
                             </p>
                         </div>
                     </a>
