@@ -1,7 +1,4 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% if error %}
-    <div class="callout alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
 <form name="fos_user_login_form" action="{{ path("fos_user_security_check") }}" method="post" id="loginform" data-abide novalidate>
     {% if csrf_token %}

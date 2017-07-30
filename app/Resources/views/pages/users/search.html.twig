@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    Gestion des utilisateurs
+    Rechercher un utilisateur
 {% endblock %}
 {% block body %}
     <div class="row">
@@ -8,7 +8,8 @@
             <div class="input-group">
 
                 <div class="input-group-button">
-                    <button class="button secondary" id="edit"  data-url="{{ path('app_edituser', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/editer.png') }}" alt="Éditer"></button>
+                    <button class="button secondary" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/eye.png') }}" alt="Voir"></button>
+                    <button class="button secondary" id="edit"  data-url="{{ path('app_editObservation', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/editer.png') }}" alt="Éditer"></button>
                     <button class="button secondary" id="block"><img width="20px" src="{{ asset('images/png/interdit.png') }}" alt="Bloquer/débloquer"></button>
                     <button class="button secondary" id="delete"><img width="20px" src="{{ asset('images/png/croix blanche.png') }}" alt="Supprimer"></button>
                 </div>
@@ -17,13 +18,13 @@
             {{ form_start(formSearch, {'action': path('app_searchuser')}) }}
             <div class="input-group">
 
-            {{ form_widget(formSearch.user, {'attr': {'placeholder': 'Saisissez le nom d\'un utilisateur', 'class': 'input-group-field' } } ) }}
+                {{ form_widget(formSearch.user, {'attr': {'placeholder': 'Saisissez le nom d\'un utilisateur', 'class': 'input-group-field' } } ) }}
 
-            <div class="input-group-button">
+                <div class="input-group-button">
                     <button class="button secondary"><img width="20px" src="{{ asset('images/png/Icone_loupe_blanc.png') }}" alt="Rechercher"></button>
-            </div>
+                </div>
 
-            {{ form_end(formSearch) }}
+                {{ form_end(formSearch) }}
             </div>
 
             <div class="text-center">
@@ -76,10 +77,13 @@
                 </tbody>
             </table>
         </div>
+        {% if pagination|length == 0 %}
+            <p>Aucun utilisateur ne correspond à votre recherche</p>
+        {% endif %}
     </div>
 
 {% endblock %}
 {% block javascripts %}
-   {{ parent() }}
-   <script src="{{ asset('js/editModule.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('js/editModule.js') }}"></script>
 {% endblock %}

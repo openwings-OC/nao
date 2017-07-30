@@ -23,7 +23,6 @@ class observationCreation {
 
     public function persistObservation($observation){
         $date = $observation->getCreatedAt();
-        $observation->setState('pending');
         $observation->setUpdatedAt($date);
         $observation->setSpecy($observation->getSpecy());
         $this->em->persist($observation);
