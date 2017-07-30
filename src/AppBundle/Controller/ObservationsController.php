@@ -114,7 +114,7 @@ class ObservationsController extends Controller
             return $this->redirectToRoute('app_myobservations');
         }
         elseif($request->isMethod('POST')) {
-            $request->getSession()->getFlashBag()->add('errors', 'Il ya des erreurs dans le formulaire');
+            $request->getSession()->getFlashBag()->add('errors', 'Il y a des erreurs dans le formulaire');
         }
         return $this->render(':crud:add.html.twig', array(
             'form' => $form->createView(),
