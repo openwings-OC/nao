@@ -145,11 +145,9 @@ class ObservationsController extends Controller
             $form = $this->createForm(ObservationType::class, $observation);
 
             if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
-
                 $dir = $this->container->get('kernel')->getProjectDir() . '/web/img';
                 $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
                 $date = $observation->getCreatedAt();
-                $observation->setState('pending');
                 $observation->setUpdatedAt($date);
                 $observation->setSpecy($observation->getSpecy());
                 $observation->setUser($this->getUser());
