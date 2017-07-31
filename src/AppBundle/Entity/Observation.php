@@ -330,7 +330,7 @@ class Observation
      * @Assert\Callback
      */
     public function checkMimeTypeImage (ExecutionContextInterface $context){
-        if($this->getImage() != null){
+        if($this->getImage() !== null){
             if($this->getImage()->getFile()->getmimeType() !== 'image/png' && $this->getImage()->getFile()->getmimeType() !== 'image/jpeg'){
                 $context
                     ->buildViolation('Votre image doit être de format jpeg ou png')
@@ -338,15 +338,13 @@ class Observation
                     ->addViolation();
             }
         }
-
-
     }
 
     /**
      * @Assert\Callback
      */
     public function checkSizeImage (ExecutionContextInterface $context){
-        if($this->getImage() != null) {
+        if($this->getImage() !== null) {
             if ($this->getImage()->getFile()->getSize() > 20971520) {
                 $context
                     ->buildViolation('Votre image ne doit pas dépasser 20 Mo')
@@ -354,6 +352,7 @@ class Observation
                     ->addViolation();
             }
         }
+        return;
 
     }
 }

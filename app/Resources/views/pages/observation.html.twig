@@ -7,6 +7,8 @@
         <div class="columns">
             <a href="{{ path('app_specy', {'id': observation.specy.cdNom}) }}" class="button">Retour à la fiche de l'espèce</a>
         </div>
+        {{ dump(observation.status) }}
+        {% if observation.status == "validated" %}
         <div class="columns small-12">
             <h4 class="titre-observation callout">{% if observation.specy.nomVern == "" %}
                     {{ observation.specy.lbNom }}
@@ -31,6 +33,7 @@
             <p><span class="gras">Commentaire : </span>{{ observation.comment }}</p>
             <p><span class="gras">Observé le </span>{{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
         </div>
+         {% endif %}
         <div class="medium-6 small-12 columns dernieres-observations">
             {{ include(':modules:sidebar.html.twig') }}
         </div>
