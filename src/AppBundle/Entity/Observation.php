@@ -2,10 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Validator\CheckImageSize;
+use AppBundle\Validator\CheckImageType;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Image;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use AppBundle\Validator\CheckImageTypeValidator;
+use AppBundle\Validator\CheckImageSizeValidator;
 
 /**
  * Observation
@@ -74,6 +78,8 @@ class Observation
     /**
      *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist", "remove"})
+     * @CheckImageType()
+     * @CheckImageSize()
      *
      */
     private $image;
@@ -326,33 +332,4 @@ class Observation
         return $this->user;
     }
 
-    /**
-     * @Assert\Callback
-     */
-    public function checkMimeTypeImage (ExecutionContextInterface $context){
-        if($this->getImage() !== null){
-            if($this->getImage()->getFile()->getmimeType() !== 'image/png' && $this->getImage()->getFile()->getmimeType() !== 'image/jpeg'){
-                $context
-                    ->buildViolation('Votre image doit être de format jpeg ou png')
-                    ->atPath('image')
-                    ->addViolation();
-            }
-        }
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function checkSizeImage (ExecutionContextInterface $context){
-        if($this->getImage() !== null) {
-            if ($this->getImage()->getFile()->getSize() > 20971520) {
-                $context
-                    ->buildViolation('Votre image ne doit pas dépasser 20 Mo')
-                    ->atPath('image')
-                    ->addViolation();
-            }
-        }
-        return;
-
-    }
 }

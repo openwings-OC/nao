@@ -13,9 +13,9 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
     public function findObservationsBySpecieId($id){
         $observations = $this->createQueryBuilder('o')
             ->where('o.specy = :id')
-            ->andWhere('o.state = :validated')
+            ->andWhere('o.state = :state')
             ->setParameter('id', $id)
-            ->setParameter('validated', 'validated')
+            ->setParameter('state', 'validate')
             ->orderBy('o.id', 'DESC')
             ->getQuery()
             ->getResult();
@@ -48,7 +48,7 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
         $list = $this->createQueryBuilder('l')
             ->orderBy('l.id', 'DESC')
             ->where('l.state = :state')
-            ->setParameter('state', 'validated')
+            ->setParameter('state', 'validate')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
