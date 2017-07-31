@@ -1,5 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<<<<<<< HEAD
+
 {% if error %}
     <div class="row small-12">
         <div class="callout row message-flash">
@@ -7,8 +7,6 @@
         </div>
     </div>
 {% endif %}
-=======
->>>>>>> ee676c5f046ead2b0b033e6b0e580452928ce1c2
 
 <form name="fos_user_login_form" action="{{ path("fos_user_security_check") }}" method="post" id="loginform" data-abide novalidate>
     {% if csrf_token %}
