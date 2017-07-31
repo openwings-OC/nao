@@ -1,13 +1,13 @@
 {% extends '::base.html.twig' %}
 {% block title %}
-    {{ parent() }}Toutes les observations
+    Validation des observations
 {% endblock %}
 {% block body %}
     <div class="row">
-        <h1>Validation des observations</h1>
-        <button class="button" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}">Voir</button>
-        <button class="button success" id="edit"  data-url="{{ path('app_editObservation', {'id': '__id__'}) }}">Éditer</button>
-        <button class="button alert" id="delete">Supprimer</button>
+            <div class="greenBackground">
+                <button class="button secondary" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/eye.png') }}" alt="Voir"></button>
+                <button class="button secondary" id="edit"  data-url="{{ path('app_editObservation', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/editer.png') }}" alt="Éditer"></button>
+                <button class="button secondary" id="delete"><img width="20px" src="{{ asset('images/png/croix blanche.png') }}" alt="Supprimer"></button>
         <div class="text-center">
             {{ knp_pagination_render(pagination, ':modules:pagination.html.twig') }}
         </div>
@@ -37,6 +37,8 @@
             {% endfor %}
             </tbody>
         </table>
+            </div>
+
         {% if pagination|length == 0 %}
             <p>Vous n'avez pas encore d'observation</p>
         {% endif %}
