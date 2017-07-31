@@ -1,13 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div class="row small-12">
-        <div class="callout row message-flash">
-            <div><img width="30" src="{{ asset('images/png/echec.png') }}" alt=""></div><p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
-        </div>
-    </div>
-{% endif %}
-
 <form name="fos_user_login_form" action="{{ path("fos_user_security_check") }}" method="post" id="loginform" data-abide novalidate>
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
