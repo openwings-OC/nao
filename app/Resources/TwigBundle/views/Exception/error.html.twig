@@ -1,12 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-{{ parent() }}Erreur {{ status_code }}
+Erreur {{ status_code }}
 {% endblock %}
 {% block body %}
-
-    <div class="text-center callout ccf">
-        <h1>ERREUR</h1>
-    </div>
     <div class="row">
         <div class="columns medium-6">
             <img src="{{ asset('images/jpg/Failed_araignée_desk.jpg') }}" alt="Erreur">
@@ -22,5 +18,4 @@
             <a href="{{ path('homepage') }}" class="button third">RETOUR À L'ACCUEIL </a>
         </div>
     </div>
-
 {% endblock %}
