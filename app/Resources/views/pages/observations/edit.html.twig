@@ -15,7 +15,11 @@
                     {{ form_widget(form.image) }}
                     {{ form_widget(form.image) }}
                     {{ form_errors(form.image) }}
+                    {% if observation.image is not empty %}
                     <img src="{{ asset('img/' ~ observation.image.url) }}" alt="" class="image-form">
+                    {% else %}
+                    <img src="{{ asset('images/png/oiseau-silhouette.png') }}" alt="" class="image-form">
+                    {% endif %}
                 </div>
                 <div class="large-12" id="information-validation">
                     {% if is_granted("ROLE_USER") %} <p class="callout round primary">Attention, toute observation doit etre validée par un naturaliste pour être pûbliée</p>{% elseif is_granted("ROLE_ADMIN") %}<p></p>{% endif %}
