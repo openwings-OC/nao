@@ -171,6 +171,7 @@ class ObservationsController extends Controller
                 $em->flush();
                 return $this->redirectToRoute('app_indexobservation', array('id' => $observation->getId()));
             }
+
             return $this->render('pages/observations/editNaturaliste.html.twig', array(
                 'observation' => $observation,
                 'form'          => $form->createView()
