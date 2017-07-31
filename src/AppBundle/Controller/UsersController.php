@@ -12,6 +12,7 @@ use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Form\UserDeleteFormType;
 use AppBundle\Form\UserSearchType;
+use AppBundle\Form\UserSearchWithParamType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

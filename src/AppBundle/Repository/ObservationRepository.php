@@ -46,7 +46,7 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
         $list = $this->createQueryBuilder('l')
             ->orderBy('l.id', 'DESC')
             ->where('l.state = :state')
-            ->setParameter('state', 'validated')
+            ->setParameter('state', 'validate')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
