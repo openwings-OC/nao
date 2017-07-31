@@ -21,9 +21,11 @@
         </h1>
     </div>
     {% if observations is defined %}
+
         <div class="row large-8 description-observation">
             {% for observation in observations %}
                 {% if loop.index == 1 %}
+                    {% if observation.state == "validated" %}
                 <div class="columns small-12">
                     <h4 class="titre-observation callout">
                         {% if observation.specy.nomVern == "" %}
@@ -49,6 +51,7 @@
                         <p><span class="gras">Commentaire :</span> <br>{{ observation.comment }}</p>
                         <p><span class="gras">Observé le : </span>{{ observation.createdAt|date('d-m-Y') }} à {{ observation.createdAt|date('H\\h\i') }}</p>
                     </div>
+                        {% endif %}
                 {% endif %}
             {% endfor %}
             {% if observations is not empty %}

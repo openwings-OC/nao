@@ -34,6 +34,7 @@ class ObservationType extends AbstractType
             ))
             ->add('specy', EntityType::class, array(
                 'label' => 'Choisir l\'espèce observée',
+                'placeholder' => 'Choisissez l\'espèce',
                 'class' => 'AppBundle:Taxref',
                 'attr'    => array('id' => 'observationAdd'),
                 'query_builder' => function( EntityRepository $er){

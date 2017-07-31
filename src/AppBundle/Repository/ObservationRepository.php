@@ -13,7 +13,9 @@ class ObservationRepository extends \Doctrine\ORM\EntityRepository
     public function findObservationsBySpecieId($id){
         $observations = $this->createQueryBuilder('o')
             ->where('o.specy = :id')
+            ->andWhere('o.state = :validated')
             ->setParameter('id', $id)
+            ->setParameter('validated', 'validated')
             ->orderBy('o.id', 'DESC')
             ->getQuery()
             ->getResult();

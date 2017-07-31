@@ -4,7 +4,7 @@
 {% endblock %}
 {% block meta %}<meta name="description" content="Contacter l’association Nos amis les Oiseaux !"/>{% endblock %}
 {% block body %}
-    {{ form_start(form) }}
+    {{ form_start(form, { 'attr' : { 'id' : 'form_contact'}}) }}
     <div class="row large-5">
         <label class="secondary" for="lastname">{{ form_label(form.name) }}</label>
     </div>
@@ -39,4 +39,5 @@
     </div>
     {{ form_rest(form) }}
     {{ form_end(form) }}
+
 {% endblock %}
