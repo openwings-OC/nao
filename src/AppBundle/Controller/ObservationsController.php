@@ -111,7 +111,7 @@ class ObservationsController extends Controller
             $this->container->get('app.observation_creation')->uploadImage($observation, $dir);
             $user = $this->getUser();
             $observation->setUser($user);
-            if($user->getRole() == 'ROLE_AMATEUR'){
+            if($user->getRole() == 'ROLE_USER'){
                 $observation->setState(Observation::STATUS_PENDING);
                 $request->getSession()->getFlashBag()->add('success', 'Observation ajoutée. Elle est maintenant en attente de validation');
             }else{

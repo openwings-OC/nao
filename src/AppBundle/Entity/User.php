@@ -97,6 +97,7 @@ class User extends BaseUser
         parent::__construct();
         $this->createdAt = new \DateTime();
         $this->observations = new ArrayCollection();
+        $this->roles = array('ROLE_USER');
     }
 
     /**
