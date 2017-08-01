@@ -12,16 +12,18 @@ use AppBundle\Entity\User;
 use AppBundle\Form\UserEditType;
 use AppBundle\Form\UserDeleteFormType;
 use AppBundle\Form\UserSearchType;
+use AppBundle\Form\UserSearchWithParamType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UsersController extends Controller
 {
     /**
      * @Route("/users", name="app_indexuser")
+     * @Method({"GET","HEAD"})
      */
     public function indexAction(Request $request)
     {
@@ -46,6 +48,7 @@ class UsersController extends Controller
         }
         $formSearch = $this->createForm(UserSearchType::class);
         $pagination->setTemplate('modules:pagination.html.twig');
+
         return $this->render('pages/users/index.html.twig', array(
             'pagination' => $pagination,
             'formsArray' => $formsArray,
@@ -55,6 +58,7 @@ class UsersController extends Controller
     }
     /**
      * @Route("/users/editer/{id}", name="app_edituser")
+     * @Method({"GET","HEAD","POST"})
      */
     public function editAction(Request $request, $id)
     {
@@ -76,7 +80,7 @@ class UsersController extends Controller
             ));
             $request->getSession()
                 ->getFlashBag()
-                ->add('success', 'Le rôle de '.$user->getUsername().' a été modifié avec succès.', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
+                ->add('success', 'Le rôle de '.  $user->getUsername() .' a été modifié avec succès.', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
             return $this->redirectToRoute('app_indexuser');
     }
     /**

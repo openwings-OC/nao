@@ -14,3 +14,13 @@ services:
     app.flashbag_fosuser:
                 class: AppBundle\Service\FlashBagFosUser
                 arguments: [ "@session" ]
+    app.check_size_image:
+                class: AppBundle\Validator\CheckImageSizeValidator
+                arguments: [ "@session" ]
+                tags:
+                        - { name: validator.constraint_validator, alias: app_check_size_image }
+    app.check_type_image:
+                    class: AppBundle\Validator\CheckImageTypeValidator
+                    arguments: [ "@session" ]
+                    tags:
+                            - { name: validator.constraint_validator, alias: app_check_type_image }

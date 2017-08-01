@@ -16,6 +16,7 @@
                 <th>Selection</th>
                 <th>Date</th>
                 <th>Espèce</th>
+                <th>Commentaire du naturaliste</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -30,8 +31,8 @@
                     </td>
                     <td>{{ observation.createdAt|date("d/m/Y H:i") }}</td>
                     <td>{{ observation.specy }}</td>
+                    <td>{{ observation.observationComment }}</td>
                     <td>{% if observation.state == "pending" %}En cours de validation{% elseif observation.state == "review" %}À revoir{% else %}Validé{% endif %}</td>
-
                 </tr>
             {% endfor %}
             </tbody>

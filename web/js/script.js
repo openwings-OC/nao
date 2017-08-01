@@ -10,10 +10,32 @@ Array.prototype.forEach.call(inputs, function(input) {
 
     input.addEventListener('change', function(e) {
         var value = $('#appbundle_observation_image_file').val();
+        console.log(value);
         var filename = value.slice(12);
-        label.html(filename)
+        if(filename.length > 20){
+            label.html(filename.substr(0,10) + "...")
+        }
+        else {
+            label.html(filename)
+        }
+        readURL(this);
     });
 });
+
+//Afficher l'image avant la soumission du formulaire en Javascript
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.image-form').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
 
 //Autocompletion moteur de recherche home
 $('#search-home').autocomplete({

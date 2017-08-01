@@ -19,7 +19,6 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('letter', $letter.'%', false)
             ->getQuery()
             ->getResult();
-
         return $user;
     }
 }

@@ -79,6 +79,10 @@ class User extends BaseUser
     /**
      * @Assert\Length(min = 8,  max = 20, minMessage="Votre mot de passe doit contenir au moins 8 caractères", maxMessage="Votre mot de passe peut contenir 20 caractères maximum")
      * @Assert\Regex(pattern="/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", match=true, message="Votre mot de passe doit contenir des chiffres, des lettres et au moins une majuscule")
+     * @Assert\Email(
+     *     message = "Cette email '{{ value }}' n'est pas valide",
+     *     checkMX = true
+     * )
      * @Assert\NotBlank(message="Ce champs est vide")
      */
     protected $plainPassword;
@@ -97,6 +101,7 @@ class User extends BaseUser
         parent::__construct();
         $this->createdAt = new \DateTime();
         $this->observations = new ArrayCollection();
+        $this->roles = array('ROLE_USER');
     }
 
     /**

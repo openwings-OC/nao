@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use AppBundle\Validator\CheckImageTypeValidator;
+use AppBundle\Validator\CheckImageSizeValidator;
+use AppBundle\Validator\CheckImageSize;
+use AppBundle\Validator\CheckImageType;
 
 
 /**

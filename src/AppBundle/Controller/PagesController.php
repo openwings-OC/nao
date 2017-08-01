@@ -8,6 +8,7 @@ use AppBundle\Form\ObservationType;
 use AppBundle\Form\RegistrationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,7 @@ class PagesController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @Method({"GET","HEAD"})
      */
     public function indexAction(Request $request)
     {
@@ -33,6 +35,7 @@ class PagesController extends Controller
 
     /**
     * @route("/guide-debutant", name="app_guide_debutant")
+     * @Method({"GET","HEAD"})
     */
     public function debutantAction(){
         return $this->render(':pages:guide_debutant.html.twig');
@@ -40,6 +43,7 @@ class PagesController extends Controller
 
     /**
      * @route("/adherer", name="app_adherer")
+     * @Method({"GET","HEAD"})
      */
     public function adhererAction(){
         return $this->render(':pages:adherer.html.twig');
@@ -47,6 +51,7 @@ class PagesController extends Controller
 
     /**
      * @route("/association", name="app_association")
+     * @Method({"GET","HEAD"})
      */
     public function associationAction(){
         return $this->render(':pages:association.html.twig');
@@ -54,6 +59,7 @@ class PagesController extends Controller
 
     /**
      * @route("/equipe", name="app_equipe")
+     * @Method({"GET","HEAD"})
      */
     public function equipeAction(){
         return $this->render(':pages:equipe.html.twig');
@@ -61,6 +67,7 @@ class PagesController extends Controller
 
     /**
      * @route("/mission", name="app_mission")
+     * @Method({"GET","HEAD"})
      */
     public function missionAction(){
         return $this->render(':pages:mission.html.twig');
@@ -68,6 +75,7 @@ class PagesController extends Controller
 
     /**
      * @route("/projet", name="app_projet")
+     * @Method({"GET","HEAD"})
      */
     public function projetAction(){
         return $this->render(':pages:projet.html.twig');
@@ -76,14 +84,24 @@ class PagesController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @route("/participation", name="app_participation")
+     * @Method({"GET","HEAD"})
      */
-    public function participation(){
+    public function participationAction(){
         $route = $this->get('app.random_landing')->chooserNumberRandom();
         return $this->redirectToRoute($route);
     }
 
     /**
+     * @route("/mentions", name="app_mentions")
+     * @Method({"GET","HEAD"})
+     */
+    public function mentionsAction(){
+        return $this->render(':pages:mentions.html.twig');
+    }
+
+    /**
      * @route("/plan-du-site", name="app_plan_site")
+     * @Method({"GET","HEAD"})
      */
     public function planAction(){
         return $this->render(':pages:plan-site.html.twig');
@@ -91,6 +109,7 @@ class PagesController extends Controller
 
     /**
      * @route("/participation-a", name="app_landing-a")
+     * @Method({"GET","HEAD"})
      */
     public function landingAAction(Request $request){
         /** @var $formFactory FactoryInterface */
@@ -145,6 +164,7 @@ class PagesController extends Controller
     }
     /**
      * @route("/participation-b", name="app_landing-b")
+     * @Method({"GET","HEAD"})
      */
     public function landingBAction(Request $request){
         /** @var $formFactory FactoryInterface */
