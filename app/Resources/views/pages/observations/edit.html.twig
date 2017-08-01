@@ -63,6 +63,15 @@
                     {{ form_widget(form.comment) }}
                     {{ form_errors(form.comment) }}
                 </div>
+                {% if observation.state == 'review' %}
+                <div class="large-12 columns">
+                    <label for="">Commentaire du naturaliste</label>
+                    {{ observation.observationComment }}
+                </div>
+                <div class="large-12 columns" id="information-validation">
+                    <p class="callout round primary">En appuyant sur envoyer, votre observation sera de nouveau en attente de validation par un naturaliste</p>
+                </div>
+                {% endif %}
                 <div class="columns text-center large-12">
                     {{ form_widget(form.save, {'attr' : {'class' : 'button large-2 third button-confirm' }}) }}
                     <a href="#" class="button large-2 text-center third hollow">Annuler</a>

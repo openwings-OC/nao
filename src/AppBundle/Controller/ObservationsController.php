@@ -32,7 +32,7 @@ class ObservationsController extends Controller
      */
     public function indexAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT a FROM AppBundle:Observation a";
+        $dql = "SELECT a FROM AppBundle:Observation a ORDER BY a.state ASC, a.createdAt ASC";
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -76,7 +76,7 @@ class ObservationsController extends Controller
      */
     public function myObservationsAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.createdAt DESC, a.state";
+        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.state ASC, a.createdAt ASC";
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -141,7 +141,7 @@ class ObservationsController extends Controller
         if($observation === null){ throw $this->createNotFoundException('Cette observation n\'existe pas'); }
 
         $em = $this->getDoctrine()->getManager();
-        if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() == "pending"|"review"){
+        if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() != "validate"){
             if($observation->getUser() == $this->getUser()){
                 $form = $this->createForm(ObservationType::class, $observation);
 
@@ -152,6 +152,7 @@ class ObservationsController extends Controller
                     $observation->setUpdatedAt($date);
                     $observation->setSpecy($observation->getSpecy());
                     $observation->setUser($this->getUser());
+                    $observation->setState(Observation::STATUS_PENDING);
                     $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
                     $em->persist($observation);
                     $em->flush();
