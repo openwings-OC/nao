@@ -16,6 +16,7 @@ use AppBundle\Form\ObservationType;
 use AppBundle\Form\ObservationEditType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +30,7 @@ class ObservationsController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @route("/observations", name="app_indexobservation")
+     * @Method({"GET","HEAD"})
      */
     public function indexAction(Request $request){
         $em = $this->getDoctrine()->getManager();
@@ -58,6 +60,7 @@ class ObservationsController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @route("/observations/voir/{id}", name="app_observation")
+     * @Method({"GET","HEAD"})
      */
     public function observationAction(Request $request){
         $observation = $this->getDoctrine()->getRepository('AppBundle:Observation')->find((int)$request->get('id'));
@@ -73,6 +76,7 @@ class ObservationsController extends Controller
 
     /**
      * @route("mesobservations", name="app_myobservations")
+     * @Method({"GET","HEAD"})
      */
     public function myObservationsAction(Request $request){
         $em = $this->getDoctrine()->getManager();
@@ -101,6 +105,7 @@ class ObservationsController extends Controller
     /**
      *
      * @route("/observations/ajouter", name="app_addObservation")
+     * @Method({"GET","HEAD","POST"})
      */
     public function addObservationAction(Request $request){
         $observation = new Observation();
@@ -133,6 +138,7 @@ class ObservationsController extends Controller
     /**
      *
      * @route("/observations/editer/{id}", name="app_editObservation")
+     * @Method({"GET","HEAD","POST"})
      */
     public function editObservationAction(Request $request, $id){
         $roles = $this->getUser()->getRoles();
@@ -142,12 +148,12 @@ class ObservationsController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() != "validate"){
-            if($observation->getUser() == $this->getUser()){
+            if($observation->getUser() == $this->getUser() || in_array("ROLE_ADMIN", $roles)){
                 $form = $this->createForm(ObservationType::class, $observation);
 
                 if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
                     $dir = $this->container->get('kernel')->getProjectDir() . '/web/img';
-                    $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
+                    $this->container->get('app.observation_creation')->uploadImage($observation, $dir);
                     $date = $observation->getCreatedAt();
                     $observation->setUpdatedAt($date);
                     $observation->setSpecy($observation->getSpecy());
@@ -156,7 +162,11 @@ class ObservationsController extends Controller
                     $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
                     $em->persist($observation);
                     $em->flush();
-                    return $this->redirectToRoute('app_myobservations', array('id' => $observation->getId()));
+                    if(in_array("ROLE_NATURALISTE", $roles)){
+                        return $this->redirectToRoute('app_myobservations');
+                    }else{
+                        return $this->redirectToRoute('app_indexobservation');
+                    }
                 }
                 return $this->render('pages/observations/edit.html.twig', array(
                     'observation'   => $observation,
@@ -174,7 +184,7 @@ class ObservationsController extends Controller
                 $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
                 $em->persist($observation);
                 $em->flush();
-                return $this->redirectToRoute('app_indexobservation', array('id' => $observation->getId()));
+                return $this->redirectToRoute('app_indexobservation');
             }
 
             return $this->render('pages/observations/editNaturaliste.html.twig', array(
@@ -192,6 +202,7 @@ class ObservationsController extends Controller
     /**
      *
      * @route("/observations/supprimer/{id}", name="app_deleteObservation")
+     * @Method({"DELETE"})
      */
     public function deleteObservationAction(Request $request, $id){
         $roles = $this->getUser()->getRoles();
@@ -217,7 +228,8 @@ class ObservationsController extends Controller
     }
 
     /**
-     * @route("/observation_map", name="app_observation_map")
+     * @route("/carte-des-observations", name="app_observation_map")
+     * @Method({"GET","HEAD","POST"})
      */
     public function observationMap(Request $request){
         $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
@@ -262,6 +274,7 @@ class ObservationsController extends Controller
 
     /**
      * @route("/dernieres-observations", name="app_last_observations")
+     * @Method({"GET","HEAD"})
      */
     public function observationsLastAction(Request $request){
         $em = $this->getDoctrine()->getRepository('AppBundle:Observation');
