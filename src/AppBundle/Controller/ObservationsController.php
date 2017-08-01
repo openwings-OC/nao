@@ -32,7 +32,7 @@ class ObservationsController extends Controller
      */
     public function indexAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT a FROM AppBundle:Observation a";
+        $dql = "SELECT a FROM AppBundle:Observation a ORDER BY a.state ASC, a.createdAt ASC";
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -76,7 +76,7 @@ class ObservationsController extends Controller
      */
     public function myObservationsAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.createdAt DESC";
+        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.state ASC, a.createdAt ASC";
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -141,25 +141,30 @@ class ObservationsController extends Controller
         if($observation === null){ throw $this->createNotFoundException('Cette observation n\'existe pas'); }
 
         $em = $this->getDoctrine()->getManager();
-        if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() == "pending"|"review"){
-            $form = $this->createForm(ObservationType::class, $observation);
+        if(in_array("ROLE_USER", $roles) && !in_array("ROLE_NATURALISTE", $roles) && $observation->getState() != "validate"){
+            if($observation->getUser() == $this->getUser()){
+                $form = $this->createForm(ObservationType::class, $observation);
 
-            if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
-                $dir = $this->container->get('kernel')->getProjectDir() . '/web/img';
-                $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
-                $date = $observation->getCreatedAt();
-                $observation->setUpdatedAt($date);
-                $observation->setSpecy($observation->getSpecy());
-                $observation->setUser($this->getUser());
-                $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
-                $em->persist($observation);
-                $em->flush();
-                return $this->redirectToRoute('app_myobservations', array('id' => $observation->getId()));
+                if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){
+                    $dir = $this->container->get('kernel')->getProjectDir() . '/web/img';
+                    $observation->getImage()->upload($observation->getCreatedAt(), $observation->getSpecy()->getCdNom(), $dir);
+                    $date = $observation->getCreatedAt();
+                    $observation->setUpdatedAt($date);
+                    $observation->setSpecy($observation->getSpecy());
+                    $observation->setUser($this->getUser());
+                    $observation->setState(Observation::STATUS_PENDING);
+                    $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été modifiée');
+                    $em->persist($observation);
+                    $em->flush();
+                    return $this->redirectToRoute('app_myobservations', array('id' => $observation->getId()));
+                }
+                return $this->render('pages/observations/edit.html.twig', array(
+                    'observation'   => $observation,
+                    'form'          => $form->createView()
+                ));
+            }else{
+                throw $this->AccessDeniedException('Cette observation ne vous appartient pas');
             }
-            return $this->render('pages/observations/edit.html.twig', array(
-                'observation'   => $observation,
-                'form'          => $form->createView()
-            ));
         }elseif (in_array("ROLE_NATURALISTE", $roles)){
             $form = $this->createForm(ObservationEditType::class, $observation);
             if($request->isMethod('POST') && $form->handleRequest($request)->isValid() ){

@@ -49,17 +49,13 @@
                 <a href="#" class="hollow button secondary large-12">Annuler</a>
                 <div class="large-12">
                     {% if observation.image is not empty %}
-                    <img src="{{ asset('img/' ~ observation.image.url) }}" alt="">
+                        <img src="{{ asset('img/' ~ observation.image.url) }}" alt="">
+                    {% else %}
+                        <strong>Il n'y a pas de photo sur cette observation</strong>
                    {% endif %}
                 </div>
             </div>
             {{ form_rest(form) }}
-        </div>
-        <div class="large-12 row">
-            <p class="panel callout radius text-center alert-box warning round">Déplacez le curseur pour récupérer automatiquement les coordonnées</p>
-        </div>
-        <div class="row large-12">
-            {% include "modules/mapAdd.html.twig" %}
         </div>
     </div>
     <script>
