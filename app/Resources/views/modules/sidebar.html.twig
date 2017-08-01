@@ -5,10 +5,14 @@
         {% if loop.index > 1 %}
             <tr>
                 <td>
-                    {% if observation.user != null %} {{ observation.user.username }} {% else %}Inconnu{% endif %} - {{ observation.createdAt|date('d-m-Y') }} - <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
+                    {% if observation.user != null %} {{ observation.user.username }} {% else %}Inconnu{% endif %}
                 </td>
-                <td>{{ observation.createdAt|date('d/m/Y') }}</td>
-                <td><a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a></td>
+                <td>
+                    {{ observation.createdAt|date('d-m-Y') }}
+                </td>
+                <td>
+                    <a href="{{ path('app_observation', {'id' : observation.id}) }}">Voir</a>
+                </td>
             </tr>
         {% endif %}
     {% endfor %}

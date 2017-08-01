@@ -77,9 +77,16 @@ class PagesController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @route("/participation", name="app_participation")
      */
-    public function participation(){
+    public function participationAction(){
         $route = $this->get('app.random_landing')->chooserNumberRandom();
         return $this->redirectToRoute($route);
+    }
+
+    /**
+     * @route("/mentions", name="app_mentions")
+     */
+    public function mentionsAction(){
+        return $this->render(':pages:mentions.html.twig');
     }
 
     /**

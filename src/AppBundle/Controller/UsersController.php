@@ -47,6 +47,7 @@ class UsersController extends Controller
         }
         $formSearch = $this->createForm(UserSearchType::class);
         $pagination->setTemplate('modules:pagination.html.twig');
+
         return $this->render('pages/users/index.html.twig', array(
             'pagination' => $pagination,
             'formsArray' => $formsArray,
@@ -77,7 +78,7 @@ class UsersController extends Controller
             ));
             $request->getSession()
                 ->getFlashBag()
-                ->add('success', 'Le rôle de '.$user->getUsername().' a été modifié avec succès.', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
+                ->add('success', 'Le rôle de '.  $user->getUsername() .' a été modifié avec succès.', 'Vous ne pouvez plus éditer une observation qui a été validé par un naturaliste');
             return $this->redirectToRoute('app_indexuser');
     }
     /**
