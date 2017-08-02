@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="card-section">
                                     <p>
-                                        Observé par {% if bird.user != null %} {{ bird.user.username }} {% else %}Inconnu{% endif %}, le  {{ bird.createdAt|date('d/m/Y') }}<br>
+                                        Observé par {% if bird.user != null %} {{ bird.user.username|slice(0,11) }} {% else %}Inconnu{% endif %}, le  {{ bird.createdAt|date('d/m/Y') }}<br>
                                         {% if bird.specy.nomVern == "" %}
                                             {{ bird.specy.lbNom|slice(0, 20) ~ '...' }}
                                         {% else %}
@@ -103,9 +103,10 @@
                 <a href="http://eepurl.com/cQc9PD" target="_blank" class="button secondary expanded"><img height="50" width="50" src="{{ asset('images/png/icone_news.png') }}" alt="NAO" />
                     <p>
                         JE RESTE INFORMÉ
+                        <br>
+                        Inscription à la newsletter
                     </p></a>
             </div>
-
 
         </div>
     </div>

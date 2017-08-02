@@ -72,6 +72,10 @@ class User extends BaseUser
     /**
      * @Assert\Length(min = 7,  max = 50, minMessage="Votre email doit contenir au moins 6 caractères", maxMessage="Votre email peut contenir 50 caractères maximum")
      * @Assert\NotBlank(message="Ce champs est vide")
+     * @Assert\Email(
+     *     message = "Cette email '{{ value }}' n'est pas valide",
+     *     checkMX = true
+     * )
      */
     protected $email;
 
@@ -79,10 +83,7 @@ class User extends BaseUser
     /**
      * @Assert\Length(min = 8,  max = 20, minMessage="Votre mot de passe doit contenir au moins 8 caractères", maxMessage="Votre mot de passe peut contenir 20 caractères maximum")
      * @Assert\Regex(pattern="/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", match=true, message="Votre mot de passe doit contenir des chiffres, des lettres et au moins une majuscule")
-     * @Assert\Email(
-     *     message = "Cette email '{{ value }}' n'est pas valide",
-     *     checkMX = true
-     * )
+     *
      * @Assert\NotBlank(message="Ce champs est vide")
      */
     protected $plainPassword;
