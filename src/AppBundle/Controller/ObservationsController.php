@@ -80,7 +80,7 @@ class ObservationsController extends Controller
      */
     public function myObservationsAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.state ASC, a.createdAt ASC";
+        $dql = "SELECT a FROM AppBundle:Observation a WHERE a.user = ".$this->getUser()->getId()." ORDER BY a.createdAt DESC";
         $qb = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -173,7 +173,7 @@ class ObservationsController extends Controller
                     'form'          => $form->createView()
                 ));
             }else{
-                throw $this->AccessDeniedException('Cette observation ne vous appartient pas');
+                $this->createAccessDeniedException('Cette observation ne vous appartient pas');
             }
         }elseif (in_array("ROLE_NATURALISTE", $roles)){
             $form = $this->createForm(ObservationEditType::class, $observation);
@@ -215,7 +215,6 @@ class ObservationsController extends Controller
             $this->container->get('app.delete_image')->deleteImageWhenObservationDeleted($observation, $dir);
             $em->remove($observation);
             $em->flush();
-
         }elseif (in_array("ROLE_NATURALISTE", $roles)){
 
         }else{
