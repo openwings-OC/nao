@@ -37,6 +37,8 @@ function readURL(input) {
 
 
 
+
+
 //Autocompletion moteur de recherche home
 $('#search-home').autocomplete({
     maxShowItems: 10,

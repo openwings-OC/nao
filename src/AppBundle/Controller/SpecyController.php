@@ -43,26 +43,6 @@ class SpecyController extends Controller
         ));
     }
 
-    /**
-     *
-     * @route("/resultats/{page}", name="app_results")
-     */
-    public function resultAction($page){
-        $em = $this->getDoctrine()->getRepository('AppBundle:Taxref');
-        $list = $em->findBirdByLetterLimited($page , Taxref::PAGE_NUMBER);
-
-        $pagination = array(
-            'page' => $page,
-            //'nbPages' => $list(count($list) / 50),
-            'nomRoute' => 'app_results',
-            'paramsRoute' => array()
-        );
-
-        return $this->redirect('pages/search.html.twig', array(
-            'list' => $list,
-            'pagination' => $pagination
-        ));
-    }
 
     /**
      * @route("/autocomplete", name="app_autocomplete")
