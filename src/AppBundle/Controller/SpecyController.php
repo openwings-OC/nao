@@ -12,14 +12,17 @@ use AppBundle\Entity\Observation;
 use AppBundle\Form\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+
 
 class SpecyController extends Controller
 {
     /**
      * @route("/recherche-especes", name="app_search")
+     * @Method({"GET","HEAD","POST"})
      */
     public function searchAction(Request $request)
     {
@@ -43,9 +46,9 @@ class SpecyController extends Controller
         ));
     }
 
-
     /**
      * @route("/autocomplete", name="app_autocomplete")
+     * @Method({"POST"})
      */
     public function autocompleteAction(Request $request){
         if($request->isXmlHttpRequest()){
@@ -73,6 +76,7 @@ class SpecyController extends Controller
 
     /**
      * @route("/espece/{id}", name="app_specy")
+     * @Method({"GET","HEAD","POST"})
      */
     public function specyAction(Request $request){
         $specy = $this->getDoctrine()->getRepository('AppBundle:Taxref')->findSpecyByBirdId((int)$request->get('id'));

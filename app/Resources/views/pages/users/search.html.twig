@@ -8,8 +8,7 @@
             <div class="input-group">
 
                 <div class="input-group-button">
-                    <button class="button secondary" id="see" data-url="{{ path('app_observation', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/eye.png') }}" alt="Voir"></button>
-                    <button class="button secondary" id="edit"  data-url="{{ path('app_editObservation', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/editer.png') }}" alt="Éditer"></button>
+                    <button class="button secondary" id="edit"  data-url="{{ path('app_edituser', {'id': '__id__'}) }}"><img width="20px" src="{{ asset('images/png/editer.png') }}" alt="Éditer"></button>
                     <button class="button secondary" id="block"><img width="20px" src="{{ asset('images/png/interdit.png') }}" alt="Bloquer/débloquer"></button>
                     <button class="button secondary" id="delete"><img width="20px" src="{{ asset('images/png/croix blanche.png') }}" alt="Supprimer"></button>
                 </div>
@@ -77,9 +76,6 @@
                 </tbody>
             </table>
         </div>
-        {% if pagination|length == 0 %}
-            <p>Aucun utilisateur ne correspond à votre recherche</p>
-        {% endif %}
     </div>
 
 {% endblock %}

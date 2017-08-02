@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="card-section">
                                     <p>
-                                        Observé par {{ bird.user.userName }}, le  {{ bird.createdAt|date('d/m/Y') }}<br>
+                                        Observé par {% if bird.user != null %} {{ bird.user.username }} {% else %}Inconnu{% endif %}, le  {{ bird.createdAt|date('d/m/Y') }}<br>
                                         {% if bird.specy.nomVern == "" %}
                                             {{ bird.specy.lbNom|slice(0, 20) ~ '...' }}
                                         {% else %}

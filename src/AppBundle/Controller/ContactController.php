@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Contact;
 use AppBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,7 +24,7 @@ class ContactController extends Controller {
         $session = $request->getSession();
         if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             $this->get('app.envoi_email')->sendEmailContact($contact);
-            $session->getFlashBag()->add('confirm-message', 'Votre message a bien été envoyé.');
+            $session->getFlashBag()->add('success', 'Votre message a bien été envoyé.');
             return $this->redirectToRoute('homepage');
         }
         return $this->render('contact/contact.html.twig', array(

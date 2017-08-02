@@ -15,14 +15,15 @@ use AppBundle\Form\UserSearchType;
 use AppBundle\Form\UserSearchWithParamType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UsersController extends Controller
 {
     /**
      * @Route("/users", name="app_indexuser")
+     * @Method({"GET","HEAD"})
      */
     public function indexAction(Request $request)
     {
@@ -57,6 +58,7 @@ class UsersController extends Controller
     }
     /**
      * @Route("/users/editer/{id}", name="app_edituser")
+     * @Method({"GET","HEAD","POST"})
      */
     public function editAction(Request $request, $id)
     {
